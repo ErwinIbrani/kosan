@@ -54,6 +54,12 @@ class SiteController extends Controller
         ];
     }
 
+    public function actionTest()
+    {
+        $page = \app\modules\secret\models\management\Page::menu();
+        print_r($page);
+    }
+
     /**
      * Displays homepage.
      *
@@ -61,41 +67,15 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        Yii::$app->mailer->compose()
+    ->setFrom('from@domain.com')
+    ->setTo('hasandotprayoga@gmail.com')
+    ->setSubject('Message subject')
+    ->setTextBody('Plain text content')
+    ->setHtmlBody('<b>HTML content</b>')
+    ->send();
+
         return $this->render('index');
-    }
-
-    /**
-     * Login action.
-     *
-     * @return Response|string
-     */
-    public function actionLogin()
-    {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }
-
-        $model->password = '';
-        return $this->render('login', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Logout action.
-     *
-     * @return Response
-     */
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
-
-        return $this->goHome();
     }
 
     /**
@@ -124,5 +104,10 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    public function actionImage($code)
+    {
+        return Yii::$app->mfile->getImage($code);
     }
 }
