@@ -4,16 +4,17 @@ $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
-    'id' => 'kosan18181',
+    'id' => 'kosan18181z',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'timeZone' => 'Asia/Jakarta',
     'aliases' => [
-        '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@bower'      => '@vendor/bower-asset',
+        '@npm'        => '@vendor/npm-asset',
+        '@potoktp'    => '/uploads/potoktp',
     ],
-    'defaultRoute'=>'dashboard',
-    'layout'=>'main',
+    //'defaultRoute' =>'landing-page',
+    'layout'       =>'main',
     /*component*/
     'components' => [
          'i18n' => [
@@ -40,7 +41,7 @@ $config = [
         ],
 
         'mfile' => [
-            'class'=>'app\components\HDPFile',
+            'class'=>'app\components\KosanFile',
         ],
 
         'request' => [
@@ -94,7 +95,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                '' => 'site/index',                                
+                ''  => 'landing-page/index',                                
                 '<controller:\w+>/<action:\w+>/' => '<controller>/<action>',
             ],
         ],
@@ -126,6 +127,7 @@ $config = [
        'allowActions' => [
            'site/*',
            'error/*',
+           'landing-page/*',
            'dashboard/*',
            'auth/*',
            'rbac/*', // -> matikan saat fase production

@@ -6,11 +6,10 @@ use Yii;
 use yii\helpers\Url;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
-
 use app\models\identity\SignupForm;
 use app\models\identity\LoginForm;
-use app\models\identity\PasswordResetRequestForm;
-use app\models\identity\ResetPasswordForm;
+use app\models\identity\User;
+use yii\web\UploadedFile;
 
 
 class AuthController extends \yii\web\Controller
@@ -35,11 +34,7 @@ class AuthController extends \yii\web\Controller
             if (Yii::$app->request->isAjax) {
                 return true;
             }else{
-                if(!empty($model->isBuyer($model->username))){
-                  return $this->redirect(['/guest/search-production']);  
-                }else if ($model->isBuyer($model->username === NULL) ){
-                    return $this->redirect(['/dashboard']);
-              }  
+              return $this->redirect(['/dashboard']);
             }
         } 
         else {
@@ -57,59 +52,43 @@ class AuthController extends \yii\web\Controller
         }
     }
 
-    public function actionForgotpassword()
-    {
-        $this->view->title = 'Forgot Password';
-
-    	$model = new PasswordResetRequestForm();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail()) {
-                Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
-
-                return $this->redirect(['login']);
-            } else {
-                Yii::$app->session->setFlash('error', 'Sorry, we cannot reset the password for the email address provided.');
-            }
-        }
-
-        return $this->render('forgotpassword', [
-            'model' => $model,
-        ]);
-    }
-
-    public function actionResetpassword($token)
-    {
-        $this->view->title = 'Reset Password';
-
-        try {
-            $model = new ResetPasswordForm($token);
-        } catch (InvalidParamException $e) {
-            throw new BadRequestHttpException($e->getMessage());
-        }
-
-        if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
-            Yii::$app->session->setFlash('success', 'The new password has been successfully saved.');
-
-            return $this->redirect(['login']);
-        }
-
-        return $this->render('resetPassword', [
-            'model' => $model,
-        ]);
-    }
-
+  
     public function actionRegister()
     {
-        $this->view->title = 'Register';
+      $this->view->title = 'Register';
+      $model             = new SignupForm();
+        if ($model->load(Yii::$app->request->post())){
+            $modelUser                = new User();
+            $request                  = Yii::$app->request;
+            $modelUser->nama_lengkap  = $request->post('SignupForm')['nama_lengkap'];
+            $modelUser->jenis_kelamin = $request->post('SignupForm')['jenis_kelamin'];
+            $modelUser->tanggal_lahir = $request->post('SignupForm')['tanggal_lahir'];
+            $modelUser->tempat_lahir  = $request->post('SignupForm')['tempat_lahir'];
+            $modelUser->no_telepon    = $request->post('SignupForm')['no_telepon'];
+            $modelUser->email         = $request->post('SignupForm')['email'];
+            $modelUser->alamat        = $request->post('SignupForm')['alamat'];
+            $modelUser->setPassword($request->post('SignupForm')['password']);
+            $modelUser->generateAuthKey();
+            $folder                  = Yii::getAlias('@webroot/').Yii::getAlias('@potoktp/');
+            $file                    = UploadedFile::getInstance($model, 'poto_ktp');
 
-    	$model = new SignupForm();
-        if ($model->load(Yii::$app->request->post())) {
-            if ($user = $model->signup()) {
-                if (Yii::$app->getUser()->login($user)) {
-                    return $this->redirect(['/dashboard']);
-                }
-            }
-        }
+             if (!is_null($file)) 
+             {
+                $filename = sha1(date('YmdHis').time());
+                $mfile    = Yii::$app->mfile->upload($file, $folder, $filename);
+               if ($mfile) {
+                  $modelUser->poto_ktp = $mfile;
+                 }
+             }
+            if($modelUser->save()){
+                Yii::$app->session->setFlash('success', 'Silahkan Login'); 
+                  return $this->redirect(['login']); 
+           }
+           else{
+             Yii::$app->session->setFlash('error', 'Ada yang error'); 
+             return $this->redirect(['login']); 
+           }
+       }
 
         return $this->render('register', [
             'model' => $model,
