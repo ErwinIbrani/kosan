@@ -20,6 +20,7 @@ class SignupForm extends Model
     public $password;
     public $alamat;
     public $poto_ktp;
+    public $username;
 
     /**
      * {@inheritdoc}
@@ -45,8 +46,8 @@ class SignupForm extends Model
 
             ['username','trim'],
             ['username','required'],
-            ['username', 'integer'],
-            ['username','unique', 'targetClass' => '\app\models\identity\User', 'message' => 'Nomer HP Sudah Terdaptar'],
+            ['username', 'string'],
+            ['username','unique', 'targetClass' => '\app\models\identity\User', 'message' => 'Username Sudah Terdaptar'],
             
             ['no_telepon','trim'],
             ['no_telepon','required'],

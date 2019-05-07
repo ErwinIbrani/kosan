@@ -42,8 +42,7 @@ use yii\helpers\Html;
             'icon' => 'users',
             //'url' => 'javascript:void(0)',
             'items' => [
-                ['label' => 'List User Bulk', 'icon' => 'search', 'url' => ['/user/']],
-                ['label' => 'List User', 'icon' => 'search', 'url' => ['/user/index-user/']],
+                ['label' => 'List User', 'icon' => 'user', 'url' => ['/user/']],
                 ['label' => 'Assignment', 'icon' => 'balance-scale', 'url' => ['/rbac/assignment/']],
                 ['label' => 'Role', 'icon' => 'blind', 'url' => ['/rbac/role/']],
                 ['label' => 'Permission', 'icon' => 'compass', 'url' => ['/rbac/permission/']],
@@ -52,9 +51,9 @@ use yii\helpers\Html;
         ],
 
         [
-            'label' => 'Factory Management',
-            'icon'=>'wrench',
-            'url' => ['/factory/']
+            'label' => 'Kosan Management',
+            'icon' =>'wrench',
+            'url' => ['/kosan/']
         ],
 
         [

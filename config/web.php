@@ -12,6 +12,7 @@ $config = [
         '@bower'      => '@vendor/bower-asset',
         '@npm'        => '@vendor/npm-asset',
         '@potoktp'    => '/uploads/potoktp',
+        '@potokosan'  => '/uploads/potokosan',
     ],
     //'defaultRoute' =>'landing-page',
     'layout'       =>'main',
@@ -133,6 +134,7 @@ $config = [
            'rbac/*', // -> matikan saat fase production
            'gii/*', // -> matikan saat fase production
            'debug/*',// -> matikan saat fase production
+          //'kosan/*',
         
        ]
     ],
