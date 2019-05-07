@@ -10,7 +10,7 @@ class LandingPageController extends Controller
 
    public function actionIndex()
   {
-       echo('Dahboard');
+      return $this->render('index');
   }
 
 

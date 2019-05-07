@@ -23,6 +23,7 @@ use Yii;
  */
 class User extends \yii\db\ActiveRecord
 {
+
     /**
      * {@inheritdoc}
      */
@@ -41,7 +42,7 @@ class User extends \yii\db\ActiveRecord
             [['jenis_kelamin', 'alamat', 'poto_ktp'], 'string'],
             [['status'], 'integer'],
             [['tanggal_lahir', 'tanggal_daftar'], 'safe'],
-            [['nama_lengkap', 'password_hash', 'password_reset_token'], 'string', 'max' => 255],
+            [['nama_lengkap', 'password_hash', 'password_reset_token', 'username'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
             [['email', 'tempat_lahir'], 'string', 'max' => 100],
             [['no_telepon'], 'string', 'max' => 15],
@@ -56,6 +57,7 @@ class User extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'nama_lengkap' => 'Nama Lengkap',
+            'username'      => 'Username',
             'jenis_kelamin' => 'Jenis Kelamin',
             'auth_key' => 'Auth Key',
             'password_hash' => 'Password Hash',

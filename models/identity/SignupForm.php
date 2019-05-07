@@ -41,6 +41,12 @@ class SignupForm extends Model
             ['tempat_lahir', 'trim'],
             ['tempat_lahir', 'required'],
             ['tempat_lahir', 'string', 'max' => 100],
+
+
+            ['username','trim'],
+            ['username','required'],
+            ['username', 'integer'],
+            ['username','unique', 'targetClass' => '\app\models\identity\User', 'message' => 'Nomer HP Sudah Terdaptar'],
             
             ['no_telepon','trim'],
             ['no_telepon','required'],

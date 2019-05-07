@@ -12,7 +12,7 @@ class DashboardController extends \yii\web\Controller
 
    public function actionIndex()
   {
-       echo('Dahboard');
+      return $this->render('index');
   }
 
 }

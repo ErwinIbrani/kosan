@@ -24,6 +24,10 @@ use yii\jui\DatePicker;
       </div>
 
       <div class="form-group has-feedback">
+      <?= $form->field($model, 'username')->textInput(['maxlength' => true,]); ?>
+      </div>
+
+      <div class="form-group has-feedback">
         <?= $form->field($model, 'jenis_kelamin')->dropDownList(
                                         ['Laki-laki'  => 'Laki-laki', 
                                          'Perempuan'   => 'Perempuan'],

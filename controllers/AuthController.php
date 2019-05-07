@@ -61,6 +61,7 @@ class AuthController extends \yii\web\Controller
             $modelUser                = new User();
             $request                  = Yii::$app->request;
             $modelUser->nama_lengkap  = $request->post('SignupForm')['nama_lengkap'];
+            $modelUser->username      = $request->post('SignupForm')['username'];
             $modelUser->jenis_kelamin = $request->post('SignupForm')['jenis_kelamin'];
             $modelUser->tanggal_lahir = $request->post('SignupForm')['tanggal_lahir'];
             $modelUser->tempat_lahir  = $request->post('SignupForm')['tempat_lahir'];

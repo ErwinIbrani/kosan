@@ -149,12 +149,12 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function getLinkPreviewAvatar()
     {
-        $code = Yii::$app->mfile->getCode($this->avatar,Yii::getAlias('@webroot/').Yii::getAlias('@users/').$this->id);
+        $code = Yii::$app->mfile->getCode($this->poto_ktp,Yii::getAlias('@webroot/').Yii::getAlias('@potoktp/'));
 
-        if(!is_null($this->avatar) AND !empty($this->avatar))
+        if(!is_null($this->poto_ktp) AND !empty($this->poto_ktp))
             return Url::to(['/site/image', 'code' => $code]);
         else
-            return Yii::getAlias('@web').'/scrt/img/default.png';
+            return Yii::getAlias('@web').'/uploads/default.png';
     }
 
     public function getRoles()
