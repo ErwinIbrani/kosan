@@ -8,7 +8,10 @@ use yii\helpers\Html;
         <div class="col-md-12">
           <div class="box">
             <div class="box-header with-border">
-              <?= $this->render('_search', ['model' => $searchModel]) ?>
+                <?= Html::a('Cari Lagi',
+                                    ['/landing-page/index'],
+                                    ['class' => 'btn btn-info btn-sm btn-flat']
+                                ) ?>
             </div>
             <br/>
             <!-- ./box-body -->

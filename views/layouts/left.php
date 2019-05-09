@@ -5,6 +5,8 @@ use mdm\admin\components\Helper;
 use yii\helpers\Html;
 
 ?>
+<?php 
+    if(!Yii::$app->user->isGuest){ ?>
 <aside class="main-sidebar">
 
     <section class="sidebar">
@@ -171,3 +173,4 @@ echo Menu::widget([
 
     </section>
 </aside>
+<?php } ?>

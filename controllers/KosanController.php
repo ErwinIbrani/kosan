@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\UploadedFile;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\UserKosan;
 
 /**
  * KosanController implements the CRUD actions for Kosan model.
@@ -201,4 +202,74 @@ class KosanController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+
+    public function actionListKosan()
+    {
+        $this->view->title = 'Semua Kategori Kosan';
+        $searchModel = new KosanSearch();
+        $query       = Kosan::find();
+        $countQuery  = clone $query;
+        $pages       = new Pagination(['totalCount' => $countQuery->count()]);
+        $models      = $query->offset($pages->offset)->limit($pages->limit)->all();
+        return $this->render('list-kosan', ['models' => $models,'pages' => $pages, 'searchModel' => $searchModel]);
+    }
+
+
+   public function actionSearch()
+   {
+       $this->view->title = 'Semua Kategori Kosan';
+       $model = new KosanSearch();
+       if ($model->load(Yii::$app->request->post())){
+         $request              = Yii::$app->request;
+         $model->alamat_kosan  = $request->post('KosanSearch')['alamat_kosan'];
+         if(!empty($model->alamat_kosan)){
+             $query       = Kosan::find()
+                            ->where(['like', 'alamat_kosan', '%' .$model->alamat_kosan. '%', false]);;
+             $countQuery  = clone $query;
+             $pages       = new Pagination(['totalCount' => $countQuery->count()]);
+             $models      = $query->offset($pages->offset)->limit($pages->limit)->all();
+             return $this->render('list_filter', ['models' => $models,'pages' => $pages]);
+         }
+         else{
+            return $this->redirect(['list-kosan']); 
+         }
+      }      
+   }
+
+   public function actionCreateKosanUser()
+   {
+       $model = new UserKosan();
+        if ($model->load(Yii::$app->request->post())){
+            $request               = Yii::$app->request;
+            $model->user_id        = Yii::$app->user->identity->id;
+            $model->kosan_id       = $request->post('UserKosan')['kosan_id'];
+            $model->tgl_masuk_kos  = $request->post('UserKosan')['tgl_masuk_kos'];
+            $model->alamat_kosan   = $request->post('UserKosan')['alamat_kosan'];
+            $model->pasilitas      = $request->post('UserKosan')['pasilitas'];
+            $model->jenis_kosan    = $request->post('UserKosan')['jenis_kosan'];
+            $ada = $this->cek($model->user_id, $model->kosan_id);
+            if($ada > 1){
+              Yii::$app->session->setFlash('error', 'Ada yang error'); 
+              return $this->redirect(['index']); 
+            }else{
+                if($model->save()){
+                    $user = User::findOne($model->user_id);
+                    $user->status_kost = 1;
+                    $user->save(false); 
+                    Yii::$app->session->setFlash('error', 'Ada yang error'); 
+                    return $this->redirect(['index']);  
+                }
+            }
+        
+        }  
+   }
+
+   private function cek($user_id, $kosan_id)
+   {
+      return UserKosan::find()
+                 ->where(['user_id' => $user_id, 'kosan_id' => $kosan_id])
+                 ->one();
+   }
+
 }
