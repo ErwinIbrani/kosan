@@ -65,7 +65,7 @@ FancyAsset::register($this);
                         else
                         { ?>
                           <?= Html::a('Pilih Kosan',
-                                    ['/kosan/pilih', 'id' => $model->id],
+                                    ['/kosan/pilih/', 'id' => $model->id],
                                     ['class' => 'btn btn-info btn-sm btn-flat']
                               ) ?>
                       <?php } 
@@ -86,7 +86,7 @@ FancyAsset::register($this);
                         else
                         { ?>
                              <?= Html::a('Kembali',
-                                    ['/kosan/list-kosan'],
+                                    ['/dashboard/index'],
                                     ['class' => 'btn btn-primary btn-sm btn-flat']
                                 ) ?>
                       <?php } 

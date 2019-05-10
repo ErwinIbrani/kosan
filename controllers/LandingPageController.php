@@ -40,15 +40,17 @@ class LandingPageController extends Controller
 	         $models      = $query->offset($pages->offset)->limit($pages->limit)->all();
 		     return $this->render('index_filter', ['models' => $models,'pages' => $pages]);
 		 }
-		 else{
+		 else
+     {
             return $this->redirect(['index']); 
 		 }
-      }      
-   }
+    }      
+  }
 
 
    public function actionDetail($id)
    {
+       $this->view->title = 'Detail Kosan';
    	   $model = Kosan::findOne($id);
        return $this->render('detail', ['model' => $model]);
    }

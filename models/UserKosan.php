@@ -35,7 +35,7 @@ class UserKosan extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'kosan_id', 'tgl_masuk_kos', 'tgl_berakhir_kos', 'pemebritahuan'], 'required'],
+            [['user_id', 'kosan_id', 'tgl_masuk_kos', 'tgl_berakhir_kos'], 'required'],
             [['user_id', 'kosan_id'], 'integer'],
             [['tgl_masuk_kos', 'tgl_berakhir_kos'], 'safe'],
             [['status', 'status_bayar', 'pemebritahuan'], 'string'],

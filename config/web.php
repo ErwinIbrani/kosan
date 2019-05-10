@@ -4,7 +4,7 @@ $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
-    'id' => 'kosan18181z',
+    'id' => 'KosanApp',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'timeZone' => 'Asia/Jakarta',
@@ -134,7 +134,7 @@ $config = [
            'rbac/*', // -> matikan saat fase production
            'gii/*', // -> matikan saat fase production
            'debug/*',// -> matikan saat fase production
-          //'kosan/*',
+           'kosan/*',
         
        ]
     ],

@@ -10,6 +10,7 @@ use yii\web\UploadedFile;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\UserKosan;
+use app\models\User;
 
 /**
  * KosanController implements the CRUD actions for Kosan model.
@@ -204,66 +205,40 @@ class KosanController extends Controller
     }
 
 
-    public function actionListKosan()
-    {
-        $this->view->title = 'Semua Kategori Kosan';
-        $searchModel = new KosanSearch();
-        $query       = Kosan::find();
-        $countQuery  = clone $query;
-        $pages       = new Pagination(['totalCount' => $countQuery->count()]);
-        $models      = $query->offset($pages->offset)->limit($pages->limit)->all();
-        return $this->render('list-kosan', ['models' => $models,'pages' => $pages, 'searchModel' => $searchModel]);
-    }
-
-
-   public function actionSearch()
+   public function actionPilih($id)
    {
-       $this->view->title = 'Semua Kategori Kosan';
-       $model = new KosanSearch();
-       if ($model->load(Yii::$app->request->post())){
-         $request              = Yii::$app->request;
-         $model->alamat_kosan  = $request->post('KosanSearch')['alamat_kosan'];
-         if(!empty($model->alamat_kosan)){
-             $query       = Kosan::find()
-                            ->where(['like', 'alamat_kosan', '%' .$model->alamat_kosan. '%', false]);;
-             $countQuery  = clone $query;
-             $pages       = new Pagination(['totalCount' => $countQuery->count()]);
-             $models      = $query->offset($pages->offset)->limit($pages->limit)->all();
-             return $this->render('list_filter', ['models' => $models,'pages' => $pages]);
-         }
-         else{
-            return $this->redirect(['list-kosan']); 
-         }
-      }      
-   }
-
-   public function actionCreateKosanUser()
-   {
+       $this->view->title = 'Pilih Kosan';
+       $kosanModel = $this->findModel($id);
        $model = new UserKosan();
         if ($model->load(Yii::$app->request->post())){
-            $request               = Yii::$app->request;
-            $model->user_id        = Yii::$app->user->identity->id;
-            $model->kosan_id       = $request->post('UserKosan')['kosan_id'];
-            $model->tgl_masuk_kos  = $request->post('UserKosan')['tgl_masuk_kos'];
-            $model->alamat_kosan   = $request->post('UserKosan')['alamat_kosan'];
-            $model->pasilitas      = $request->post('UserKosan')['pasilitas'];
-            $model->jenis_kosan    = $request->post('UserKosan')['jenis_kosan'];
+            $request                  = Yii::$app->request;
+            $model->user_id           = Yii::$app->user->identity->id;
+            $model->kosan_id          = $request->post('UserKosan')['kosan_id'];
+            $model->tgl_masuk_kos     = $request->post('UserKosan')['tgl_masuk_kos'];
+            $model->tgl_berakhir_kos  = date("Y-m-d", strtotime(''.$model->tgl_masuk_kos.' +1 month'));
             $ada = $this->cek($model->user_id, $model->kosan_id);
             if($ada > 1){
               Yii::$app->session->setFlash('error', 'Ada yang error'); 
-              return $this->redirect(['index']); 
+              return $this->redirect(['/dashboard/index/']); 
             }else{
                 if($model->save()){
                     $user = User::findOne($model->user_id);
                     $user->status_kost = 1;
-                    $user->save(false); 
-                    Yii::$app->session->setFlash('error', 'Ada yang error'); 
-                    return $this->redirect(['index']);  
+                    if($user->save(false)){
+                      $kosan               = Kosan::findOne($kosanModel->id);
+                      $kosan->jumlah_kamar = $kosanModel->jumlah_kamar - 1; 
+                      $kosan->save(); 
+                      Yii::$app->session->setFlash('success', 'Anda Telah Memilih Kosan'); 
+                      return $this->redirect(['/dashboard/index/']);  
+                    } 
+                    
                 }
             }
-        
-        }  
+        }
+        return $this->render('pilih_kosan', ['kosanModel' => $kosanModel, 'model' => $model]);  
    }
+
+ 
 
    private function cek($user_id, $kosan_id)
    {

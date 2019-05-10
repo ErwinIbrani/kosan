@@ -34,6 +34,8 @@ use yii\helpers\Html;
                    </div>
                 </div>
                <?php } ?>
+
+               
               </div>
               <div class="pull-right">
               <?= LinkPager::widget(['pagination' => $pages]); ?>

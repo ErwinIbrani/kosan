@@ -47,7 +47,7 @@ class User extends \yii\db\ActiveRecord
             [['nama_lengkap', 'username', 'jenis_kelamin', 'tanggal_lahir', 'tempat_lahir', 'no_telepon', 'auth_key', 'password_hash', 'email', 'status', 'alamat', 'tanggal_daftar'], 'required'],
             [['jenis_kelamin', 'alamat', 'poto_ktp'], 'string'],
             [['tanggal_lahir', 'tanggal_daftar'], 'safe'],
-            [['status'], 'integer'],
+            [['status', 'status_kost'], 'integer'],
             [['nama_lengkap', 'username', 'password_hash', 'password'], 'string', 'max' => 255],
             [['tempat_lahir', 'email'], 'string', 'max' => 100],
             [['no_telepon'], 'string', 'max' => 15],
@@ -75,6 +75,7 @@ class User extends \yii\db\ActiveRecord
             'alamat' => 'Alamat',
             'poto_ktp' => 'Poto Ktp',
             'tanggal_daftar' => 'Tanggal Daftar',
+            'status_kost' => 'Status Kost'
         ];
     }
 
