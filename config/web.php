@@ -9,15 +9,30 @@ $config = [
     'bootstrap' => ['log'],
     'timeZone' => 'Asia/Jakarta',
     'aliases' => [
-        '@bower'      => '@vendor/bower-asset',
-        '@npm'        => '@vendor/npm-asset',
-        '@potoktp'    => '/uploads/potoktp',
-        '@potokosan'  => '/uploads/potokosan',
+        '@bower'           => '@vendor/bower-asset',
+        '@npm'             => '@vendor/npm-asset',
+        '@potoktp'         => '/uploads/potoktp',
+        '@potokosan'       => '/uploads/potokosan',
+        '@buktipembayaran' => '/uploads/buktipembayaran',
     ],
     //'defaultRoute' =>'landing-page',
     'layout'       =>'main',
     /*component*/
     'components' => [
+
+    'mailer' => [
+                'class' => 'yii\swiftmailer\Mailer',
+                'useFileTransport' => false,
+                'transport' => [
+                    'class' => 'Swift_SmtpTransport',
+                    'host' => 'smtp.gmail.com',
+                    'username' => 'mandiriatma@gmail.com',
+                    'password' => 'PhpMysql',
+                    'port' => '465',
+                    'encryption' => 'ssl',
+                ],
+         ],
+
          'i18n' => [
          'translations' => [
             'app' => [
@@ -135,6 +150,7 @@ $config = [
            'gii/*', // -> matikan saat fase production
            'debug/*',// -> matikan saat fase production
            'kosan/*',
+           'user-kosan/*',
         
        ]
     ],

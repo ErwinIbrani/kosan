@@ -116,7 +116,7 @@ $this->params['breadcrumbs'][] = $this->title;
                   Html::a(Html::tag('i', '', ['class' => 'fa fa-money' ]). ' '.'Bayar Kosan', ['/user-kosan/bayar', 'id' => $model->id], ['class' => 'btn btn-info btn-xs', 'title' => 'Tombol Ini Untuk Membayar']);             
               }
               else{
-                return 'Dibayar';
+                 return 'Dibayar';
               }
            },   
          ],

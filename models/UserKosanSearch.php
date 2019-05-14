@@ -18,7 +18,7 @@ class UserKosanSearch extends UserKosan
     {
         return [
             [['id', 'user_id', 'kosan_id'], 'integer'],
-            [['tgl_masuk_kos', 'tgl_berakhir_kos', 'status', 'status_bayar', 'periode_kosan', 'status_konfirmasi'], 'safe'],
+            [['tgl_masuk_kos', 'tgl_berakhir_kos', 'status', 'status_bayar', 'periode_kosan', 'status_konfirmasi', 'bukti_pembayaran', 'status_cron_job'], 'safe'],
         ];
     }
 
@@ -80,7 +80,7 @@ class UserKosanSearch extends UserKosan
         $query = UserKosan::find()
                 ->joinWith('kosan', true)
                 ->joinWith('user', true)
-                ->where(['user.id' => Yii::$app->user->identity->id]);
+                ->where(['user.id' => Yii::$app->user->identity->id, 'status_cron_job' => 'Dieksekusi']);
 
         // add conditions that should always apply here
 

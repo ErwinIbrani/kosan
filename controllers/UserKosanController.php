@@ -8,6 +8,7 @@ use app\models\UserKosanSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * UserKosanController implements the CRUD actions for UserKosan model.
@@ -123,5 +124,64 @@ class UserKosanController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionBayar($id)
+    {
+        $this->view->title = 'Upload Bukti Pembayaran Kosan';
+        $transaction = Yii::$app->db->beginTransaction();   
+        $model    = $this->findModel($id);
+
+     try {
+          if ($model->load(Yii::$app->request->post()))
+          {
+             
+              if (!file_exists($model->linkpreview))
+               {
+             
+                 $folder = Yii::getAlias('@webroot/').Yii::getAlias('@buktipembayaran/');
+                 $file   = UploadedFile::getInstance($model, 'bukti_pembayaran_virtual');
+                 if (!is_null($file)) {
+                      $filename                  = sha1(date('YmdHis').time());
+                      $mfile                     = Yii::$app->mfile->upload($file, $folder, $filename);
+                      if ($mfile) {
+                        $model->bukti_pembayaran = $mfile;
+                        $model->status_bayar     = 'Dibayar';
+                      }
+                 }
+              }
+
+              if($model->save(false)){
+                  $newRecord                   = new UserKosan();
+                  $newRecord->user_id          = $model->user_id;
+                  $newRecord->kosan_id         = $model->kosan_id;
+                  $newRecord->tgl_masuk_kos    = $model->tgl_berakhir_kos;
+                  $newRecord->tgl_berakhir_kos = date("Y-m-d", strtotime(''.$newRecord->tgl_masuk_kos.' +1 month'));
+                  $newRecord->periode_kosan    = $model->periode_kosan + 1;
+                  $newRecord->status_cron_job  = 'Belum Dieksekusi';
+                  if($newRecord->save(false)){
+                    $transaction->commit();
+                    Yii::$app->session->setFlash('success', 'Bukti Berhasil Diupload'); 
+                    return $this->redirect(['/dashboard/index']);
+                  }else{
+                    $transaction->rollback();
+                    Yii::$app->session->setFlash('error', 'Updated Failed'); 
+                    return $this->redirect(['/dashboard/index']);
+                  }
+               }else{
+                  $transaction->rollback();
+                  Yii::$app->session->setFlash('error', 'Updated Failed'); 
+                  return $this->redirect(['/dashboard/index']);
+               } 
+             }
+
+        } catch (\Exception $e) {
+          $transaction->rollBack();
+          throw $e;
+      }   
+
+    return $this->render('_form_bayar', [
+            'model' => $model,
+        ]);
     }
 }
