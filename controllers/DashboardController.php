@@ -66,7 +66,8 @@ class DashboardController extends \yii\web\Controller
    }
 
 
-   public function actionKeluarKost($id)
+
+   /*public function actionKeluarKost($id)
    {
       $kosan                = Kosan::findOne($id);
       $kosan->jumlah_kamar  = $kosan->jumlah_kamar + 1;
@@ -76,6 +77,6 @@ class DashboardController extends \yii\web\Controller
         Yii::$app->session->setFlash('success', 'Anda Telah Mengakhiri Kosan'); 
         return $this->redirect(['/auth/login']); 
       }
-   }
+   }*/
 
 }

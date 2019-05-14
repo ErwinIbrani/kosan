@@ -18,8 +18,19 @@ $this->params['breadcrumbs'][] = $this->title;
    <?php
       $columns = [
          ['class' => 'kartik\grid\SerialColumn'],
+
+           [
+              'attribute' => 'periode_kosan',
+              'label'     => 'Periode Kosan Ke',
+              'hAlign'    => 'left',  
+              'vAlign'    => 'middle',
+              'content'   => function($model){
+                 return $model->periode_kosan;
+              },
+              'contentOptions' => ['style' => 'width:10px;'],
+            ],
             //'id',
-            [
+            /*[
               'attribute' => 'kosan_id',
               'label'     => 'Nama Kosan',
               'hAlign'    => 'left',  
@@ -31,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
               'contentOptions' => ['style' => 'width:180px;'],
             ],
 
-             [
+            [
               'attribute' => 'kosan_id',
               'label'     => 'Alamat Kosan',
               'hAlign'    => 'left',  
@@ -41,22 +52,75 @@ $this->params['breadcrumbs'][] = $this->title;
                  return $model->kosan->alamat_kosan;
               },
               'contentOptions' => ['style' => 'width:180px;'],
-            ],
+            ],*/
 
             [
+                  'label'    => 'Tanggal Awal Kosan',
+                  'format'   => ['date', 'php:Y-m-d'],
+                  'filter'   => \yii\jui\DatePicker::widget([
+                          'model'     =>$searchModel,
+                          'attribute' =>'tgl_masuk_kos',
+                          'language'  => 'id',
+                          'dateFormat'=> 'yyyy-MM-dd',
+                ]),
+                'value'    => function($model) {
+                  return $model->tgl_masuk_kos;
+                },
+                'hAlign'   => 'left',
+                'vAlign'   => 'middle',
+                'contentOptions' => ['style' => 'width:100px;'],
+            ],
+
+
+            [
+                  'label'    => 'Tanggal Berakhir Kosan',
+                  'format'   => ['date', 'php:Y-m-d'],
+                  'filter'   => \yii\jui\DatePicker::widget([
+                          'model'     =>$searchModel,
+                          'attribute' =>'tgl_berakhir_kos',
+                          'language'  => 'id',
+                          'dateFormat'=> 'yyyy-MM-dd',
+                ]),
+                'value'    => function($model) {
+                  return $model->tgl_berakhir_kos;
+                },
+                'hAlign'   => 'left',
+                'vAlign'   => 'middle',
+                'contentOptions' => ['style' => 'width:100px;'],
+            ],
+
+
+         [
+              'attribute' => 'status_konfirmasi',
+              'label'     => 'Status Konfirmasi Pembayaran',
+              'hAlign'    => 'left',  
+              'vAlign'    => 'middle',
+              'content'   => function($model){
+                 return $model->status_konfirmasi;
+              },
+              'contentOptions' => ['style' => 'width:100px;'],
+         ],
+
+
+
+          [
              'attribute' => 'Action',
              'format'    =>'raw',
              'hAlign'    => 'center',  
              'vAlign'    => 'middle',
              'filter'  => false,
-             'contentOptions' => ['style' => 'width:100px;'],
+             'contentOptions' => ['style' => 'width:90px;'],
              'value' => function($model) {
+               if($model->status_bayar === 'Belum Dibayar'){
                  return
-                  Html::a(Html::tag('i', '', ['class' => 'fa fa-sign-out' ]). ' '.'Keluar Kosan', ['/dashboard/keluar-kost', 'id' => $model->kosan->id], ['class' => 'btn btn-info btn-xs', 'title' => 'Tombol Ini Untuk Mengakhiri Kosan Anda']);             
-
-                },
+                  Html::a(Html::tag('i', '', ['class' => 'fa fa-money' ]). ' '.'Bayar Kosan', ['/user-kosan/bayar', 'id' => $model->id], ['class' => 'btn btn-info btn-xs', 'title' => 'Tombol Ini Untuk Membayar']);             
+              }
+              else{
+                return 'Dibayar';
+              }
+           },   
          ],
-            
+
       ];
      ?> 
   </div>

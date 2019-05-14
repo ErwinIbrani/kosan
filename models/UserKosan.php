@@ -36,9 +36,9 @@ class UserKosan extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'kosan_id', 'tgl_masuk_kos', 'tgl_berakhir_kos'], 'required'],
-            [['user_id', 'kosan_id'], 'integer'],
+            [['user_id', 'kosan_id', 'periode_kosan'], 'integer'],
             [['tgl_masuk_kos', 'tgl_berakhir_kos'], 'safe'],
-            [['status', 'status_bayar', 'pemebritahuan'], 'string'],
+            [['status', 'status_bayar', 'status_konfirmasi'], 'string'],
             [['kosan_id'], 'exist', 'skipOnError' => true, 'targetClass' => Kosan::className(), 'targetAttribute' => ['kosan_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
@@ -57,8 +57,10 @@ class UserKosan extends \yii\db\ActiveRecord
             'tgl_berakhir_kos' => 'Tgl Berakhir Kos',
             'status' => 'Status',
             'status_bayar' => 'Status Bayar',
-            'pemebritahuan' => 'Pemebritahuan',
+            'periode_kosan' => 'Periode Kosan',
+            'status_konfirmasi' => 'Status Konfirmasi'
         ];
+
     }
 
     /**

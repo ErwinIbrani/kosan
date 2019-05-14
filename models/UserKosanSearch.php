@@ -18,7 +18,7 @@ class UserKosanSearch extends UserKosan
     {
         return [
             [['id', 'user_id', 'kosan_id'], 'integer'],
-            [['tgl_masuk_kos', 'tgl_berakhir_kos', 'status', 'status_bayar', 'pemebritahuan'], 'safe'],
+            [['tgl_masuk_kos', 'tgl_berakhir_kos', 'status', 'status_bayar', 'periode_kosan', 'status_konfirmasi'], 'safe'],
         ];
     }
 
@@ -63,11 +63,12 @@ class UserKosanSearch extends UserKosan
             'kosan_id' => $this->kosan_id,
             'tgl_masuk_kos' => $this->tgl_masuk_kos,
             'tgl_berakhir_kos' => $this->tgl_berakhir_kos,
+            'periode_kosan' => $this->periode_kosan,
         ]);
 
         $query->andFilterWhere(['like', 'status', $this->status])
-            ->andFilterWhere(['like', 'status_bayar', $this->status_bayar])
-            ->andFilterWhere(['like', 'pemebritahuan', $this->pemebritahuan]);
+              ->andFilterWhere(['like', 'status_bayar', $this->status_bayar])
+              ->andFilterWhere(['like', 'status_konfirmasi', $this->status_konfirmasi]);
 
         return $dataProvider;
     }
@@ -103,11 +104,12 @@ class UserKosanSearch extends UserKosan
             'kosan_id' => $this->kosan_id,
             'tgl_masuk_kos' => $this->tgl_masuk_kos,
             'tgl_berakhir_kos' => $this->tgl_berakhir_kos,
+            'periode_kosan' => $this->periode_kosan,
         ]);
 
         $query->andFilterWhere(['like', 'status', $this->status])
-            ->andFilterWhere(['like', 'status_bayar', $this->status_bayar])
-            ->andFilterWhere(['like', 'pemebritahuan', $this->pemebritahuan]);
+              ->andFilterWhere(['like', 'status_bayar', $this->status_bayar])
+              ->andFilterWhere(['like', 'status_konfirmasi', $this->status_konfirmasi]);
 
         return $dataProvider;
     }
