@@ -20,7 +20,7 @@ class DashboardController extends \yii\web\Controller
  
     public function actionIndex()
     {
-
+      /*user sudah kost*/
       if(Yii::$app->user->identity->status_kost === 1){ 
             $searchModel = new UserKosanSearch();
             $dataProvider = $searchModel->kosanUser(Yii::$app->request->queryParams);
@@ -30,7 +30,8 @@ class DashboardController extends \yii\web\Controller
             ]);
 
         }else{
-             $searchModel = new KosanSearch();
+          /*user masih cari kost*/
+            $searchModel = new KosanSearch();
             $query       = Kosan::find();
             $countQuery  = clone $query;
             $pages       = new Pagination(['totalCount' => $countQuery->count()]);

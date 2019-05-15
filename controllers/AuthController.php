@@ -23,7 +23,7 @@ class AuthController extends \yii\web\Controller
 
     public function actionLogin()
     {
-        $this->view->title = 'Login Admin';
+        $this->view->title = 'Login';
 
     	  if (!Yii::$app->user->isGuest) {
             return $this->redirect(['/dashboard']);
