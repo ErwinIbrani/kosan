@@ -117,8 +117,8 @@ class UserKosan extends \yii\db\ActiveRecord
         $users = User::find()
                 ->where(['id' => $user_id])
                 ->all();
-        foreach ($users as $user) {
-         echo "Sedang Mengirim Email.....";
+         foreach ($users as $user) {
+         echo "Sedang Mengirim Pemberitahuan.......";
          Yii::$app->mailer->compose()
                  ->setFrom([Yii::$app->params['adminEmail'] => Yii::$app->name.'robot'])
                  ->setTo($user->email)
