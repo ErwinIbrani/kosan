@@ -30,7 +30,7 @@ use yii\helpers\Html;
               <span class="input-group-btn">
                 <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i>
                 </button>
-              </span>
+              </span>if  ( Yii :: $app -> user -> can ( 'view_categories' ))
             </div>
         </form>
         -->
@@ -38,9 +38,9 @@ use yii\helpers\Html;
 <?php $menuItems =  [
         /*user*/
         ['label' => 'Pembayaran Kosan','icon'=>'money', 'url' => ['/dashboard/index/']],
-
+       
         /*admin*/
-        ['label' => 'Pembayaran Kosan','icon'=>'money', 'url' => ['/dashboard-admin/index/']],
+        ['label' => 'Pembayaran Kosan','icon'=>'money', 'url' =>  ['/dashboard-admin/index/']],
         
 
         /*admin*/
