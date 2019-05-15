@@ -11,7 +11,7 @@
  Target Server Version : 50721
  File Encoding         : 65001
 
- Date: 15/05/2019 09:16:34
+ Date: 15/05/2019 11:27:07
 */
 
 SET NAMES utf8mb4;
@@ -34,6 +34,7 @@ CREATE TABLE `auth_assignment`  (
 -- Records of auth_assignment
 -- ----------------------------
 INSERT INTO `auth_assignment` VALUES ('Admin', '8', 1557152564);
+INSERT INTO `auth_assignment` VALUES ('Admin', '9', 1557894069);
 
 -- ----------------------------
 -- Table structure for auth_item
@@ -360,6 +361,33 @@ INSERT INTO `migration` VALUES ('m140506_102106_rbac_init', 1556848773);
 INSERT INTO `migration` VALUES ('m150927_060316_cronjob_init', 1557841264);
 INSERT INTO `migration` VALUES ('m170907_052038_rbac_add_index_on_auth_assignment_user_id', 1556848773);
 INSERT INTO `migration` VALUES ('m180523_151638_rbac_updates_indexes_without_prefix', 1556848774);
+
+-- ----------------------------
+-- Table structure for pengaduan
+-- ----------------------------
+DROP TABLE IF EXISTS `pengaduan`;
+CREATE TABLE `pengaduan`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `kosan_id` int(11) NOT NULL,
+  `jenis_pengaduan` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `keterangan_pengadu` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `foto` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
+  `status` enum('Diperbaiki','Belum Diperbaiki') CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'Belum Diperbaiki',
+  `keterangan_teknisi` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
+  `tanggal_laporan` datetime(0) NULL DEFAULT NULL,
+  `tanggal_ditangani` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `user_pengadu`(`user_id`) USING BTREE,
+  INDEX `kosan_pengadu`(`kosan_id`) USING BTREE,
+  CONSTRAINT `kosan_pengadu` FOREIGN KEY (`kosan_id`) REFERENCES `kosan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `user_pengadu` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of pengaduan
+-- ----------------------------
+INSERT INTO `pengaduan` VALUES (1, 9, 2, 'Latai Bocor', 'Terdapat Lantai yang Bocor', '1550c2e973ace3161f35b1fb7937a0afa69dee68.jpg', 'Belum Diperbaiki', NULL, '2019-05-15 09:59:47', '2019-05-15 09:59:47');
 
 -- ----------------------------
 -- Table structure for user

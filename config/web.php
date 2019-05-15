@@ -15,6 +15,7 @@ $config = [
         '@potoktp'         => '/uploads/potoktp',
         '@potokosan'       => '/uploads/potokosan',
         '@buktipembayaran' => '/uploads/buktipembayaran',
+        '@pengaduan'       => '/uploads/pengaduan',
     ],
     //'defaultRoute' =>'landing-page',
     'layout'       =>'main',
@@ -152,6 +153,7 @@ $config = [
            'debug/*',// -> matikan saat fase production
            'kosan/*',
            'user-kosan/*',
+           'pengaduan/*'
         
        ]
     ],

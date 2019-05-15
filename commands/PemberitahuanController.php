@@ -34,14 +34,14 @@ class PemberitahuanController extends Controller
     }
 
      /**
-     * Run SomeModel::jalankan_pemberitahuan for today only as the default action
+     * Run SomeModel::kirim_pemberitahuan for today only as the default action
      * @return int exit code
      */
     public function actionIndex(){
         return $this->actionInit(date("Y-m-d"), date("Y-m-d"));
     }
     /**
-     * Run SomeModel::jalankan_pemberitahuan for yesterday
+     * Run SomeModel::kirim_pemberitahuan for yesterday
      * @return int exit code
      */
     public function actionYesterday()

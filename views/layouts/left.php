@@ -36,9 +36,14 @@ use yii\helpers\Html;
         -->
 
 <?php $menuItems =  [
+        /*user*/
+        ['label' => 'Pembayaran Kosan','icon'=>'money', 'url' => ['/dashboard/index/']],
 
-        ['label' => 'Dashboard','icon'=>'dashboard', 'url' => ['/dashboard/index/']],
+        /*admin*/
+        ['label' => 'Pembayaran Kosan','icon'=>'money', 'url' => ['/dashboard-admin/index/']],
+        
 
+        /*admin*/
         [
             'label' => 'User Management',
             'icon' => 'users',
@@ -52,17 +57,33 @@ use yii\helpers\Html;
             ],
         ],
 
+
+         /*admin*/
         [
             'label' => 'Kosan Management',
-            'icon' =>'wrench',
-            'url' => ['/kosan/']
+            'icon'  => 'wrench',
+            'url'   => ['/kosan/']
+        ],
+        
+        /*admin*/
+        [
+            'label' => 'Pengaduan',
+            'icon'  => 'check',
+            'url'   => ['/pengaduan-admin/']
         ],
 
+       /*user*/
         [
-            'label' => 'Warehouse Management',
-            'icon'=>'braille',
-            'url' => ['/warehouse/']
+            'label' => 'Pengaduan',
+            'icon'  => 'check',
+            'url'   => ['/pengaduan/']
         ],
+
+
+
+
+
+
 
         [
             'label' => 'Payment Management',
