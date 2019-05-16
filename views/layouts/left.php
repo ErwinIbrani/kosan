@@ -40,9 +40,8 @@ use yii\helpers\Html;
         ['label' => 'Pembayaran Kosan','icon'=>'money', 'url' => ['/dashboard/index/']],
        
         /*admin*/
-        ['label' => 'Pembayaran Kosan','icon'=>'money', 'url' =>  ['/dashboard-admin/index/']],
+        ['label' => 'Pembayaran Kosan','icon'=>'money', 'url' =>  ['/dashboard-admin/index']],
         
-
         /*admin*/
         [
             'label' => 'User Management',
@@ -68,117 +67,34 @@ use yii\helpers\Html;
         /*admin*/
         [
             'label' => 'Pengaduan',
-            'icon'  => 'check',
+            'icon'  => 'bell',
             'url'   => ['/pengaduan-admin/']
         ],
 
        /*user*/
         [
             'label' => 'Pengaduan',
-            'icon'  => 'check',
+            'icon'  => 'bell',
             'url'   => ['/pengaduan/']
         ],
 
-
-
-
-
-
-
+       /*admin*/
         [
-            'label' => 'Payment Management',
-            'icon' => 'credit-card',
-            //'url' => 'javascript:void(0)',
-            'items' => [
-                ['label' => 'Price List', 'icon' => 'search', 'url' => ['/pricelist/']],
-                ['label' => 'Status Payment', 'icon' => 'plus', 'url' => ['/statuspayment/']],
-            ],
-        ],
-
-        [
-            'label' => 'Checklist',
+            'label' => 'Status Pemebitahuan',
             'icon'  => 'check',
-            'url'   => ['/checklist/']
+            'url'   => ['/cron-job/']
         ],
 
         [
-            'label' => 'Nira',
-            'icon' => 'bandcamp',
-            //'url' => 'javascript:void(0)',
-            'items' => [
-                ['label' => 'Nira Today < 12', 'icon' => 'search', 'url' => ['/recapitulation/nira-today-minus/']],
-                ['label' => 'Nira Today > 12', 'icon' => 'search', 'url' => ['/recapitulation/nira-today-plus/']],
-                ['label' => 'Nira One Week', 'icon' => 'search', 'url' => ['/recapitulation/nira-one-week/']],
-                ['label' => 'Nira One Month', 'icon' => 'search', 'url' => ['/recapitulation/nira-one-month/']],
-            ],
+            'label' => 'Berhenti Mengkost',
+            'icon'  => 'sign-out',
+            'url'   => ['/user-kosan/keluar-kosan', 'data' => [
+                        'confirm' => 'Apakah Anda Yakin ?',
+                        'method' => 'post',
+                    ],]
         ],
 
-       [
-            'label' => 'Tappers',
-            'icon' => 'users',
-            //'url' => 'javascript:void(0)',
-            'items' => [
-                ['label' => 'Purchase Filter', 'icon' => 'search', 'url' => ['/petani/filter-purchase/']],
-                ['label' => 'Tapper Today', 'icon' => 'search', 'url' => ['/petani/petani-today/']],
-                ['label' => 'Tapper One Week', 'icon' => 'search', 'url' => ['/petani/petani-one-week/']],
-                ['label' => 'Tapper One Month', 'icon' => 'search', 'url' => ['/petani/petani-one-month/']],
-                ['label' => 'Per Tapper Filter', 'icon' => 'search', 'url' => ['/petani/filter-petani/']]
-            ],
-        ],
-
-
-        [
-            'label' => 'Collectors',
-            'icon' => 'user',
-            //'url' => 'javascript:void(0)',
-            'items' => [
-                ['label' => "List Collector's Payment", 'icon' => 'search', 'url' => ['/collectors-payment/index/']],
-            ],
-        ],
-
-    
-        [
-            'label' => 'Production',
-            'icon' => 'barcode',
-            //'url' => 'javascript:void(0)',
-            'items' => [
-                ['label' => 'Create Production', 'icon' => 'plus', 'url' => ['/label/create/']],
-                ['label' => 'List Production', 'icon' => 'database', 'url' => ['/label/index/']],
-                ['label' => 'Production Today < 12', 'icon' => 'search', 'url' => ['/label/production-today-minus/']],
-                ['label' => 'Production Today > 12', 'icon' => 'search', 'url' => ['/label/production-today-plus/']],
-                ['label' => 'Production One Week', 'icon' => 'search', 'url' => ['/label/production-one-week/']],
-                ['label' => 'Production One Month', 'icon' => 'search', 'url' => ['/label/production-one-month/']],
-            ],
-        ],
-
-        [
-            'label' => 'Purchase And ICS',
-            'icon' => 'file',
-            //'url' => 'javascript:void(0)',
-            'items' => [
-                ['label' => 'Purchase', 'icon' => 'shopping-cart', 'url' => ['/purchase/']],
-                ['label' => 'Purchase One Week', 'icon' => 'shopping-cart', 'url' => ['/purchase/one-week/']],
-                ['label' => 'ICS', 'icon' => 'search', 'url' => ['/gardencontrol/']],
-            ],
-        ],
-
-        [
-            'label' => 'Search Production',
-            'icon' => 'search',
-            //'url' => 'javascript:void(0)',
-            'items' => [
-                ['label' => 'Search Production', 'icon' => 'search', 'url' => ['/guest/search-production/']],
-            ],
-        ],
-
-        [
-            'label' => 'KPI',
-            'icon' => 'star',
-            //'url' => 'javascript:void(0)',
-            'items' => [
-                ['label' => 'List KPI', 'icon' => 'search', 'url' => ['/kpi/rating-result/']],
-            ],
-        ],
+       
 
     ];
 

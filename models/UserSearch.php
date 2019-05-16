@@ -18,7 +18,7 @@ class UserSearch extends User
     {
         return [
             [['id', 'status'], 'integer'],
-            [['nama_lengkap', 'username', 'jenis_kelamin', 'tanggal_lahir', 'tempat_lahir', 'no_telepon', 'auth_key', 'password_hash', 'email', 'alamat', 'poto_ktp', 'tanggal_daftar'], 'safe'],
+            [['nama_lengkap', 'username', 'jenis_kelamin', 'tanggal_lahir', 'tempat_lahir', 'no_telepon', 'auth_key', 'password_hash', 'email', 'alamat', 'poto_ktp', 'tanggal_daftar', 'status_kost'], 'safe'],
         ];
     }
 
@@ -40,7 +40,9 @@ class UserSearch extends User
      */
     public function search($params)
     {
-        $query = User::find();
+        $query = User::find()->orderBy([
+                  'id' => SORT_DESC
+                ]);
 
         // add conditions that should always apply here
 
@@ -73,6 +75,7 @@ class UserSearch extends User
             ->andFilterWhere(['like', 'password_hash', $this->password_hash])
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'alamat', $this->alamat])
+             ->andFilterWhere(['like', 'status_kost', $this->status_kost])
             ->andFilterWhere(['like', 'poto_ktp', $this->poto_ktp]);
 
         return $dataProvider;

@@ -11,23 +11,29 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\UserKosan;
 use app\models\User;
+use yii\filters\AccessControl;
 
 /**
  * KosanController implements the CRUD actions for Kosan model.
  */
 class KosanController extends Controller
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
+
+
+   public function behaviors()
     {
         return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                 ],
+                'denyCallback' => function ($rule, $action) {
+                    $this->redirect(['/auth/login']);
+                }
             ],
         ];
     }
@@ -184,7 +190,7 @@ class KosanController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
+        Yii::$app->session->setFlash('success', 'Berhasil Dihapus');  
         return $this->redirect(['index']);
     }
 
@@ -216,12 +222,12 @@ class KosanController extends Controller
             $model->kosan_id          = $request->post('UserKosan')['kosan_id'];
             $model->tgl_masuk_kos     = $request->post('UserKosan')['tgl_masuk_kos'];
             $model->tgl_berakhir_kos  = date("Y-m-d", strtotime(''.$model->tgl_masuk_kos.' +1 month'));
-            $ada = $this->cek($model->user_id, $model->kosan_id);
-            if($ada > 1){
-              Yii::$app->session->setFlash('error', 'Ada yang error'); 
+            $ada = $this->cek($model->user_id);
+            if(!empty($ada)){
+              Yii::$app->session->setFlash('error', 'Maff !! Ada Sudah Memilih Kosan'); 
               return $this->redirect(['/dashboard/index/']); 
             }else{
-                if($model->save()){
+                if($model->save(false)){
                     $user = User::findOne($model->user_id);
                     $user->status_kost = 1;
                     if($user->save(false)){
@@ -240,10 +246,10 @@ class KosanController extends Controller
 
  
 
-   private function cek($user_id, $kosan_id)
+   private function cek($user_id)
    {
       return UserKosan::find()
-                 ->where(['user_id' => $user_id, 'kosan_id' => $kosan_id])
+                 ->where(['user_id' => $user_id])
                  ->one();
    }
 

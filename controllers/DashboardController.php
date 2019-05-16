@@ -16,7 +16,23 @@ use app\models\UserKosanSearch;
 class DashboardController extends \yii\web\Controller
 {
    
-
+   public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+                'denyCallback' => function ($rule, $action) {
+                    $this->redirect(['/auth/login']);
+                }
+            ],
+        ];
+    }
  
     public function actionIndex()
     {

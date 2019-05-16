@@ -14,15 +14,6 @@ class SiteController extends Controller
 {
   
 
-    public function actionIndex()
-    {
-       echo('Dahboards');
-    }
-
-  
-
-    
-
     public function actionImage($code)
     {
         return Yii::$app->mfile->getImage($code);

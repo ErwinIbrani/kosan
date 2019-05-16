@@ -9,23 +9,27 @@ use app\models\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * UserController implements the CRUD actions for User model.
  */
 class UserController extends Controller
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
+     public function behaviors()
     {
         return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                 ],
+                'denyCallback' => function ($rule, $action) {
+                    $this->redirect(['/auth/login']);
+                }
             ],
         ];
     }

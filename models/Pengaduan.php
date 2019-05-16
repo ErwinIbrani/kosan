@@ -35,9 +35,20 @@ class Pengaduan extends \yii\db\ActiveRecord
     {
         return 'pengaduan';
     }
-    
 
-   
+     public function behaviors()
+    {
+        return [
+        // Other behaviors
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'tanggal_laporan',
+                'updatedAtAttribute' => false,
+                'value' => new Expression('NOW()'),
+            ],
+        ];   
+    }
+    
 
     /**
      * {@inheritdoc}
@@ -48,7 +59,7 @@ class Pengaduan extends \yii\db\ActiveRecord
             [['user_id', 'kosan_id', 'jenis_pengaduan', 'keterangan_pengadu'], 'required'],
             [['user_id', 'kosan_id'], 'integer'],
             [['keterangan_pengadu', 'foto', 'status', 'keterangan_teknisi'], 'string'],
-            [['tanggal_laporan', 'tanggal_ditangani'], 'safe'],
+            [['tanggal_laporan'], 'safe'],
             [['jenis_pengaduan'], 'string', 'max' => 255],
             [['kosan_id'], 'exist', 'skipOnError' => true, 'targetClass' => Kosan::className(), 'targetAttribute' => ['kosan_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
@@ -70,8 +81,7 @@ class Pengaduan extends \yii\db\ActiveRecord
             'foto' => 'Foto',
             'status' => 'Status',
             'keterangan_teknisi' => 'Keterangan Teknisi',
-            'tanggal_laporan' => 'Tanggal Laporan',
-            'tanggal_ditangani' => 'Tanggal Ditangani',
+            'tanggal_laporan' => 'Tanggal Laporan'
         ];
     }
 
@@ -109,5 +119,17 @@ class Pengaduan extends \yii\db\ActiveRecord
               ->select(['id', 'nama_kosan as value'])
               ->asArray()
               ->all();
+    }
+
+
+    public function beforeSave($insert)
+    {
+        if($this->isNewRecord) {
+            $this->setAttribute('status', 'Belum Diperbaiki');
+        } else {
+            $this->setAttribute('status', 'Diperbaiki');
+        }
+
+        return parent::beforeSave($insert);
     }
 }

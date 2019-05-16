@@ -104,4 +104,9 @@ class User extends \yii\db\ActiveRecord
         else
             return Yii::getAlias('@web').'/uploads/default.png';
     }
+
+    public function getAssignments()
+    {
+        return $this->hasMany(AuthAssignment::className(), ['user_id' => 'id']);
+    }
 }

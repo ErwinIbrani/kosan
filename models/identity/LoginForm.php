@@ -79,4 +79,15 @@ class LoginForm extends Model
         return $this->_user;
     }
 
+    public function isAdmin($email)
+    {
+        $data =  UserModel::find()
+                  ->innerJoinWith('assignments', true)
+                  ->where("auth_assignment.item_name='Admin'")
+                  ->andWhere(['email' => $email])
+                  ->one();
+
+        return $data;
+    }
+
 }

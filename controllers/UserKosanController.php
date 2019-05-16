@@ -3,29 +3,35 @@
 namespace app\controllers;
 
 use Yii;
+use app\models\User;
 use app\models\UserKosan;
 use app\models\UserKosanSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
-
+use yii\filters\AccessControl;
 /**
  * UserKosanController implements the CRUD actions for UserKosan model.
  */
 class UserKosanController extends Controller
 {
-    /**
-     * {@inheritdoc}
-     */
+   
+
     public function behaviors()
     {
         return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                 ],
+                'denyCallback' => function ($rule, $action) {
+                    $this->redirect(['/auth/login']);
+                }
             ],
         ];
     }
@@ -180,8 +186,17 @@ class UserKosanController extends Controller
           throw $e;
       }   
 
-    return $this->render('_form_bayar', [
+     return $this->render('_form_bayar', [
             'model' => $model,
         ]);
+    }
+
+
+    public function actionKeluarKosan()
+    {
+           $model  = User::findOne(Yii::$app->user->identity->id);
+           $model->delete();
+           Yii::$app->session->setFlash('success', 'Anda Telah Keluar Dari Kosan'); 
+           return $this->redirect(['/auth/register']);
     }
 }

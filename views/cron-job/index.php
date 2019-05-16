@@ -7,60 +7,32 @@ use kartik\grid\GridView;
 /* @var $searchModel app\models\FactorySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'List Pengaduan';
+$this->title = 'Status Pemberitahuan';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="box box-primary">
  <div class="box-header with-border">
    <div class="box-title">
-   <?= Html::a('Buat Pengaduan', ['create'], ['class' => 'btn btn-success']) ?>
    <?php
       $columns = [
-         ['class' => '\kartik\grid\SerialColumn'],
+         ['class' => 'kartik\grid\SerialColumn'],
             //'id',
-            
+            'controller',
+            'action',
             [
-              'attribute' => 'nama_kosan',
-              'label'     => 'Nama Kosan',
+              'attribute' => 'success',
+              'label'     => 'Status Pemberitahuan',
               'hAlign'    => 'left',  
               'vAlign'    => 'middle',
-              'value'      => function($model) {
-                  return $model->kosan->nama_kosan;
-                },
-              'contentOptions' => ['style' => 'width:180px;'],
+              'content'   => function($model){
+                 if($model->success == 1){
+                  return 'Berhasil Dijalankan';
+                 }else{
+                  return 'Gagal Dijalankan';
+                 }
+              }
             ],
-
-            [
-              'attribute' => 'jenis_pengaduan',
-              'label'     => 'Jenis Pengaduan',
-              'hAlign'    => 'left',  
-              'vAlign'    => 'middle',
-              'contentOptions' => ['style' => 'width:180px;'],
-            ],
-
-             [
-              'attribute' => 'keterangan_pengadu',
-              'label'     => 'Keterangan',
-              'format'    => 'ntext',
-              'hAlign'    => 'left',  
-              'vAlign'    => 'middle',
-              'contentOptions' => ['style' => 'width:180px;'],
-            ],
-
-
-            [
-              'attribute' => 'status',
-              'label'     => 'Status Diperbaiki',
-              'filter'    => ['Diperbaiki' => 'Diperbaiki', 'Belum Diperbaiki' => 'Belum Diperbaiki'],
-              'hAlign'    => 'left',  
-              'vAlign'    => 'middle',
-              'contentOptions' => ['style' => 'width:180px;'],
-            ],
-
-           
-          ['class' => 'kartik\grid\ActionColumn',
-           'template' => '{update}',],
       ];
      ?> 
   </div>
@@ -108,7 +80,7 @@ $this->params['breadcrumbs'][] = $this->title;
                   ]
                 ],
 
-              GridView::EXCEL   => [
+             GridView::EXCEL   => [
                     'label'    => 'EXCEL',
                     'filename' => 'exported-data_kosan_EXCEL' . date('Y-m-d_H-i-s'),
                     //'title'    => 'kosan EXCEL',                        

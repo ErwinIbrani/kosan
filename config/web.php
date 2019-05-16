@@ -146,14 +146,14 @@ $config = [
            'site/*',
            'error/*',
            'landing-page/*',
-           'dashboard/*',
            'auth/*',
            'rbac/*', // -> matikan saat fase production
            'gii/*', // -> matikan saat fase production
            'debug/*',// -> matikan saat fase production
-           'kosan/*',
-           'user-kosan/*',
-           'pengaduan/*'
+           'dashboard/index',
+           'kosan/pilih',
+           'user-kosan/bayar',
+          
         
        ]
     ],

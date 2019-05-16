@@ -33,6 +33,6 @@ use app\widgets\Alert;
         </div>
       </div>
     <?php ActiveForm::end(); ?>
-      <!-- Html::a('Forgot Password', ['/auth/forgotpassword']); -->
+    <?=  Html::a('Daftar Akun', ['/auth/register']); ?>
   </div>
 </div>

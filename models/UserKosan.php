@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use app\models\User;
+use yii\helpers\Url;
 /**
  * This is the model class for table "user_kosan".
  *

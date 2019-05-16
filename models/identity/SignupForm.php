@@ -32,6 +32,7 @@ class SignupForm extends Model
             ['nama_lengkap', 'trim'],
             ['nama_lengkap', 'required'],
             ['nama_lengkap', 'string', 'max' => 255],
+            ['nama_lengkap','unique', 'targetClass' => '\app\models\identity\User', 'message' => 'Nama Lenkap Jangan sama, kalau sama gunakan alias'],
             
             ['jenis_kelamin', 'trim'],
             ['jenis_kelamin', 'required'],

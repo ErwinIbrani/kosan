@@ -21,11 +21,11 @@ class AuthController extends \yii\web\Controller
         return $this->redirect(['login']);
     }
 
-    public function actionLogin()
+      public function actionLogin()
     {
         $this->view->title = 'Login';
 
-    	  if (!Yii::$app->user->isGuest) {
+        if (!Yii::$app->user->isGuest) {
             return $this->redirect(['/dashboard']);
         }
 
@@ -34,7 +34,11 @@ class AuthController extends \yii\web\Controller
             if (Yii::$app->request->isAjax) {
                 return true;
             }else{
-              return $this->redirect(['/dashboard']);
+                if(!empty($model->isAdmin($model->email))){
+                  return $this->redirect(['/dashboard-admin/']);  
+                }else if ($model->isAdmin($model->email === NULL) ){
+                    return $this->redirect(['/dashboard']);
+              }  
             }
         } 
         else {

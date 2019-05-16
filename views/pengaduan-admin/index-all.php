@@ -7,7 +7,7 @@ use kartik\grid\GridView;
 /* @var $searchModel app\models\FactorySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Management User';
+$this->title = 'List Pengaduan';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -16,70 +16,62 @@ $this->params['breadcrumbs'][] = $this->title;
    <div class="box-title">
    <?php
       $columns = [
-         ['class' => 'kartik\grid\SerialColumn'],
+         ['class' => '\kartik\grid\SerialColumn'],
             //'id',
+            
             [
-              'attribute' => 'nama_lengkap',
-              'label'     => 'Nama Lengkap',
+              'attribute' => 'nama_kosan',
+              'label'     => 'Nama Kosan',
               'hAlign'    => 'left',  
               'vAlign'    => 'middle',
+              'value'      => function($model) {
+                  return $model->kosan->nama_kosan;
+                },
+              'contentOptions' => ['style' => 'width:180px;'],
+            ],
+
+
+            [
+              'attribute' => 'nama_pengadu',
+              'label'     => 'Nama Pelapor',
+              'hAlign'    => 'left',  
+              'vAlign'    => 'middle',
+              'value'      => function($model) {
+                  return $model->user->nama_lengkap;
+                },
               'contentOptions' => ['style' => 'width:180px;'],
             ],
 
             [
-              'attribute' => 'username',
-              'label'     => 'Username',
-              'hAlign'    => 'left',  
-              'vAlign'    => 'middle',
-              'contentOptions' => ['style' => 'width:180px;'],
-            ],
-
-            [
-              'attribute' => 'email',
-              'label'     => 'E-Mail',
-              'format'    => 'ntext',
+              'attribute' => 'jenis_pengaduan',
+              'label'     => 'Jenis Pengaduan',
               'hAlign'    => 'left',  
               'vAlign'    => 'middle',
               'contentOptions' => ['style' => 'width:180px;'],
             ],
 
              [
-              'attribute' => 'jenis_kelamin',
-              'label'     => 'Jenis Kelamin',
-              'filter'    => ['Laki-laki' => 'Laki-laki', 'Perempuan' => 'Perempuan'],
+              'attribute' => 'keterangan_pengadu',
+              'label'     => 'Keterangan',
               'format'    => 'ntext',
               'hAlign'    => 'left',  
               'vAlign'    => 'middle',
               'contentOptions' => ['style' => 'width:180px;'],
             ],
+
 
             [
-              'attribute' => 'no_telepon',
-              'label'     => 'No Telepon',
-              'format'    => 'ntext',
+              'attribute' => 'status',
+              'label'     => 'Status Diperbaiki',
+              'filter'    => ['Diperbaiki' => 'Diperbaiki', 'Belum Diperbaiki' => 'Belum Diperbaiki'],
               'hAlign'    => 'left',  
               'vAlign'    => 'middle',
               'contentOptions' => ['style' => 'width:180px;'],
             ],
 
-             [
-              'attribute' => 'status_kost',
-              'label'     => 'Status Kost',
-              'format'    => 'ntext',
-              'hAlign'    => 'left',  
-              'vAlign'    => 'middle',
-              'filter'    => ['1' => 'Konfirmasi', '0' => 'Belum Memilih Kosan'],
-              'contentOptions' => ['style' => 'width:180px;'],
-              'content'   => function($model){
-                 if($model->status_kost === 1){
-                  return Html::a('Konfirmasi', ['/rbac/assignment?Assignment%5Busername%5D='.$model->username.''], ['class' => 'btn btn-info btn-xs']);
-                 }else{
-                  return 'Belum Memilih Kosan';
-                 }
-              }
-            ],
            
-          ['class' => 'kartik\grid\ActionColumn'],
+          ['class' => 'kartik\grid\ActionColumn',
+           'template' => '{view}{update}{delete}',],
       ];
      ?> 
   </div>
@@ -105,8 +97,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
              GridView::PDF   => [
                   'label'    => 'PDF', 
-                  'filename' => 'exported-data_user_PDF' . date('Y-m-d_H-i-s'),
-                  //'title'    => 'user PDF', 
+                  'filename' => 'exported-data_kosan_PDF' . date('Y-m-d_H-i-s'),
+                  //'title'    => 'kosan PDF', 
                   'config'   => [
                     // 'methods' => [
                     //   'SetHeader' => [
@@ -121,17 +113,17 @@ $this->params['breadcrumbs'][] = $this->title;
                       'subject' => 'Preceptors',
                       'keywords' => 'pdf, preceptors, export, other, keywords, here'
                     ],*/
-                    'contentBefore' => 'Daftar User Kosan',
+                    'contentBefore' => 'Daftar kosan Kosan',
                     //'contentAfter'  => 'Telah diterima uang dari PT Aren Mandala Sari pada tanggal ___________________'
                     /*sebesar IDR '.$searchModel->total_price.'*/
                   ]
                 ],
 
-             GridView::EXCEL   => [
+              GridView::EXCEL   => [
                     'label'    => 'EXCEL',
-                    'filename' => 'exported-data_user_EXCEL' . date('Y-m-d_H-i-s'),
-                    //'title'    => 'user EXCEL',                        
-                    'options'  => ['title' => 'user List', 'author' => 'Me'], 
+                    'filename' => 'exported-data_kosan_EXCEL' . date('Y-m-d_H-i-s'),
+                    //'title'    => 'kosan EXCEL',                        
+                    'options'  => ['title' => 'kosan List', 'author' => 'Me'], 
                     'config'   => [
                        'cssFile' => ['style' => 'background-color: red;'],
                     ]           
@@ -139,22 +131,22 @@ $this->params['breadcrumbs'][] = $this->title;
 
               GridView::HTML   => [
                     'label'    => 'HTML',
-                    'filename' => 'exported-data_user_HTML' . date('Y-m-d_H-i-s'),                            
+                    'filename' => 'exported-data_kosan_HTML' . date('Y-m-d_H-i-s'),                            
                 ], 
 
                 GridView::JSON   => [
                     'label'    => 'JSON',
-                    'filename' => 'exported-data_user_JSON' . date('Y-m-d_H-i-s'),       
+                    'filename' => 'exported-data_kosan_JSON' . date('Y-m-d_H-i-s'),       
                 ],  
 
                  GridView::CSV   => [
                     'label'    => 'CSV',
-                    'filename' => 'exported-data_user_CSV' . date('Y-m-d_H-i-s'),            
+                    'filename' => 'exported-data_kosan_CSV' . date('Y-m-d_H-i-s'),            
                 ],   
 
                 GridView::TEXT   => [
                     'label'    => 'TEXT',
-                    'filename' => 'exported-data_user_TEXT' . date('Y-m-d_H-i-s'),              
+                    'filename' => 'exported-data_kosan_TEXT' . date('Y-m-d_H-i-s'),              
                 ],
 
              ],
