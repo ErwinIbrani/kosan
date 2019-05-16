@@ -11,7 +11,7 @@
  Target Server Version : 50721
  File Encoding         : 65001
 
- Date: 15/05/2019 11:27:07
+ Date: 16/05/2019 11:15:14
 */
 
 SET NAMES utf8mb4;
@@ -33,8 +33,10 @@ CREATE TABLE `auth_assignment`  (
 -- ----------------------------
 -- Records of auth_assignment
 -- ----------------------------
-INSERT INTO `auth_assignment` VALUES ('Admin', '8', 1557152564);
-INSERT INTO `auth_assignment` VALUES ('Admin', '9', 1557894069);
+INSERT INTO `auth_assignment` VALUES ('Admin', '10', 1557925448);
+INSERT INTO `auth_assignment` VALUES ('User', '11', 1557978922);
+INSERT INTO `auth_assignment` VALUES ('User', '8', 1557977638);
+INSERT INTO `auth_assignment` VALUES ('User', '9', 1557975053);
 
 -- ----------------------------
 -- Table structure for auth_item
@@ -57,8 +59,14 @@ CREATE TABLE `auth_item`  (
 -- ----------------------------
 -- Records of auth_item
 -- ----------------------------
+INSERT INTO `auth_item` VALUES ('/cron-job/*', 2, NULL, NULL, NULL, 1557974180, 1557974180);
+INSERT INTO `auth_item` VALUES ('/cron-job/index', 2, NULL, NULL, NULL, 1557974180, 1557974180);
+INSERT INTO `auth_item` VALUES ('/dashboard-admin/*', 2, NULL, NULL, NULL, 1557975197, 1557975197);
+INSERT INTO `auth_item` VALUES ('/dashboard-admin/index', 2, NULL, NULL, NULL, 1557926153, 1557926153);
+INSERT INTO `auth_item` VALUES ('/dashboard-admin/konfirmasi', 2, NULL, NULL, NULL, 1557927699, 1557927699);
 INSERT INTO `auth_item` VALUES ('/dashboard/*', 2, NULL, NULL, NULL, 1557152493, 1557152493);
 INSERT INTO `auth_item` VALUES ('/dashboard/index', 2, NULL, NULL, NULL, 1557152493, 1557152493);
+INSERT INTO `auth_item` VALUES ('/dashboard/search', 2, NULL, NULL, NULL, 1557975206, 1557975206);
 INSERT INTO `auth_item` VALUES ('/gridview/*', 2, NULL, NULL, NULL, 1557152456, 1557152456);
 INSERT INTO `auth_item` VALUES ('/gridview/export/*', 2, NULL, NULL, NULL, 1557152454, 1557152454);
 INSERT INTO `auth_item` VALUES ('/gridview/export/download', 2, NULL, NULL, NULL, 1557152450, 1557152450);
@@ -66,10 +74,22 @@ INSERT INTO `auth_item` VALUES ('/kosan/*', 2, NULL, NULL, NULL, 1557235486, 155
 INSERT INTO `auth_item` VALUES ('/kosan/create', 2, NULL, NULL, NULL, 1557235486, 1557235486);
 INSERT INTO `auth_item` VALUES ('/kosan/delete', 2, NULL, NULL, NULL, 1557235486, 1557235486);
 INSERT INTO `auth_item` VALUES ('/kosan/index', 2, NULL, NULL, NULL, 1557235486, 1557235486);
+INSERT INTO `auth_item` VALUES ('/kosan/pilih', 2, NULL, NULL, NULL, 1557975192, 1557975192);
 INSERT INTO `auth_item` VALUES ('/kosan/update', 2, NULL, NULL, NULL, 1557235486, 1557235486);
 INSERT INTO `auth_item` VALUES ('/kosan/view', 2, NULL, NULL, NULL, 1557235486, 1557235486);
 INSERT INTO `auth_item` VALUES ('/landing-page/*', 2, NULL, NULL, NULL, 1557152498, 1557152498);
 INSERT INTO `auth_item` VALUES ('/landing-page/index', 2, NULL, NULL, NULL, 1557152498, 1557152498);
+INSERT INTO `auth_item` VALUES ('/pengaduan-admin/*', 2, NULL, NULL, NULL, 1557972565, 1557972565);
+INSERT INTO `auth_item` VALUES ('/pengaduan-admin/delete', 2, NULL, NULL, NULL, 1557972929, 1557972929);
+INSERT INTO `auth_item` VALUES ('/pengaduan-admin/index', 2, NULL, NULL, NULL, 1557972565, 1557972565);
+INSERT INTO `auth_item` VALUES ('/pengaduan-admin/update', 2, NULL, NULL, NULL, 1557972929, 1557972929);
+INSERT INTO `auth_item` VALUES ('/pengaduan-admin/view', 2, NULL, NULL, NULL, 1557975166, 1557975166);
+INSERT INTO `auth_item` VALUES ('/pengaduan/*', 2, NULL, NULL, NULL, 1557975163, 1557975163);
+INSERT INTO `auth_item` VALUES ('/pengaduan/create', 2, NULL, NULL, NULL, 1557975163, 1557975163);
+INSERT INTO `auth_item` VALUES ('/pengaduan/delete', 2, NULL, NULL, NULL, 1557975163, 1557975163);
+INSERT INTO `auth_item` VALUES ('/pengaduan/index', 2, NULL, NULL, NULL, 1557975163, 1557975163);
+INSERT INTO `auth_item` VALUES ('/pengaduan/update', 2, NULL, NULL, NULL, 1557975163, 1557975163);
+INSERT INTO `auth_item` VALUES ('/pengaduan/view', 2, NULL, NULL, NULL, 1557975163, 1557975163);
 INSERT INTO `auth_item` VALUES ('/rbac/*', 2, NULL, NULL, NULL, 1557152479, 1557152479);
 INSERT INTO `auth_item` VALUES ('/rbac/assignment/*', 2, NULL, NULL, NULL, 1557152478, 1557152478);
 INSERT INTO `auth_item` VALUES ('/rbac/assignment/assign', 2, NULL, NULL, NULL, 1557152478, 1557152478);
@@ -126,6 +146,14 @@ INSERT INTO `auth_item` VALUES ('/rbac/user/view', 2, NULL, NULL, NULL, 15571524
 INSERT INTO `auth_item` VALUES ('/site/*', 2, NULL, NULL, NULL, 1557152498, 1557152498);
 INSERT INTO `auth_item` VALUES ('/site/image', 2, NULL, NULL, NULL, 1557152498, 1557152498);
 INSERT INTO `auth_item` VALUES ('/site/index', 2, NULL, NULL, NULL, 1557152498, 1557152498);
+INSERT INTO `auth_item` VALUES ('/user-kosan/*', 2, NULL, NULL, NULL, 1557975187, 1557975187);
+INSERT INTO `auth_item` VALUES ('/user-kosan/bayar', 2, NULL, NULL, NULL, 1557975187, 1557975187);
+INSERT INTO `auth_item` VALUES ('/user-kosan/create', 2, NULL, NULL, NULL, 1557975187, 1557975187);
+INSERT INTO `auth_item` VALUES ('/user-kosan/delete', 2, NULL, NULL, NULL, 1557975187, 1557975187);
+INSERT INTO `auth_item` VALUES ('/user-kosan/index', 2, NULL, NULL, NULL, 1557975187, 1557975187);
+INSERT INTO `auth_item` VALUES ('/user-kosan/keluar-kosan', 2, NULL, NULL, NULL, 1557977326, 1557977326);
+INSERT INTO `auth_item` VALUES ('/user-kosan/update', 2, NULL, NULL, NULL, 1557975187, 1557975187);
+INSERT INTO `auth_item` VALUES ('/user-kosan/view', 2, NULL, NULL, NULL, 1557975187, 1557975187);
 INSERT INTO `auth_item` VALUES ('/user/*', 2, NULL, NULL, NULL, 1557235832, 1557235832);
 INSERT INTO `auth_item` VALUES ('/user/create', 2, NULL, NULL, NULL, 1557235832, 1557235832);
 INSERT INTO `auth_item` VALUES ('/user/delete', 2, NULL, NULL, NULL, 1557235832, 1557235832);
@@ -133,6 +161,7 @@ INSERT INTO `auth_item` VALUES ('/user/index', 2, NULL, NULL, NULL, 1557235832, 
 INSERT INTO `auth_item` VALUES ('/user/update', 2, NULL, NULL, NULL, 1557235832, 1557235832);
 INSERT INTO `auth_item` VALUES ('/user/view', 2, NULL, NULL, NULL, 1557235832, 1557235832);
 INSERT INTO `auth_item` VALUES ('Admin', 1, 'Role Admin Tingkat Atas', NULL, NULL, 1557152527, 1557152527);
+INSERT INTO `auth_item` VALUES ('User', 1, 'User yang nyewa kosan', NULL, NULL, 1557975023, 1557975023);
 
 -- ----------------------------
 -- Table structure for auth_item_child
@@ -150,19 +179,38 @@ CREATE TABLE `auth_item_child`  (
 -- ----------------------------
 -- Records of auth_item_child
 -- ----------------------------
-INSERT INTO `auth_item_child` VALUES ('Admin', '/dashboard/*');
-INSERT INTO `auth_item_child` VALUES ('Admin', '/dashboard/index');
+INSERT INTO `auth_item_child` VALUES ('Admin', '/cron-job/*');
+INSERT INTO `auth_item_child` VALUES ('Admin', '/cron-job/index');
+INSERT INTO `auth_item_child` VALUES ('Admin', '/dashboard-admin/*');
+INSERT INTO `auth_item_child` VALUES ('Admin', '/dashboard-admin/index');
+INSERT INTO `auth_item_child` VALUES ('Admin', '/dashboard-admin/konfirmasi');
+INSERT INTO `auth_item_child` VALUES ('User', '/dashboard/*');
+INSERT INTO `auth_item_child` VALUES ('User', '/dashboard/index');
+INSERT INTO `auth_item_child` VALUES ('User', '/dashboard/search');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/gridview/*');
+INSERT INTO `auth_item_child` VALUES ('User', '/gridview/*');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/gridview/export/*');
+INSERT INTO `auth_item_child` VALUES ('User', '/gridview/export/*');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/gridview/export/download');
+INSERT INTO `auth_item_child` VALUES ('User', '/gridview/export/download');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/kosan/*');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/kosan/create');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/kosan/delete');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/kosan/index');
+INSERT INTO `auth_item_child` VALUES ('User', '/kosan/pilih');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/kosan/update');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/kosan/view');
-INSERT INTO `auth_item_child` VALUES ('Admin', '/landing-page/*');
-INSERT INTO `auth_item_child` VALUES ('Admin', '/landing-page/index');
+INSERT INTO `auth_item_child` VALUES ('Admin', '/pengaduan-admin/*');
+INSERT INTO `auth_item_child` VALUES ('Admin', '/pengaduan-admin/delete');
+INSERT INTO `auth_item_child` VALUES ('Admin', '/pengaduan-admin/index');
+INSERT INTO `auth_item_child` VALUES ('Admin', '/pengaduan-admin/update');
+INSERT INTO `auth_item_child` VALUES ('Admin', '/pengaduan-admin/view');
+INSERT INTO `auth_item_child` VALUES ('User', '/pengaduan/*');
+INSERT INTO `auth_item_child` VALUES ('User', '/pengaduan/create');
+INSERT INTO `auth_item_child` VALUES ('User', '/pengaduan/delete');
+INSERT INTO `auth_item_child` VALUES ('User', '/pengaduan/index');
+INSERT INTO `auth_item_child` VALUES ('User', '/pengaduan/update');
+INSERT INTO `auth_item_child` VALUES ('User', '/pengaduan/view');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/*');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/assignment/*');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/assignment/assign');
@@ -219,6 +267,15 @@ INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/user/view');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/site/*');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/site/image');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/site/index');
+INSERT INTO `auth_item_child` VALUES ('Admin', '/user-kosan/*');
+INSERT INTO `auth_item_child` VALUES ('User', '/user-kosan/*');
+INSERT INTO `auth_item_child` VALUES ('User', '/user-kosan/bayar');
+INSERT INTO `auth_item_child` VALUES ('Admin', '/user-kosan/create');
+INSERT INTO `auth_item_child` VALUES ('Admin', '/user-kosan/delete');
+INSERT INTO `auth_item_child` VALUES ('Admin', '/user-kosan/index');
+INSERT INTO `auth_item_child` VALUES ('User', '/user-kosan/keluar-kosan');
+INSERT INTO `auth_item_child` VALUES ('Admin', '/user-kosan/update');
+INSERT INTO `auth_item_child` VALUES ('Admin', '/user-kosan/view');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/user/*');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/user/create');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/user/delete');
@@ -254,7 +311,7 @@ CREATE TABLE `cron_job`  (
   `ended_at` int(11) UNSIGNED NULL DEFAULT NULL,
   `last_execution_time` float NULL DEFAULT NULL,
   PRIMARY KEY (`id_cron_job`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cron_job
@@ -271,6 +328,8 @@ INSERT INTO `cron_job` VALUES (9, 'pemberitahuan', 'index', 0, 0, 0, 1, 15578452
 INSERT INTO `cron_job` VALUES (10, 'pemberitahuan', 'index', 0, 0, 0, 1, 1557886092, 1557886095, 3.78422);
 INSERT INTO `cron_job` VALUES (11, 'pemberitahuan', 'index', 0, 0, 0, 1, 1557886290, 1557886293, 2.49914);
 INSERT INTO `cron_job` VALUES (12, 'pemberitahuan', 'index', 0, 0, 0, 1, 1557886441, 1557886444, 3.4442);
+INSERT INTO `cron_job` VALUES (13, 'pemberitahuan', 'index', 0, 0, 0, 1, 1557979885, 1557979885, 0.0680039);
+INSERT INTO `cron_job` VALUES (14, 'pemberitahuan', 'index', 0, 0, 0, 1, 1557979958, 1557979963, 5.50331);
 
 -- ----------------------------
 -- Table structure for komplain
@@ -310,9 +369,9 @@ CREATE TABLE `kosan`  (
 -- ----------------------------
 -- Records of kosan
 -- ----------------------------
-INSERT INTO `kosan` VALUES (2, 'Kosan Ibu Dia', 33, 100000.00, 'Jl. Raya', 'AC', 'Pria', 'Tersedia', '31fff5a615114521b4fc56d6d04ab056eed513a6.png');
+INSERT INTO `kosan` VALUES (2, 'Kosan Ibu Dia', 32, 100000.00, 'Jl. Raya', 'AC', 'Pria', 'Tersedia', '31fff5a615114521b4fc56d6d04ab056eed513a6.png');
 INSERT INTO `kosan` VALUES (3, 'Kosan Kamu', 13, 130000.00, 'Jl. Dipatikukur', 'AC, WC, WIFI', 'Campur', 'Tersedia', 'ec517688265cf7968bc243e8a154f9f2aab8a862.png');
-INSERT INTO `kosan` VALUES (4, 'Kosan Ibu Dia', 34, 100000.00, 'Jl. Raya', 'AC', 'Pria', 'Tersedia', '31fff5a615114521b4fc56d6d04ab056eed513a6.png');
+INSERT INTO `kosan` VALUES (4, 'Kosan Ibu Dia', 33, 100000.00, 'Jl. Raya', 'AC', 'Pria', 'Tersedia', '31fff5a615114521b4fc56d6d04ab056eed513a6.png');
 INSERT INTO `kosan` VALUES (5, 'Kosan Kamu', 13, 130000.00, 'Jl. Dipatikukur', 'AC, WC, WIFI', 'Campur', 'Tersedia', 'ec517688265cf7968bc243e8a154f9f2aab8a862.png');
 INSERT INTO `kosan` VALUES (6, 'Kosan Ibu Dia', 34, 100000.00, 'Jl. Raya', 'AC', 'Pria', 'Tersedia', '31fff5a615114521b4fc56d6d04ab056eed513a6.png');
 INSERT INTO `kosan` VALUES (7, 'Kosan Kamu', 13, 130000.00, 'Jl. Dipatikukur', 'AC, WC, WIFI', 'Campur', 'Tersedia', 'ec517688265cf7968bc243e8a154f9f2aab8a862.png');
@@ -324,7 +383,7 @@ INSERT INTO `kosan` VALUES (12, 'Kosan Ibu Dia', 34, 100000.00, 'Jl. Raya', 'AC'
 INSERT INTO `kosan` VALUES (13, 'Kosan Kamu', 13, 130000.00, 'Jl. Dipatikukur', 'AC, WC, WIFI', 'Campur', 'Tersedia', 'ec517688265cf7968bc243e8a154f9f2aab8a862.png');
 INSERT INTO `kosan` VALUES (14, 'Kosan Ibu Dia', 34, 100000.00, 'Jl. Raya', 'AC', 'Pria', 'Tersedia', '31fff5a615114521b4fc56d6d04ab056eed513a6.png');
 INSERT INTO `kosan` VALUES (15, 'Kosan Kamu', 13, 130000.00, 'Jl. Dipatikukur', 'AC, WC, WIFI', 'Campur', 'Tersedia', 'ec517688265cf7968bc243e8a154f9f2aab8a862.png');
-INSERT INTO `kosan` VALUES (16, 'Kosan Ibu Dia', 34, 100000.00, 'Jl. Raya', 'AC', 'Pria', 'Tersedia', '31fff5a615114521b4fc56d6d04ab056eed513a6.png');
+INSERT INTO `kosan` VALUES (16, 'Kosan Ibu Dia', 33, 100000.00, 'Jl. Raya', 'AC', 'Pria', 'Tersedia', '31fff5a615114521b4fc56d6d04ab056eed513a6.png');
 INSERT INTO `kosan` VALUES (17, 'Kosan Kamu', 13, 130000.00, 'Jl. Dipatikukur', 'AC, WC, WIFI', 'Campur', 'Tersedia', 'ec517688265cf7968bc243e8a154f9f2aab8a862.png');
 INSERT INTO `kosan` VALUES (18, 'Kosan Ibu Dia', 34, 100000.00, 'Jl. Raya', 'AC', 'Pria', 'Tersedia', '31fff5a615114521b4fc56d6d04ab056eed513a6.png');
 INSERT INTO `kosan` VALUES (19, 'Kosan Kamu', 13, 130000.00, 'Jl. Dipatikukur', 'AC, WC, WIFI', 'Campur', 'Tersedia', 'ec517688265cf7968bc243e8a154f9f2aab8a862.png');
@@ -376,18 +435,17 @@ CREATE TABLE `pengaduan`  (
   `status` enum('Diperbaiki','Belum Diperbaiki') CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'Belum Diperbaiki',
   `keterangan_teknisi` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
   `tanggal_laporan` datetime(0) NULL DEFAULT NULL,
-  `tanggal_ditangani` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `user_pengadu`(`user_id`) USING BTREE,
   INDEX `kosan_pengadu`(`kosan_id`) USING BTREE,
   CONSTRAINT `kosan_pengadu` FOREIGN KEY (`kosan_id`) REFERENCES `kosan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `user_pengadu` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of pengaduan
 -- ----------------------------
-INSERT INTO `pengaduan` VALUES (1, 9, 2, 'Latai Bocor', 'Terdapat Lantai yang Bocor', '1550c2e973ace3161f35b1fb7937a0afa69dee68.jpg', 'Belum Diperbaiki', NULL, '2019-05-15 09:59:47', '2019-05-15 09:59:47');
+INSERT INTO `pengaduan` VALUES (3, 11, 3, 'dwd', 'dswds', '0edf87bd3ece6415a398f4396e0843c6f0d45f26.png', 'Belum Diperbaiki', NULL, '2019-05-16 10:58:31');
 
 -- ----------------------------
 -- Table structure for user
@@ -410,13 +468,13 @@ CREATE TABLE `user`  (
   `tanggal_daftar` datetime(0) NOT NULL,
   `status_kost` smallint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (8, 'Santi', 'erwin', 'Perempuan', '2019-05-01', 'Bandung', '098564833844', 'WctfhkEgrJD4QFFi_1rJcNTrhQqHHBJf', '$2y$13$KleWkwitzS0x3Px7zUMyReeMaoHZH9g8I/MpQ8ttCxchPaOq8t/Be', 'santi@gmail.com', 10, 'Jl. ajaa', 'aab0504a2939cc1cbd2e79ba6673d305568854bc.png', '2019-05-06 09:19:30', 0);
-INSERT INTO `user` VALUES (9, 'Erwin', 'Wiguna', 'Laki-laki', '2019-05-12', 'Jakarta', '085351644655', 'RQVWrKgjWKnhf7StRPGc3dZSuTz8oTEr', '$2y$13$vSK84.SI13Hw0ZKrmmk.AuWWPkXJHrYmPVBSvxWnnMgVy1wqJQAci', 'erwinlocalhost90@gmail.com', 10, 'Jl. Raya', 'cc49921c9b399902164ae00d9757b6faa246a8f7.png', '2019-05-13 13:54:15', 1);
+INSERT INTO `user` VALUES (10, 'admin kosan', 'admin_kosan', 'Laki-laki', '2019-05-15', 'Bandung', '085645366455', 'Q_FYQ2-jQSXIzPbFvmZl_-dP5hPFbP96', '$2y$13$kQQM0GnbOVN6HYDzjnydyum0Evtje9y6htS0bZFSjpP4biVreVspK', 'admin@gmail.com', 10, 'Jl. Dipatiukur', 'bf1c3179deab701e87821a40a1e74c4bb0c2ee45.png', '2019-05-15 20:02:57', 0);
+INSERT INTO `user` VALUES (11, 'Erwin Situmorang', 'erwin', 'Laki-laki', '2019-05-15', 'Bandung Barat', '098364544633', 'AYx5o-jalPKdfgIrwCMY9-bl-wPYQxLx', '$2y$13$45v8CirUYklAnNaMq8NcVuN60m17wtXeZj0c4wOM/s6fdplkA49fq', 'erwinlocalhost90@gmail.com', 10, 'Jl. Raya Batu Nunggal', 'b932d5479326e256ad0a0d845c4fc093a09f82f9.png', '2019-05-16 10:40:16', 1);
 
 -- ----------------------------
 -- Table structure for user_kosan
@@ -439,12 +497,12 @@ CREATE TABLE `user_kosan`  (
   INDEX `kosan`(`kosan_id`) USING BTREE,
   CONSTRAINT `kosan` FOREIGN KEY (`kosan_id`) REFERENCES `kosan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user_kosan
 -- ----------------------------
-INSERT INTO `user_kosan` VALUES (1, 9, 2, '2019-05-13', '2019-06-13', 'Tetap', 'Belum Dikonfirmasi', 'Dibayar', 1, '480924079d00aba1e1865fc373af476e0f75e209.png', 'Dieksekusi');
-INSERT INTO `user_kosan` VALUES (3, 9, 2, '2019-06-13', '2019-05-15', 'Tetap', 'Belum Dikonfirmasi', 'Belum Dibayar', 2, NULL, 'Dieksekusi');
+INSERT INTO `user_kosan` VALUES (8, 11, 2, '2019-05-01', '2019-06-01', 'Tetap', 'Belum Dikonfirmasi', 'Dibayar', 1, 'e21ffc4a204d5a9cfb1f9ee7ca7feab5cf307d1b.jpg', 'Dieksekusi');
+INSERT INTO `user_kosan` VALUES (9, 11, 2, '2019-06-01', '2019-05-16', 'Tetap', 'Belum Dikonfirmasi', 'Belum Dibayar', 2, NULL, 'Dieksekusi');
 
 SET FOREIGN_KEY_CHECKS = 1;
