@@ -192,11 +192,5 @@ class UserKosanController extends Controller
     }
 
 
-    public function actionKeluarKosan()
-    {
-           $model  = User::findOne(Yii::$app->user->identity->id);
-           $model->delete();
-           Yii::$app->session->setFlash('success', 'Anda Telah Keluar Dari Kosan'); 
-           return $this->redirect(['/auth/register']);
-    }
+   
 }

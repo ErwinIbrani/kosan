@@ -37,17 +37,26 @@ class PemberitahuanController extends Controller
      * Run SomeModel::kirim_pemberitahuan for today only as the default action
      * @return int exit code
      */
-    public function actionIndex(){
+    public function actionTujuhHari()
+    {
+        return $this->actionInit(date("Y-m-d", strtotime("-7 days")), date("Y-m-d", strtotime("-7 days")));
+    }
+
+    public function actionHariIni()
+    {
         return $this->actionInit(date("Y-m-d"), date("Y-m-d"));
     }
+
+    
+
     /**
      * Run SomeModel::kirim_pemberitahuan for yesterday
      * @return int exit code
      */
-    public function actionYesterday()
+   /* public function actionKemarin()
     {
         return $this->actionInit(date("Y-m-d", strtotime("-1 days")), date("Y-m-d", strtotime("-1 days")));
-    }
+    }*/
 
 
 

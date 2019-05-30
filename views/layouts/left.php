@@ -88,7 +88,7 @@ use yii\helpers\Html;
         [
             'label' => 'Berhenti Mengkost',
             'icon'  => 'sign-out',
-            'url'   => ['/user-kosan/keluar-kosan', 'data' => [
+            'url'   => ['/keluar-kosan/keluar-kosan', 'data' => [
                         'confirm' => 'Apakah Anda Yakin ?',
                         'method' => 'post',
                     ],]
