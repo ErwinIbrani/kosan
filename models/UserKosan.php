@@ -97,9 +97,10 @@ class UserKosan extends \yii\db\ActiveRecord
     public static function kirim_pemberitahuan($date)
     {
         $target   = self::find()
-                  ->where(['tgl_berakhir_kos' => $date])
+                  ->where(['tgl_masuk_kos' => $date])
+                  ->andWhere(['!=', 'periode_kosan', 1])
                   ->all();
-       
+     
         if(!empty($target)) {
            foreach ($target as $model) {
              $model->status_cron_job = 'Dieksekusi';

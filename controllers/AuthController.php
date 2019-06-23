@@ -9,6 +9,7 @@ use yii\web\BadRequestHttpException;
 use app\models\identity\SignupForm;
 use app\models\identity\LoginForm;
 use app\models\identity\User;
+use app\models\User as UserRegister;
 use yii\web\UploadedFile;
 
 
@@ -66,6 +67,7 @@ class AuthController extends \yii\web\Controller
             $request                  = Yii::$app->request;
             $modelUser->nama_lengkap  = $request->post('SignupForm')['nama_lengkap'];
             $modelUser->username      = $request->post('SignupForm')['username'];
+            $modelUser->status        = 0;
             $modelUser->jenis_kelamin = $request->post('SignupForm')['jenis_kelamin'];
             $modelUser->tanggal_lahir = $request->post('SignupForm')['tanggal_lahir'];
             $modelUser->tempat_lahir  = $request->post('SignupForm')['tempat_lahir'];
@@ -86,18 +88,40 @@ class AuthController extends \yii\web\Controller
                  }
              }
             if($modelUser->save()){
-                Yii::$app->session->setFlash('success', 'Silahkan Login'); 
-                  return $this->redirect(['login']); 
-           }
+                 $model->sendVerification($modelUser->id);
+                  Yii::$app->session->setFlash('success', 'Silahkkan Konfirmasi E-Mail Anda');
+                  return $this->redirect(['register']);
+            }
            else{
              Yii::$app->session->setFlash('error', 'Ada yang error'); 
-             return $this->redirect(['login']); 
+             return $this->redirect(['register']);
            }
        }
 
         return $this->render('register', [
             'model' => $model,
         ]);
+    }
+
+
+    public function actionConfirmation($id, $auth_key)
+    {
+        $user = UserRegister::find()
+            ->where(['id' => $id])
+            ->andWhere(['auth_key' => $auth_key])
+            ->andWhere(['status' => 0])
+            ->one();
+
+        if(!empty($user)){
+            $user->status = 10;
+            $user->save();
+            Yii::$app->session->setFlash('success', 'Please Login');
+            return $this->redirect(['login']);
+        }
+        else{
+            Yii::$app->session->setFlash('error', 'Please Login');
+            return $this->redirect(['login']);
+        }
     }
 
     public function actionLogout()

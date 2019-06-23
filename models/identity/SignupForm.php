@@ -2,9 +2,9 @@
 namespace app\models\identity;
 
 use yii\base\Model;
-
+use Yii;
 use app\models\identity\User;
-
+use yii\helpers\Html;
 /**
  * Signup form
  */
@@ -68,6 +68,23 @@ class SignupForm extends Model
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
         ];
+    }
+
+    public function sendVerification($id)
+    {
+        $user = User::findOne([
+            'id' => $id,
+        ]);
+
+        return Yii::$app
+            ->mailer
+            ->compose()
+            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
+            ->setTo($this->email)
+            ->setSubject('Konfirmasi Register Kosan' . Yii::$app->name)
+            ->setTextBody("Mohon Untuk Klik Link")
+            ->setHtmlBody(Html::a('Klik Untuk Konfirmasi',Yii::$app->urlManager->createAbsoluteUrl(['auth/confirmation', 'id' => $user->id, 'auth_key' => $user->auth_key])))
+            ->send();
     }
 
 }
