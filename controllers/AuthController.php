@@ -88,7 +88,7 @@ class AuthController extends \yii\web\Controller
                  }
              }
             if($modelUser->save()){
-                 $model->sendVerification($modelUser->id);
+                  $model->sendVerification($modelUser->id);
                   Yii::$app->session->setFlash('success', 'Silahkkan Konfirmasi E-Mail Anda');
                   return $this->redirect(['register']);
             }

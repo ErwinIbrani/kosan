@@ -8,47 +8,66 @@ use yii\helpers\Html;
         <div class="col-md-12">
           <div class="box">
             <div class="box-header with-border">
-                <?= Html::a('Cari Lagi',
-                                    ['/landing-page/index'],
-                                    ['class' => 'btn btn-info btn-sm btn-flat']
-                                ) ?>
+                <div class="collapse navbar-collapse" id="collapse-menu">
+                <div class="col-md-6">
+                <!--kosongkan-->
+                </div>
+                    <div class="col-md-6">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <?= Html::a(Html::tag('i', '', ['class' => 'fa fa-filter']) . ' Cari Ulang', ['landing-page/index'], ['class' => 'text-blue', 'title' => 'Cari Ulang']) ?>
+                            </li>
+
+                            <?php
+                            if(\Yii::$app->user->isGuest){ ?>
+                                <li>
+                                    <?= Html::a(Html::tag('i', '', ['class' => 'fa fa-key']) . ' Login', ['auth/login'], ['class' => 'text-blue', 'title' => 'Login']) ?>
+                                </li>
+
+                                <li>
+                                    <?= Html::a(Html::tag('i', '', ['class' => 'fa fa-user']) . ' Register', ['auth/register'], ['class' => 'text-blue', 'title' => 'Register']) ?>
+                                </li>
+                            <?php }
+                            else{ ?>
+                                <!--Url sudah Login-->
+                            <?php } ?>
+                        </ul>
+                    </div>
+                </div>
             </div>
             <br/>
-            <!-- ./box-body -->
-            <div class="box-body">
-              <div class="row">
+
               <?php foreach ($models as $key => $value) { ?>
-                <div class="col-sm-4 col-xs-6">
-                   <div class="info-box"  style="height: 100px;">
-                    <span class="info-box-icon" style="height: 100px;">
-                      <?= Html::img($value->linkpreview, ['class'=>'img-thumbnail', 'style' => 'height:100%;width:100%']); ?>
-                    </span>
-                     <div class="info-box-content">
-                       <span class="info-box-text"><?= $value->nama_kosan ?></span>
-                       <span class="info-box-text"><?= $value->alamat_kosan ?></span>
-                       <span class="info-box-number">Rp. <?= number_format($value->harga_perbulan) ?>/Bulan</span>
-                       <div class="pull-right">
-                        <?= Html::a('Detail',
-                                    ['/landing-page/detail', 'id' => $value->id],
-                                    ['class' => 'btn btn-primary btn-sm btn-flat']
-                                ) ?>
+                  <div class="col-sm-4 col-xs-6">
+                      <br/>
+                      <div class="box box-success box-solid">
+                          <div class="box-header with-border">
+                              <h3 class="box-title"><?= $value->nama_kosan; ?></h3>
+                              <div class="box-tools pull-right">
+                                  <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                              </div>
+                              <!-- /.box-tools -->
+                          </div>
+                          <!-- /.box-header -->
+                          <div class="box-body">
+                              <span class="info-box-text">Nama Kosan   : <?= $value->nama_kosan ?></span>
+                              <span class="info-box-text">Alamat Kosan : <?= $value->alamat_kosan ?></span>
+                              <span class="info-box-number">Rp. <?= number_format($value->harga_perbulan) ?>/Bulan</span>
+                              <div class="pull-right">
+                                  <?= Html::a('Detail',
+                                      ['/landing-page/detail', 'id' => $value->id],
+                                      ['class' => 'btn btn-primary btn-sm btn-flat']
+                                  ) ?>
+                              </div>
+                          </div>
                       </div>
-                     </div>
-                   </div>
-                </div>
-               <?php } ?>
-              </div>
-              <div class="pull-right">
-              <?= LinkPager::widget(['pagination' => $pages]); ?>
-              </div>
-              <!-- /.row -->
-            </div>
-            <!-- /.box-footer -->
+                  </div>
+              <?php } ?>
+
+
           </div>
-          <!-- /.box -->
         </div>
-        <!-- /.col -->
-      </div> 
+      </div>
 
 
 

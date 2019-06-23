@@ -25,7 +25,8 @@
         "yiisoft/yii2-jui": "~2.0.0",
         "kartik-v/yii2-date-range": "dev-master",
         "fedemotta/yii2-cronjob": "*",
-        "kartik-v/yii2-widget-fileinput": "dev-master"
+        "kartik-v/yii2-widget-fileinput": "dev-master",
+        "kv4nt/yii2-owl-carousel2": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
