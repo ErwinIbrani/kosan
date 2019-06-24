@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\AuthAssignment;
 use Yii;
 use yii\helpers\Url;
 use yii\base\InvalidParamException;
@@ -61,42 +62,55 @@ class AuthController extends \yii\web\Controller
     public function actionRegister()
     {
       $this->view->title = 'Register';
+      $transaction       = Yii::$app->db->beginTransaction();
       $model             = new SignupForm();
-        if ($model->load(Yii::$app->request->post())){
-            $modelUser                = new User();
-            $request                  = Yii::$app->request;
-            $modelUser->nama_lengkap  = $request->post('SignupForm')['nama_lengkap'];
-            $modelUser->username      = $request->post('SignupForm')['username'];
-            $modelUser->status        = 0;
-            $modelUser->jenis_kelamin = $request->post('SignupForm')['jenis_kelamin'];
-            $modelUser->tanggal_lahir = $request->post('SignupForm')['tanggal_lahir'];
-            $modelUser->tempat_lahir  = $request->post('SignupForm')['tempat_lahir'];
-            $modelUser->no_telepon    = $request->post('SignupForm')['no_telepon'];
-            $modelUser->email         = $request->post('SignupForm')['email'];
-            $modelUser->alamat        = $request->post('SignupForm')['alamat'];
-            $modelUser->setPassword($request->post('SignupForm')['password']);
-            $modelUser->generateAuthKey();
-            $folder                  = Yii::getAlias('@webroot/').Yii::getAlias('@potoktp/');
-            $file                    = UploadedFile::getInstance($model, 'poto_ktp');
+      try{
+          if ($model->load(Yii::$app->request->post())){
+              $modelUser                = new User();
+              $request                  = Yii::$app->request;
+              $modelUser->nama_lengkap  = $request->post('SignupForm')['nama_lengkap'];
+              $modelUser->username      = $request->post('SignupForm')['username'];
+              $modelUser->status        = 0;
+              $modelUser->jenis_kelamin = $request->post('SignupForm')['jenis_kelamin'];
+              $modelUser->tanggal_lahir = $request->post('SignupForm')['tanggal_lahir'];
+              $modelUser->tempat_lahir  = $request->post('SignupForm')['tempat_lahir'];
+              $modelUser->no_telepon    = $request->post('SignupForm')['no_telepon'];
+              $modelUser->email         = $request->post('SignupForm')['email'];
+              $modelUser->alamat        = $request->post('SignupForm')['alamat'];
+              $modelUser->setPassword($request->post('SignupForm')['password']);
+              $modelUser->generateAuthKey();
+              $folder                  = Yii::getAlias('@webroot/').Yii::getAlias('@potoktp/');
+              $file                    = UploadedFile::getInstance($model, 'poto_ktp');
 
-             if (!is_null($file)) 
-             {
-                $filename = sha1(date('YmdHis').time());
-                $mfile    = Yii::$app->mfile->upload($file, $folder, $filename);
-               if ($mfile) {
-                  $modelUser->poto_ktp = $mfile;
-                 }
-             }
-            if($modelUser->save()){
+              if (!is_null($file))
+              {
+                  $filename = sha1(date('YmdHis').time());
+                  $mfile    = Yii::$app->mfile->upload($file, $folder, $filename);
+                  if ($mfile) {
+                      $modelUser->poto_ktp = $mfile;
+                  }
+              }
+              if($modelUser->save()){
+                  $model = new AuthAssignment();
+                  $model->item_name = 'User';
+                  $model->user_id   = $modelUser->id;
+                  $model->save();
                   $model->sendVerification($modelUser->id);
+                  $transaction->commit();
                   Yii::$app->session->setFlash('success', 'Silahkkan Konfirmasi E-Mail Anda');
                   return $this->redirect(['register']);
-            }
-           else{
-             Yii::$app->session->setFlash('error', 'Ada yang error'); 
-             return $this->redirect(['register']);
-           }
-       }
+              }
+              else{
+                  $transaction->rollBack();
+                  Yii::$app->session->setFlash('error', 'Ada yang error');
+                  return $this->redirect(['register']);
+              }
+          }
+      }catch (\Exception $exception)
+      {
+          $transaction->rollBack();
+          throw $exception;
+      }
 
         return $this->render('register', [
             'model' => $model,

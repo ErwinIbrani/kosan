@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 use yii\helpers\Html;
 use kartik\grid\GridView;
@@ -20,15 +20,34 @@ $this->params['breadcrumbs'][] = $this->title;
          ['class' => 'kartik\grid\SerialColumn'],
 
            [
-              'attribute' => 'periode_kosan',
-              'label'     => 'Periode Kosan Ke',
-              'hAlign'    => 'left',  
+              'attribute' => 'tgl_berakhir_kos',
+              'label'     => 'Notifikasi Kosan',
+               'filter'   => false,
+              'hAlign'    => 'left',
               'vAlign'    => 'middle',
               'content'   => function($model){
-                 return $model->periode_kosan;
+                  if($model->tgl_berakhir_kos === date("Y-m-d"))
+                  {
+                      return '<label class="text-red">Kosan Anda Akan Seger Habis</label>';
+                  }
+                  else
+                  {
+                     return null;
+                  }
               },
               'contentOptions' => ['style' => 'width:10px;'],
             ],
+
+          [
+              'attribute' => 'periode_kosan',
+              'label'     => 'Periode Kosan Ke',
+              'hAlign'    => 'left',
+              'vAlign'    => 'middle',
+              'content'   => function($model){
+                  return $model->periode_kosan;
+              },
+              'contentOptions' => ['style' => 'width:10px;'],
+          ],
             //'id',
             /*[
               'attribute' => 'kosan_id',
