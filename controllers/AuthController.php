@@ -91,10 +91,10 @@ class AuthController extends \yii\web\Controller
                   }
               }
               if($modelUser->save()){
-                  $model = new AuthAssignment();
-                  $model->item_name = 'User';
-                  $model->user_id   = $modelUser->id;
-                  $model->save();
+                  $modelRole = new AuthAssignment();
+                  $modelRole->item_name = 'User';
+                  $modelRole->user_id   = $modelUser->id;
+                  $modelRole->save(false);
                   $model->sendVerification($modelUser->id);
                   $transaction->commit();
                   Yii::$app->session->setFlash('success', 'Silahkkan Konfirmasi E-Mail Anda');
