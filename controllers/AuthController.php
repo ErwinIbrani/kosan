@@ -38,9 +38,15 @@ class AuthController extends \yii\web\Controller
             }else{
                 if(!empty($model->isAdmin($model->email))){
                   return $this->redirect(['/dashboard-admin/']);  
-                }else if ($model->isAdmin($model->email === NULL) ){
-                    return $this->redirect(['/dashboard']);
-              }  
+                }
+                if(!empty($model->isKost($model->email)))
+                {
+                  return $this->redirect(['/dashboard/']);
+                }
+                if(!empty($model->notKost($model->email)))
+                {
+                    return $this->redirect(['/landing-page/']);
+                }
             }
         } 
         else {

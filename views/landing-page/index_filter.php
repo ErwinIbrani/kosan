@@ -29,7 +29,12 @@ use yii\helpers\Html;
                                 </li>
                             <?php }
                             else{ ?>
-                                <!--Url sudah Login-->
+                               <!-- <li>
+                                    <?/*= Html::a(Html::tag('i', '', ['class' => 'fa fa-bars']) . ' Kembali Ke Menu', ['/dashboard/'], ['class' => 'text-blue', 'title' => 'Ke Menu Utama']) */?>
+                                </li>-->
+                                <li>
+                                    <?= Html::a(Html::tag('i', '', ['class' => 'fa fa-sign-out']) . ' Logout', ['/auth/logout'], ['class' => 'text-blue', 'title' => 'Logout']) ?>
+                                </li>
                             <?php } ?>
                         </ul>
                     </div>

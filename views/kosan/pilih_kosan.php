@@ -41,7 +41,7 @@ use yii\jui\DatePicker;
        </div>
 
        <div class="form-group">
-        <?= $form->field($kosanModel, 'jenis_kosan')->dropDownList([ 'Pria' => 'Pria', 'Wanita' => 'Wanita', 'Campur' => 'Campur', ], ['prompt' => '.:Pilil:.', 'readonly' => true]) ?>
+        <?= $form->field($kosanModel, 'jenis_kosan')->dropDownList([ 'Pria' => 'Pria', 'Wanita' => 'Wanita', 'Pria dan Wanita' => 'Pria dan Wanita', ], ['prompt' => '.:Pilil:.', 'readonly' => true]) ?>
       </div>  
        
 

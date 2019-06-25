@@ -2,11 +2,13 @@
 
 namespace app\controllers;
 
+use app\models\User;
 use yii\web\Controller;
 use app\models\Kosan;
 use app\models\KosanSearch;
 use yii\data\Pagination;
 use Yii;
+use app\models\UserKosan;
 
 class LandingPageController extends Controller
 {
@@ -51,8 +53,9 @@ class LandingPageController extends Controller
    public function actionDetail($id)
    {
        $this->view->title = 'Detail Kosan';
-   	   $model = Kosan::findOne($id);
-       return $this->render('detail', ['model' => $model]);
+   	   $model     = Kosan::findOne($id);
+       $userKosan = UserKosan::find()->where(['kosan_id' => $model->id])->count();
+       return $this->render('detail', ['model' => $model, 'countkost' => $userKosan]);
    }
 
 

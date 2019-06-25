@@ -45,7 +45,7 @@ use kartik\file\FileInput;
        </div>
 
        <div class="form-group">
-        <?= $form->field($model, 'jenis_kosan')->dropDownList([ 'Pria' => 'Pria', 'Wanita' => 'Wanita', 'Campur' => 'Campur', ], ['prompt' => '.:Pilil:.']) ?>
+        <?= $form->field($model, 'jenis_kosan')->dropDownList([ 'Pria' => 'Pria', 'Wanita' => 'Wanita', 'Pria dan Wanita' => 'Pria dan Wanita', ], ['prompt' => '.:Pilil:.']) ?>
       </div>  
        
         <?= $form->field($model, 'gambar_poto')->widget(FileInput::classname(), [

@@ -31,7 +31,11 @@ FancyAsset::register($this);
                     </div><br/>
 
                     <div class="direct-chat-text">
-                     Jumlah Kamar : <?= $model->jumlah_kamar ?>
+                     Jumlah Kamar Kosong : <?= $model->jumlah_kamar ?>
+                    </div><br/>
+
+                    <div class="direct-chat-text">
+                        Jumlah Kamar Terpakai : <?= $countkost ?>
                     </div><br/>
 
                     <div class="direct-chat-text">
@@ -50,15 +54,15 @@ FancyAsset::register($this);
                      Jenis Kosan : <?= $model->jenis_kosan ?>
                     </div><br/>
 
-                    <div class="direct-chat-text">
-                     Status Kosan : <?= $model->status ?>
-                    </div><br/>
+                    <!--<div class="direct-chat-text">
+                     Status Kosan : <?/*= $model->status */?>
+                    </div><br/>-->
                   
                   <div class="pull-right">
                   <?php 
                        if(Yii::$app->user->isGuest){ ?>
                           <?= Html::a('Pilih Kosan',
-                                    ['/auth/register'],
+                                    ['/auth/login'],
                                     ['class' => 'btn btn-info btn-sm btn-flat']
                         ) ?>
                         <?php } 
@@ -76,21 +80,13 @@ FancyAsset::register($this);
 
                 <div class="col-md-2">
                   <div class="pull-right">
-                  <?php 
-                    if(Yii::$app->user->isGuest){ ?>
-                       <?= Html::a('Kembali',
+
+                   <?= Html::a('Kembali',
                                     ['/landing-page/index'],
                                     ['class' => 'btn btn-primary btn-sm btn-flat']
                                 ) ?>
-                    <?php } 
-                        else
-                        { ?>
-                             <?= Html::a('Kembali',
-                                    ['/dashboard/index'],
-                                    ['class' => 'btn btn-primary btn-sm btn-flat']
-                                ) ?>
-                      <?php } 
-                    ?>            
+
+
                    </div>             
                 </div>
 

@@ -37,16 +37,15 @@ class DashboardController extends \yii\web\Controller
     public function actionIndex()
     {
       /*user sudah kost*/
-      if(Yii::$app->user->identity->status_kost === 1){ 
-            $searchModel = new UserKosanSearch();
-            $dataProvider = $searchModel->kosanUser(Yii::$app->request->queryParams);
+      /*if(Yii::$app->user->identity->status_kost === 1){ */
+      $searchModel = new UserKosanSearch();
+      $dataProvider = $searchModel->kosanUser(Yii::$app->request->queryParams);
             return $this->render('index-search', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]);
 
-        }else{
-          /*user masih cari kost*/
+        /*}*//*else{
             $searchModel = new KosanSearch();
             $query       = Kosan::find();
             $countQuery  = clone $query;
@@ -54,11 +53,10 @@ class DashboardController extends \yii\web\Controller
             $models      = $query->offset($pages->offset)->limit($pages->limit)->all();
             return $this->render('index', [
                                          'models' => $models,
-                                         'pages' => $pages, 
+                                         'pages' => $pages,
                                          'searchModel' => $searchModel]);
-        }
-  
-    }
+        }*/
+     }
 
 
    public function actionSearch()

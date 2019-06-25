@@ -84,10 +84,27 @@ class LoginForm extends Model
         $data =  UserModel::find()
                   ->innerJoinWith('assignments', true)
                   ->where("auth_assignment.item_name='Admin'")
-                  ->andWhere(['email' => $email])
+                  ->andWhere(['user.email' => $email])
+                  ->andWhere(['user.status_kost' => 0])
                   ->one();
 
         return $data;
+    }
+
+    public function isKost($email)
+    {
+        return UserModel::find()
+               ->where(['email' => $email])
+               ->andWhere(['status_kost' => 1])
+               ->one();
+    }
+
+    public function notKost($email)
+    {
+        return UserModel::find()
+            ->where(['email' => $email])
+            ->andWhere(['status_kost' => 0])
+            ->one();
     }
 
 }

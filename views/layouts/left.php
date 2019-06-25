@@ -43,7 +43,7 @@ use yii\helpers\Html;
         ['label' => 'Pembayaran Kosan','icon'=>'money', 'url' =>  ['/dashboard-admin/index']],
         
         /*admin*/
-        [
+        /*[
             'label' => 'User Management',
             'icon' => 'users',
             //'url' => 'javascript:void(0)',
@@ -54,7 +54,7 @@ use yii\helpers\Html;
                 ['label' => 'Permission', 'icon' => 'compass', 'url' => ['/rbac/permission/']],
                 ['label' => 'Access', 'icon' => 'retweet', 'url' => ['/rbac/route/']],
             ],
-        ],
+        ],*/
 
 
          /*admin*/
@@ -79,11 +79,11 @@ use yii\helpers\Html;
         ],
 
        /*admin*/
-        [
+        /*[
             'label' => 'Status Pemebitahuan',
             'icon'  => 'check',
             'url'   => ['/cron-job/']
-        ],
+        ],*/
 
         [
             'label' => 'Berhenti Mengkost',

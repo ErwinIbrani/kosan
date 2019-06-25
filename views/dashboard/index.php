@@ -4,13 +4,6 @@ use yii\widgets\LinkPager;
 use yii\helpers\Html;
 ?>
 
-<?php
-
-if(Yii::$app->user->identity->status_kost === 1){ ?>
-
-
-<?php } else { ?>
-
           <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title"><?= $this->render('_search', ['model' => $searchModel]) ?> 
@@ -65,4 +58,3 @@ if(Yii::$app->user->identity->status_kost === 1){ ?>
             </div>
             <!-- /.box-footer -->
        </div>
-<?php } ?>

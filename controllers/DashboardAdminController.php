@@ -36,8 +36,7 @@ class DashboardAdminController extends \yii\web\Controller
    
 
    public function actionIndex()
-    {
-       
+   {
        $searchModel = new UserKosanSearch();
        $dataProvider = $searchModel->kosanUserAll(Yii::$app->request->queryParams);
        return $this->render('user_kost', [

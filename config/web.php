@@ -52,7 +52,7 @@ $config = [
             'class' => 'yii\i18n\Formatter',
             'defaultTimeZone'   => 'Asia/Jakarta',
             'decimalSeparator'  => ',',
-            'thousandSeparator' => '.',
+            'thousandSeparator' => ',',
             'currencyCode'      => 'IDR',
         ],
         'authManager' => [
