@@ -16,7 +16,7 @@ use yii\filters\AccessControl;
  */
 class UserKosanController extends Controller
 {
-   
+
 
     public function behaviors()
     {
@@ -134,17 +134,17 @@ class UserKosanController extends Controller
 
     public function actionBayar($id)
     {
-        $this->view->title = 'Upload Bukti Pembayaran Kosan';
-        $transaction = Yii::$app->db->beginTransaction();   
+        $this->view->title = 'Upload Bukti PembayaranController Kosan';
+        $transaction = Yii::$app->db->beginTransaction();
         $model    = $this->findModel($id);
 
      try {
           if ($model->load(Yii::$app->request->post()))
           {
-             
+
               if (!file_exists($model->linkpreview))
                {
-             
+
                  $folder = Yii::getAlias('@webroot/').Yii::getAlias('@buktipembayaran/');
                  $file   = UploadedFile::getInstance($model, 'bukti_pembayaran_virtual');
                  if (!is_null($file)) {
@@ -167,30 +167,61 @@ class UserKosanController extends Controller
                   $newRecord->status_cron_job  = 'Belum Dieksekusi';
                   if($newRecord->save(false)){
                     $transaction->commit();
-                    Yii::$app->session->setFlash('success', 'Bukti Berhasil Diupload'); 
+                    Yii::$app->session->setFlash('success', 'Bukti Berhasil Diupload');
                     return $this->redirect(['/dashboard/index']);
                   }else{
                     $transaction->rollback();
-                    Yii::$app->session->setFlash('error', 'Updated Failed'); 
+                    Yii::$app->session->setFlash('error', 'Updated Failed');
                     return $this->redirect(['/dashboard/index']);
                   }
                }else{
                   $transaction->rollback();
-                  Yii::$app->session->setFlash('error', 'Updated Failed'); 
+                  Yii::$app->session->setFlash('error', 'Updated Failed');
                   return $this->redirect(['/dashboard/index']);
-               } 
+               }
              }
 
         } catch (\Exception $e) {
           $transaction->rollBack();
           throw $e;
-      }   
+      }
 
      return $this->render('_form_bayar', [
             'model' => $model,
         ]);
     }
 
+    public  function  actionUser($kosan_id)
+    {
+        $query = UserKosan::find()
+            ->select(['user.nama_lengkap', 'user.username', 'kosan.nama_kosan', 'user_kosan.user_id'])
+            ->joinWith('kosan', true)
+            ->joinWith('user', true)
+            ->where(['user_kosan.kosan_id' => $kosan_id])
+            ->groupBy(['user_kosan.user_id'])
+            ->all();
 
-   
+        return $this->render('user', [
+            'queryModels' =>  $query ,
+        ]);
+    }
+
+    public function actionDate($today)
+    {
+        $query = UserKosan::find()
+            ->select(['user.nama_lengkap', 'user.username', 'kosan.nama_kosan', 'user_kosan.user_id'])
+            ->joinWith('kosan', true)
+            ->joinWith('user', true)
+            ->where(['user_kosan.tgl_berakhir_kos' => $today])
+            ->groupBy(['user_kosan.user_id'])
+            ->all();
+
+        return $this->render('today', [
+            'queryModels' =>  $query ,
+        ]);
+
+    }
+
+
+
 }

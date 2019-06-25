@@ -111,7 +111,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
          [
               'attribute' => 'status_konfirmasi',
-              'label'     => 'Status Konfirmasi Pembayaran',
+              'label'     => 'Status Konfirmasi PembayaranController',
               'hAlign'    => 'left',  
               'vAlign'    => 'middle',
               'filter'    => ['Dikonfirmasi' => 'Dikonfirmasi', 'Belum Dikonfirmasi' => 'Belum Dikonfirmasi'],

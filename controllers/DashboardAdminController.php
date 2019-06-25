@@ -2,18 +2,15 @@
 
 namespace app\controllers;
 
-use Yii;
-use yii\helpers\Url;
-use yii\filters\AccessControl;
+use app\models\Pengaduan;
 use app\models\UserKosan;
-use app\models\User;
+use yii\filters\AccessControl;
+use yii\web\Controller;
 use app\models\Kosan;
-use app\models\KosanSearch;
-use yii\data\Pagination;
-use app\models\UserKosanSearch;
 
 
-class DashboardAdminController extends \yii\web\Controller
+
+class DashboardAdminController extends Controller
 {
 
     public function behaviors()
@@ -33,28 +30,38 @@ class DashboardAdminController extends \yii\web\Controller
             ],
         ];
     }
-   
 
    public function actionIndex()
    {
-       $searchModel = new UserKosanSearch();
-       $dataProvider = $searchModel->kosanUserAll(Yii::$app->request->queryParams);
-       return $this->render('user_kost', [
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
-            ]);  
-    }
+       $kosan    = Kosan::find()->one();
 
-    public function actionKonfirmasi($id)
-    {
-        $model  = UserKosan::findOne($id);
-        $model->status_konfirmasi = 'Dikonfirmasi';
-        if($model->save(false)){
-           Yii::$app->session->setFlash('success', 'Pembayaran Berhasil Dikonfirmasi'); 
-           return $this->redirect(['index']); 
-        }
-    }
+       $userkost = UserKosan::find()
+                        ->where(['kosan_id' => $kosan->id])
+                        ->count();
 
+       $jumlahBayar = UserKosan::find()
+                       ->where(['kosan_id' => $kosan->id])
+                       ->andWhere(['tgl_berakhir_kos' => date("Y-m-d")])
+                       ->count();
+
+       $blmKonfirmasi = UserKosan::find()
+           ->where(['kosan_id' => $kosan->id])
+           ->andWhere(['status_konfirmasi' => 'Belum Dikonfirmasi'])
+           ->count();
+
+       $komplain = Pengaduan::find()
+                   ->where(['status' => 'Belum Diperbaiki'])
+                   ->count();
+
+
+       return $this->render('index', [
+           'kosanModel'    => $kosan,
+           'userKostModel' => $userkost,
+           'bayar'         => $jumlahBayar,
+           'notkonfim'     => $blmKonfirmasi,
+           'keluhan'       => $komplain,
+       ]);
+   }
 
 
 

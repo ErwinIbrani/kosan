@@ -27,7 +27,7 @@ use kartik\file\FileInput;
          <div class="form-group">
            <?= $form->field($model, 'bukti_pembayaran_virtual')->widget(FileInput::classname(), [
             'options' => ['accept' => 'image/*'],
-           ])->label('Upload Berkas Pembayaran'); ?>
+           ])->label('Upload Berkas PembayaranController'); ?>
           </div> 
         </div>
        </div>

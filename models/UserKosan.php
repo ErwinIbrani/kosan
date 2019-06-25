@@ -62,7 +62,7 @@ class UserKosan extends \yii\db\ActiveRecord
             'status_bayar' => 'Status Bayar',
             'periode_kosan' => 'Periode Kosan',
             'status_konfirmasi' => 'Status Konfirmasi',
-            'bukti_pembayaran' => 'Bukti Pembayaran',
+            'bukti_pembayaran' => 'Bukti PembayaranController',
             'status_cron_job'  => 'Cron Job'
         ];
 

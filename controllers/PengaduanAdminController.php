@@ -48,6 +48,17 @@ class PengaduanAdminController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+
+
+    public function actionBelum()
+    {
+        $searchModel = new PengaduanSearch();
+        $dataProvider = $searchModel->searchNot(Yii::$app->request->queryParams);
+        return $this->render('belum', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
     
     /**
      * Displays a single Pengaduan model.

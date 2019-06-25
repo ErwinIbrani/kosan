@@ -93,7 +93,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
          [
             'attribute' => 'bukti_pembayaran',
-            'label'     => 'Bukti Pembayaran',
+            'label'     => 'Bukti PembayaranController',
             'format'    => 'raw',
             'filter'    => false,
             'value'     => function($model) {
@@ -126,9 +126,9 @@ $this->params['breadcrumbs'][] = $this->title;
              'value' => function($model) {
                if($model->status_konfirmasi === 'Belum Dikonfirmasi'){
                  return
-                  Html::a(Html::tag('i', '', ['class' => 'fa fa-check']). ' '.'Konfirmasi', ['/dashboard-admin/konfirmasi', 'id' => $model->id], ['class' => 'btn btn-info btn-xs', 'title' => 'Tombol Ini Untuk Mengkonfirmasi Pembayaran', 
+                  Html::a(Html::tag('i', '', ['class' => 'fa fa-check']). ' '.'Konfirmasi', ['/pembayaran/konfirmasi', 'id' => $model->id], ['class' => 'btn btn-info btn-xs', 'title' => 'Tombol Ini Untuk Mengkonfirmasi PembayaranController',
                     'data' => [
-                        'confirm' => 'Konfirmasi Pembayaran ?',
+                        'confirm' => 'Konfirmasi PembayaranController ?',
                         'method' => 'post',
                     ],]);             
               }

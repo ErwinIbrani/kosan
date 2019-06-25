@@ -37,10 +37,10 @@ use yii\helpers\Html;
 
 <?php $menuItems =  [
         /*user*/
-        ['label' => 'Pembayaran Kosan','icon'=>'money', 'url' => ['/dashboard/index/']],
+        ['label' => 'PembayaranController Kosan','icon'=>'money', 'url' => ['/dashboard/index/']],
        
         /*admin*/
-        ['label' => 'Pembayaran Kosan','icon'=>'money', 'url' =>  ['/dashboard-admin/index']],
+        ['label' => 'PembayaranController Kosan','icon'=>'money', 'url' =>  ['/pembayaran/index']],
         
         /*admin*/
         /*[

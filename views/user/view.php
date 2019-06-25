@@ -24,6 +24,7 @@ FancyAsset::register($this);
                 'method' => 'post',
             ],
         ]) ?>
+   <?= Html::a('Kembali',  Yii::$app->request->referrer, ['class' => 'btn btn-info']) ?>
   </div>
 </div>
 <div class="box-body">
