@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
               'attribute' => 'jumlah_kamar',
-              'label'     => 'Jumlah Kamar',
+              'label'     => 'Jumlah Kamar Saat Ini',
               'hAlign'    => 'left',  
               'vAlign'    => 'middle',
               'contentOptions' => ['style' => 'width:180px;'],
