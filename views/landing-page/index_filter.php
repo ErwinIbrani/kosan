@@ -29,9 +29,13 @@ use yii\helpers\Html;
                                 </li>
                             <?php }
                             else{ ?>
-                               <!-- <li>
-                                    <?/*= Html::a(Html::tag('i', '', ['class' => 'fa fa-bars']) . ' Kembali Ke Menu', ['/dashboard/'], ['class' => 'text-blue', 'title' => 'Ke Menu Utama']) */?>
-                                </li>-->
+                                <?php if (Yii::$app->user->identity->email == 'admin@gmail.com')
+                                {
+                                    echo Html::a(Html::tag('i', '', ['class' => 'fa fa-bars']) . ' Kembali Ke Menu', ['/dashboard-admin/'], ['class' => 'text-blue', 'title' => 'Ke Menu Utama']);
+                                }else{
+                                    echo Html::a(Html::tag('i', '', ['class' => 'fa fa-bars']) . ' Kembali Ke Menu', ['/dashboard/'], ['class' => 'text-blue', 'title' => 'Ke Menu Utama']);
+                                }
+                                ?>
                                 <li>
                                     <?= Html::a(Html::tag('i', '', ['class' => 'fa fa-sign-out']) . ' Logout', ['/auth/logout'], ['class' => 'text-blue', 'title' => 'Logout']) ?>
                                 </li>
