@@ -6,5 +6,5 @@
     <div class="icon">
         <i class="fa fa-check-circle-o"></i>
     </div>
-    <?= \yii\helpers\Html::a('<i class="fa fa-arrow-circle-right"></i> Lihat Detail',['/user-kosan/date', 'today' => date("Y-m-d")], ['class' => 'small-box-footer']) ?>
+    <?= \yii\helpers\Html::a('<i class="fa fa-arrow-circle-right"></i> Lihat Detail',['/pembayaran/not/'], ['class' => 'small-box-footer']) ?>
 </div>

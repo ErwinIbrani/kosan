@@ -9,14 +9,14 @@ FancyAsset::register($this);
 /* @var $searchModel app\models\FactorySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'kosan Saya';
+$this->title = 'History Pembayaran';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="box box-primary">
  <div class="box-header with-border">
    <div class="box-title">
-  Konfirmasi Pembayaran
+ <!-- Konfirmasi Pembayaran-->
    <?php
       $columns = [
          ['class' => 'kartik\grid\SerialColumn'],
@@ -93,7 +93,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
          [
             'attribute' => 'bukti_pembayaran',
-            'label'     => 'Bukti PembayaranController',
+            'label'     => 'Bukti Pembayaran',
             'format'    => 'raw',
             'filter'    => false,
             'value'     => function($model) {
@@ -115,28 +115,6 @@ $this->params['breadcrumbs'][] = $this->title;
             },
          ],
 
-       
-          [
-             'attribute' => 'status_konfirmasi',
-             'format'    =>'raw',
-             'hAlign'    => 'center',  
-             'vAlign'    => 'middle',
-             'filter'    => ['Belum Dikonfirmasi' => 'Belum Dikonfirmasi', 'Dikonfirmasi' => 'Dikonfirmasi'],
-             'contentOptions' => ['style' => 'width:90px;'],
-             'value' => function($model) {
-               if($model->status_konfirmasi === 'Belum Dikonfirmasi'){
-                 return
-                  Html::a(Html::tag('i', '', ['class' => 'fa fa-check']). ' '.'Konfirmasi', ['/pembayaran/konfirmasi', 'id' => $model->id], ['class' => 'btn btn-info btn-xs', 'title' => 'Tombol Ini Untuk Mengkonfirmasi PembayaranController',
-                    'data' => [
-                        'confirm' => 'Konfirmasi PembayaranController ?',
-                        'method' => 'post',
-                    ],]);             
-              }
-              else{
-                 return 'Dikonfirmasi';
-              }
-           },   
-         ],
 
       ];
      ?> 

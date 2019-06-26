@@ -35,7 +35,7 @@ FancyAsset::register($this);
                     </div><br/>
 
                     <div class="direct-chat-text">
-                        Jumlah Kamar Terpakai : <?= $countkost ?>
+                        Jumlah Kamar Terisi : <?= $countkost ?>
                     </div><br/>
 
                     <div class="direct-chat-text">
@@ -47,7 +47,7 @@ FancyAsset::register($this);
                     </div><br/>
 
                     <div class="direct-chat-text">
-                     Pasilitas : <?= $model->pasilitas ?>
+                     Fasilitas : <?= $model->pasilitas ?>
                     </div><br/>
 
                     <div class="direct-chat-text">

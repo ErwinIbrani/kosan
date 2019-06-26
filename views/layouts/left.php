@@ -37,25 +37,23 @@ use yii\helpers\Html;
 
 <?php $menuItems =  [
         /*user*/
-        ['label' => 'PembayaranController Kosan','icon'=>'money', 'url' => ['/dashboard/index/']],
-       
+        ['label' => 'Pembayaran Kosan','icon'=>'money', 'url' => ['/dashboard/index/']],
         /*admin*/
-        ['label' => 'PembayaranController Kosan','icon'=>'money', 'url' =>  ['/pembayaran/index']],
-        
-        /*admin*/
-        /*[
-            'label' => 'User Management',
-            'icon' => 'users',
-            //'url' => 'javascript:void(0)',
-            'items' => [
-                ['label' => 'List User', 'icon' => 'user', 'url' => ['/user/']],
-                ['label' => 'Assignment', 'icon' => 'balance-scale', 'url' => ['/rbac/assignment/']],
-                ['label' => 'Role', 'icon' => 'blind', 'url' => ['/rbac/role/']],
-                ['label' => 'Permission', 'icon' => 'compass', 'url' => ['/rbac/permission/']],
-                ['label' => 'Access', 'icon' => 'retweet', 'url' => ['/rbac/route/']],
-            ],
-        ],*/
+        ['label' => 'Dashboard', 'icon'=>'dashboard', 'url' =>  ['/dashboard-admin/index/']],
 
+        /*admin*/
+            /* [
+                'label' => 'User Management',
+                'icon' => 'users',
+                //'url' => 'javascript:void(0)',
+                'items' => [
+                    ['label' => 'List User', 'icon' => 'user', 'url' => ['/user/']],
+                    ['label' => 'Assignment', 'icon' => 'balance-scale', 'url' => ['/rbac/assignment/']],
+                    ['label' => 'Role', 'icon' => 'blind', 'url' => ['/rbac/role/']],
+                    ['label' => 'Permission', 'icon' => 'compass', 'url' => ['/rbac/permission/']],
+                    ['label' => 'Access', 'icon' => 'retweet', 'url' => ['/rbac/route/']],
+                ],
+              ],*/
 
          /*admin*/
         [
@@ -63,6 +61,9 @@ use yii\helpers\Html;
             'icon'  => 'wrench',
             'url'   => ['/kosan/']
         ],
+
+        /*admin*/
+        ['label' => 'Pembayaran Kosan','icon'=>'money', 'url' =>  ['/pembayaran/index']],
         
         /*admin*/
         [
@@ -78,13 +79,7 @@ use yii\helpers\Html;
             'url'   => ['/pengaduan/']
         ],
 
-       /*admin*/
-        /*[
-            'label' => 'Status Pemebitahuan',
-            'icon'  => 'check',
-            'url'   => ['/cron-job/']
-        ],*/
-
+        /*User*/
         [
             'label' => 'Berhenti Mengkost',
             'icon'  => 'sign-out',
@@ -94,7 +89,7 @@ use yii\helpers\Html;
                     ],]
         ],
 
-       
+
 
     ];
 

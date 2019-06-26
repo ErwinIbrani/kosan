@@ -38,6 +38,16 @@ class PembayaranController extends Controller
         ]);
     }
 
+    public function actionNot()
+    {
+        $searchModel = new UserKosanSearch();
+        $dataProvider = $searchModel->kosanNot(Yii::$app->request->queryParams);
+        return $this->render('user_kost_not', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
     public function actionKonfirmasi($id)
     {
         $model = UserKosan::findOne($id);

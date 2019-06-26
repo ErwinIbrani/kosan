@@ -37,6 +37,7 @@ class DashboardAdminController extends Controller
 
        $userkost = UserKosan::find()
                         ->where(['kosan_id' => $kosan->id])
+                        ->groupBy(['user_id'])
                         ->count();
 
        $jumlahBayar = UserKosan::find()
@@ -47,6 +48,7 @@ class DashboardAdminController extends Controller
        $blmKonfirmasi = UserKosan::find()
            ->where(['kosan_id' => $kosan->id])
            ->andWhere(['status_konfirmasi' => 'Belum Dikonfirmasi'])
+           ->andWhere(['user_kosan.status_bayar' => 'Dibayar'])
            ->count();
 
        $komplain = Pengaduan::find()

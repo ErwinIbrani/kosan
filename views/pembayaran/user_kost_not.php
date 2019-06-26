@@ -1,77 +1,48 @@
- <?php
+<?php
 
 use yii\helpers\Html;
 use kartik\grid\GridView;
+use app\assets\FancyAsset;
+FancyAsset::register($this);
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\FactorySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Daftar History Pembayaran';
+$this->title = 'kosan Saya';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="box box-primary">
  <div class="box-header with-border">
    <div class="box-title">
-
+  Konfirmasi Pembayaran
    <?php
       $columns = [
          ['class' => 'kartik\grid\SerialColumn'],
 
-           [
-              'attribute' => 'tgl_berakhir_kos',
-              'label'     => 'Notifikasi Kosan',
-               'filter'   => false,
-              'hAlign'    => 'left',
-              'vAlign'    => 'middle',
-              'content'   => function($model){
-                  if($model->tgl_masuk_kos === date("Y-m-d") && $model->periode_kosan != 1)
-                  {
-                      return '<label class="text-red">Kosan Anda Akan Segera Habis</label>';
-                  }
-                  else
-                  {
-                     return null;
-                  }
-              },
-              'contentOptions' => ['style' => 'width:10px;'],
-            ],
-
-          [
-              'attribute' => 'periode_kosan',
-              'label'     => 'Periode Kosan Ke',
-              'hAlign'    => 'left',
-              'vAlign'    => 'middle',
-              'content'   => function($model){
-                  return $model->periode_kosan;
-              },
-              'contentOptions' => ['style' => 'width:10px;'],
-          ],
-            //'id',
-            /*[
-              'attribute' => 'kosan_id',
-              'label'     => 'Nama Kosan',
+         
+            [
+              'attribute' => 'nama_user',
+              'label'     => 'Nama',
               'hAlign'    => 'left',  
               'vAlign'    => 'middle',
-              'filter'    => false,
               'content'   => function($model){
-                 return $model->kosan->nama_kosan;
+                 return $model->user->nama_lengkap;
               },
               'contentOptions' => ['style' => 'width:180px;'],
             ],
 
             [
-              'attribute' => 'kosan_id',
-              'label'     => 'Alamat Kosan',
+              'attribute' => 'nama_kosan',
+              'label'     => 'Nama Kosan',
               'hAlign'    => 'left',  
               'vAlign'    => 'middle',
-              'filter'    => false,
               'content'   => function($model){
-                 return $model->kosan->alamat_kosan;
+                 return $model->kosan->nama_kosan;
               },
               'contentOptions' => ['style' => 'width:180px;'],
-            ],*/
+            ],
 
             [
                   'label'    => 'Tanggal Awal Kosan',
@@ -108,35 +79,61 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' => ['style' => 'width:100px;'],
             ],
 
-
-         [
-              'attribute' => 'status_konfirmasi',
-              'label'     => 'Status Konfirmasi Pembayaran',
+          [
+              'attribute' => 'status_bayar',
+              'label'     => 'Status Bayar Kosan',
               'hAlign'    => 'left',  
               'vAlign'    => 'middle',
-              'filter'    => ['Dikonfirmasi' => 'Dikonfirmasi', 'Belum Dikonfirmasi' => 'Belum Dikonfirmasi'],
+              'filter'    => ['Dibayar' => 'Dibayar', 'Belum Dibayar' => 'Belum Dibayar'],
               'content'   => function($model){
-                 return $model->status_konfirmasi;
+                 return $model->status_bayar;
               },
-              'contentOptions' => ['style' => 'width:100px;'],
+              
          ],
 
+         [
+            'attribute' => 'bukti_pembayaran',
+            'label'     => 'Bukti Pembayaran',
+            'format'    => 'raw',
+            'filter'    => false,
+            'value'     => function($model) {
+              if(!empty($model->bukti_pembayaran)){
+                 return  
+                  '<a data-fancybox="gallery" href='.$model->linkpreview.'>
+                   '.Html::img($model->linkpreview, 
+                   ['alt' => 'example1', 
+                    'class'=>'img-thumbnail img-responsive',
+                    'style' => 'border: 1px solid #ddd;
+                     border-radius: 4px;
+                     padding: 5px;
+                     width: 100px;'
+                   ]).'
+                    </a>'; 
+               }else{
+                return 'Belum Ada';
+              }
+            },
+         ],
 
-
+       
           [
-             'attribute' => 'Action',
+             'attribute' => 'status_konfirmasi',
              'format'    =>'raw',
              'hAlign'    => 'center',  
              'vAlign'    => 'middle',
-             'filter'  => false,
+             'filter'    => ['Belum Dikonfirmasi' => 'Belum Dikonfirmasi', 'Dikonfirmasi' => 'Dikonfirmasi'],
              'contentOptions' => ['style' => 'width:90px;'],
              'value' => function($model) {
-               if($model->status_bayar === 'Belum Dibayar'){
+               if($model->status_konfirmasi === 'Belum Dikonfirmasi'){
                  return
-                  Html::a(Html::tag('i', '', ['class' => 'fa fa-money' ]). ' '.'Bayar Kosan', ['/user-kosan/bayar', 'id' => $model->id], ['class' => 'btn btn-info btn-xs', 'title' => 'Tombol Ini Untuk Membayar']);             
+                  Html::a(Html::tag('i', '', ['class' => 'fa fa-check']). ' '.'Konfirmasi', ['/pembayaran/konfirmasi', 'id' => $model->id], ['class' => 'btn btn-info btn-xs', 'title' => 'Tombol Ini Untuk Mengkonfirmasi PembayaranController',
+                    'data' => [
+                        'confirm' => 'Konfirmasi PembayaranController ?',
+                        'method' => 'post',
+                    ],]);             
               }
               else{
-                 return 'Dibayar';
+                 return 'Dikonfirmasi';
               }
            },   
          ],

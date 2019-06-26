@@ -37,7 +37,7 @@ class AuthController extends \yii\web\Controller
                 return true;
             }else{
                 if(!empty($model->isAdmin($model->email))){
-                  return $this->redirect(['/pembayaran/']);
+                  return $this->redirect(['/dashboard-admin/']);
                 }
                 if(!empty($model->isKost($model->email)))
                 {
@@ -101,7 +101,7 @@ class AuthController extends \yii\web\Controller
                   $modelRole->item_name = 'User';
                   $modelRole->user_id   = $modelUser->id;
                   $modelRole->save(false);
-                  $model->sendVerification($modelUser->id);
+                  //$model->sendVerification($modelUser->id);
                   $transaction->commit();
                   Yii::$app->session->setFlash('success', 'Silahkkan Konfirmasi E-Mail Anda');
                   return $this->redirect(['register']);
