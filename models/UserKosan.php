@@ -29,7 +29,7 @@ class UserKosan extends \yii\db\ActiveRecord
     {
         return 'user_kosan';
     }
-    
+
     public $bukti_pembayaran_virtual;
     /**
      * {@inheritdoc}
@@ -38,8 +38,8 @@ class UserKosan extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'kosan_id', 'tgl_masuk_kos', 'tgl_berakhir_kos'], 'required'],
-            [['user_id', 'kosan_id', 'periode_kosan'], 'integer'],
-            [['tgl_masuk_kos', 'tgl_berakhir_kos'], 'safe'],
+            [['user_id', 'kosan_id', 'periode_kosan', 'bayar', 'nunggak', 'total'], 'integer'],
+            [['tgl_masuk_kos', 'tgl_berakhir_kos', 'jenis_pembayaran'], 'safe'],
             [['status', 'status_bayar', 'status_konfirmasi', 'bukti_pembayaran', 'status_cron_job'], 'string'],
             [['kosan_id'], 'exist', 'skipOnError' => true, 'targetClass' => Kosan::className(), 'targetAttribute' => ['kosan_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
@@ -63,7 +63,11 @@ class UserKosan extends \yii\db\ActiveRecord
             'periode_kosan' => 'Periode Kosan',
             'status_konfirmasi' => 'Status Konfirmasi',
             'bukti_pembayaran' => 'Bukti PembayaranController',
-            'status_cron_job'  => 'Cron Job'
+            'status_cron_job'  => 'Cron Job',
+            'jenis_pembayaran' =>'Jenis Pembayaran',
+            'bayar'            => 'Bayar',
+            'nunggak'          => 'Nunggak',
+            'total'            => 'Total'
         ];
 
     }

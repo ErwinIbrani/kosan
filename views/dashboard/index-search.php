@@ -133,7 +133,7 @@ $this->params['breadcrumbs'][] = $this->title;
              'value' => function($model) {
                if($model->status_bayar === 'Belum Dibayar'){
                  return
-                  Html::a(Html::tag('i', '', ['class' => 'fa fa-money' ]). ' '.'Bayar Kosan', ['/user-kosan/bayar', 'id' => $model->id], ['class' => 'btn btn-info btn-xs', 'title' => 'Tombol Ini Untuk Membayar']);             
+                  Html::a(Html::tag('i', '', ['class' => 'fa fa-upload' ]). ' '.'Upload Bukti Kuitansi', ['/user-kosan/bayar', 'id' => $model->id], ['class' => 'btn btn-info btn-xs', 'title' => 'Upload']);
               }
               else{
                  return 'Dibayar';

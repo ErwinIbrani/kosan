@@ -42,7 +42,12 @@ use yii\helpers\Url;
         ]); ?>    
     
 
-        <?= $form->field($model, 'jenis_pengaduan')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'jenis_pengaduan')->dropDownList(['Listrik'        => 'Listrik',
+            'Bocor'          => 'Bocor',
+            'Air'            => 'Air',
+            'Anjing Galak'   => 'Anjing Galak',
+            'Banjir'         => 'Banjir'],
+            ['prompt'         => '.:Pilih:.']); ?>
 
         <?= $form->field($model, 'keterangan_pengadu')->textarea(['rows' => 6]) ?>
 

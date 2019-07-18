@@ -17,7 +17,7 @@ use app\widgets\Alert;
     <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
       <div id="required">
         <div class="form-group has-feedback">
-          <?= $form->field($model, 'email')->textInput(['autofocus' => true]) ?>
+          <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
         </div>
         <div class="form-group has-feedback">
           <?= $form->field($model, 'password')->passwordInput() ?>

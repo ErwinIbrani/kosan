@@ -42,9 +42,15 @@ use yii\jui\DatePicker;
 
        <div class="form-group">
         <?= $form->field($kosanModel, 'jenis_kosan')->dropDownList([ 'Pria' => 'Pria', 'Wanita' => 'Wanita', 'Pria dan Wanita' => 'Pria dan Wanita', ], ['prompt' => '.:Pilil:.', 'readonly' => true]) ?>
-      </div>  
-       
+       </div>
 
+       <div class="form-group">
+          <?= $form->field($model, 'jenis_pembayaran')->dropDownList([ 'Cash' => 'Cash', 'DP' => 'DP'], ['prompt' => '.:Pilih Pembayaran:.']) ?>
+       </div>
+
+      <div class="form-group">
+          <?= $form->field($model, 'bayar')->textInput(['maxlength' => true]) ?>
+       </div>
                                
        <div class="form-group"> 
            <?= $form->field($model, 'kosan_id')->hiddenInput(['value' => $kosanModel->id])->label(false); ?>

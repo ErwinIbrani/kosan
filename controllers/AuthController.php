@@ -36,14 +36,14 @@ class AuthController extends \yii\web\Controller
             if (Yii::$app->request->isAjax) {
                 return true;
             }else{
-                if(!empty($model->isAdmin($model->email))){
+                if(!empty($model->isAdmin($model->username))){
                   return $this->redirect(['/dashboard-admin/']);
                 }
-                if(!empty($model->isKost($model->email)))
+                if(!empty($model->isKost($model->username)))
                 {
                   return $this->redirect(['/dashboard/']);
                 }
-                if(!empty($model->notKost($model->email)))
+                if(!empty($model->notKost($model->username)))
                 {
                     return $this->redirect(['/landing-page/']);
                 }
@@ -76,7 +76,7 @@ class AuthController extends \yii\web\Controller
               $request                  = Yii::$app->request;
               $modelUser->nama_lengkap  = $request->post('SignupForm')['nama_lengkap'];
               $modelUser->username      = $request->post('SignupForm')['username'];
-              $modelUser->status        = 0;
+              $modelUser->status        = 10;
               $modelUser->jenis_kelamin = $request->post('SignupForm')['jenis_kelamin'];
               $modelUser->tanggal_lahir = $request->post('SignupForm')['tanggal_lahir'];
               $modelUser->tempat_lahir  = $request->post('SignupForm')['tempat_lahir'];
@@ -103,13 +103,13 @@ class AuthController extends \yii\web\Controller
                   $modelRole->save(false);
                   //$model->sendVerification($modelUser->id);
                   $transaction->commit();
-                  Yii::$app->session->setFlash('success', 'Silahkkan Konfirmasi E-Mail Anda');
-                  return $this->redirect(['register']);
+                  Yii::$app->session->setFlash('success', 'Silahkkan Masuk Untuk Memulai');
+                  return $this->redirect(['login']);
               }
               else{
                   $transaction->rollBack();
                   Yii::$app->session->setFlash('error', 'Ada yang error');
-                  return $this->redirect(['register']);
+                  return $this->redirect(['login']);
               }
           }
       }catch (\Exception $exception)

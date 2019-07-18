@@ -2,6 +2,7 @@
 
 use yii\widgets\LinkPager;
 use yii\helpers\Html;
+use app\components\QueryHelper;
 ?>
 
 <div class="row">
@@ -10,10 +11,13 @@ use yii\helpers\Html;
             <div class="box-header with-border">
                 <div class="collapse navbar-collapse" id="collapse-menu">
                 <div class="col-md-6">
-                <!--kosongkan-->
+                    <div class="label label-info">Kosan Mamah</div>
                 </div>
                     <div class="col-md-6">
                         <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <?php echo Html::a(Html::tag('i', '', ['class' => 'fa fa-user']) .' '.Yii::$app->user->identity->username, ['/landing-page/index'], ['class' => 'text-blue', 'title' => Yii::$app->user->identity->username]); ?>
+                            </li>
                             <li>
                                 <?= Html::a(Html::tag('i', '', ['class' => 'fa fa-filter']) . ' Cari Ulang', ['landing-page/index'], ['class' => 'text-blue', 'title' => 'Cari Ulang']) ?>
                             </li>
@@ -29,13 +33,17 @@ use yii\helpers\Html;
                                 </li>
                             <?php }
                             else{ ?>
-                                <?php if (Yii::$app->user->identity->email == 'admin@gmail.com')
+                                <li>
+                                <?php
+                                $model = QueryHelper::getAdmin(Yii::$app->user->identity->username);
+                                if ($model->item_name  === 'Admin')
                                 {
                                     echo Html::a(Html::tag('i', '', ['class' => 'fa fa-bars']) . ' Kembali Ke Menu', ['/dashboard-admin/'], ['class' => 'text-blue', 'title' => 'Ke Menu Utama']);
                                 }else{
                                     echo Html::a(Html::tag('i', '', ['class' => 'fa fa-bars']) . ' Kembali Ke Menu', ['/dashboard/'], ['class' => 'text-blue', 'title' => 'Ke Menu Utama']);
                                 }
                                 ?>
+                                </li>
                                 <li>
                                     <?= Html::a(Html::tag('i', '', ['class' => 'fa fa-sign-out']) . ' Logout', ['/auth/logout'], ['class' => 'text-blue', 'title' => 'Logout']) ?>
                                 </li>

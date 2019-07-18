@@ -222,22 +222,33 @@ class KosanController extends Controller
             $model->kosan_id          = $request->post('UserKosan')['kosan_id'];
             $model->tgl_masuk_kos     = $request->post('UserKosan')['tgl_masuk_kos'];
             $model->tgl_berakhir_kos  = date("Y-m-d", strtotime(''.$model->tgl_masuk_kos.' +1 month'));
-            $ada = $this->cek($model->user_id);
-            if(!empty($ada)){
-              Yii::$app->session->setFlash('error', 'Maff !! Ada Sudah Memilih Kosan'); 
+            $model->bayar             = $request->post('UserKosan')['bayar'];
+            $cek_bayar                = Kosan::findOne($model->kosan_id);
+            $model->nunggak           = ((float)$model->bayar - (float)$cek_bayar->harga_perbulan);
+            $model->total             = (float)$cek_bayar->harga_perbulan;
+            $ada                      = $this->cek($model->user_id);
+
+            if((float)$model->total <= (float)$model->nunggak){
+                Yii::$app->session->setFlash('error', 'Maf!! Masukan Jumalah Yang Benar');
+                return $this->redirect(['/dashboard/index/']);
+            }
+
+            else if(!empty($ada)){
+              Yii::$app->session->setFlash('error', 'Maff !! Anda Sudah Memilih Kosan');
               return $this->redirect(['/dashboard/index/']); 
-            }else{
+            }
+
+            else{
                 if($model->save(false)){
                     $user = User::findOne($model->user_id);
                     $user->status_kost = 1;
-                    if($user->save(false)){
-                      $kosan               = Kosan::findOne($kosanModel->id);
-                      $kosan->jumlah_kamar = $kosanModel->jumlah_kamar - 1; 
-                      $kosan->save(); 
-                      Yii::$app->session->setFlash('success', 'Anda Telah Memilih Kosan'); 
-                      return $this->redirect(['/dashboard/index/']);  
-                    } 
-                    
+                    if($user->save(false)) {
+                        $kosan = Kosan::findOne($kosanModel->id);
+                        $kosan->jumlah_kamar = $kosanModel->jumlah_kamar - 1;
+                        $kosan->save();
+                        Yii::$app->session->setFlash('success', 'Anda Telah Memilih Kosan');
+                        return $this->redirect(['/dashboard/index/']);
+                    }
                 }
             }
         }

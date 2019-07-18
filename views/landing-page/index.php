@@ -3,6 +3,7 @@
 use yii\widgets\LinkPager;
 use yii\helpers\Html;
 use kv4nt\owlcarousel\OwlCarouselWidget;
+use app\components\QueryHelper;
 ?>
 
 <div class="row">
@@ -11,7 +12,7 @@ use kv4nt\owlcarousel\OwlCarouselWidget;
             <div class="box-header with-border">
                 <div class="collapse navbar-collapse" id="collapse-menu">
                    <div class="col-md-6">
-                    <!--Kosongkan-->
+                       <div class="label label-info">Kosan Mamah</div>
                    </div>
                      <div class="col-md-6">
                         <ul class="nav navbar-nav navbar-right">
@@ -27,7 +28,12 @@ use kv4nt\owlcarousel\OwlCarouselWidget;
                             <?php }
                              else{ ?>
                                  <li>
-                                     <?php if (Yii::$app->user->identity->email == 'admin@gmail.com')
+                                     <?php echo Html::a(Html::tag('i', '', ['class' => 'fa fa-user']) .' '.Yii::$app->user->identity->username, ['/landing-page/index'], ['class' => 'text-blue', 'title' => Yii::$app->user->identity->username]); ?>
+                                 </li>
+                                 <li>
+                                     <?php
+                                        $model = QueryHelper::getAdmin(Yii::$app->user->identity->username);
+                                         if ($model['item_name']  === 'Admin')
                                          {
                                              echo Html::a(Html::tag('i', '', ['class' => 'fa fa-bars']) . ' Kembali Ke Menu', ['/dashboard-admin/'], ['class' => 'text-blue', 'title' => 'Ke Menu Utama']);
                                          }else{

@@ -19,11 +19,11 @@ $this->params['breadcrumbs'][] = $this->title;
       $columns = [
          ['class' => '\kartik\grid\SerialColumn'],
             //'id',
-            
+
             [
               'attribute' => 'nama_kosan',
               'label'     => 'Nama Kosan',
-              'hAlign'    => 'left',  
+              'hAlign'    => 'left',
               'vAlign'    => 'middle',
               'value'      => function($model) {
                   return $model->kosan->nama_kosan;
@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
               'attribute' => 'jenis_pengaduan',
               'label'     => 'Jenis Pengaduan',
-              'hAlign'    => 'left',  
+              'hAlign'    => 'left',
               'vAlign'    => 'middle',
               'contentOptions' => ['style' => 'width:180px;'],
             ],
@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
               'attribute' => 'keterangan_pengadu',
               'label'     => 'Keterangan',
               'format'    => 'ntext',
-              'hAlign'    => 'left',  
+              'hAlign'    => 'left',
               'vAlign'    => 'middle',
               'contentOptions' => ['style' => 'width:180px;'],
             ],
@@ -53,12 +53,12 @@ $this->params['breadcrumbs'][] = $this->title;
               'attribute' => 'status',
               'label'     => 'Status Diperbaiki',
               'filter'    => ['Diperbaiki' => 'Diperbaiki', 'Belum Diperbaiki' => 'Belum Diperbaiki'],
-              'hAlign'    => 'left',  
+              'hAlign'    => 'left',
               'vAlign'    => 'middle',
               'contentOptions' => ['style' => 'width:180px;'],
             ],
 
-           
+
           ['class' => 'kartik\grid\ActionColumn',
            'template' => '{view}{delete}',],
       ];
