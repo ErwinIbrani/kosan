@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\SaratKetentuan */
+/* @var $model app\models\Saratketentuan */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Sarat Ketentuans', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Saratketentuans', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="sarat-ketentuan-view">
+<div class="saratketentuan-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

@@ -38,11 +38,13 @@ class DashboardController extends \yii\web\Controller
     {
       /*user sudah kost*/
       /*if(Yii::$app->user->identity->status_kost === 1){ */
+      $kosanStatus = UserKosan::find()->where(['user_id' => Yii::$app->user->identity->id])->one();
       $searchModel = new UserKosanSearch();
       $dataProvider = $searchModel->kosanUser(Yii::$app->request->queryParams);
             return $this->render('index-search', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
+                'kosanStatus' => $kosanStatus,
             ]);
 
         /*}*//*else{

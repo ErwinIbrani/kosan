@@ -38,7 +38,8 @@ class UserKosan extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'kosan_id', 'tgl_masuk_kos', 'tgl_berakhir_kos'], 'required'],
-            [['user_id', 'kosan_id', 'periode_kosan', 'bayar', 'nunggak', 'total'], 'integer'],
+            [['bayar', 'nunggak', 'total'], 'number'],
+            [['user_id', 'kosan_id', 'periode_kosan'], 'integer'],
             [['tgl_masuk_kos', 'tgl_berakhir_kos', 'jenis_pembayaran'], 'safe'],
             [['status', 'status_bayar', 'status_konfirmasi', 'bukti_pembayaran', 'status_cron_job'], 'string'],
             [['kosan_id'], 'exist', 'skipOnError' => true, 'targetClass' => Kosan::className(), 'targetAttribute' => ['kosan_id' => 'id']],

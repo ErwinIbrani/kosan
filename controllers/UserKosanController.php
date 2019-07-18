@@ -141,6 +141,7 @@ class UserKosanController extends Controller
      try {
           if ($model->load(Yii::$app->request->post()))
           {
+              $request   = Yii::$app->request;
 
               if (!file_exists($model->linkpreview))
                {
@@ -153,8 +154,11 @@ class UserKosanController extends Controller
                       if ($mfile) {
                         $model->bukti_pembayaran = $mfile;
                         $model->status_bayar     = 'Dibayar';
+                        $model->bayar            = (float)$request->post('UserKosan')['bayar'];
+                        $model->nunggak          = 0;
+                        $model->total            = $model->bayar;
                       }
-                 }
+                  }
               }
 
               if($model->save(false)){

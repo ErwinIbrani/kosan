@@ -14,7 +14,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="box box-primary">
     <div class="box-header with-border">
         <div class="box-title">
-            <?= Html::a('Buat Baru', ['create'], ['class' => 'btn btn-success']) ?>
             <?php
             $columns = [
                 ['class' => '\kartik\grid\SerialColumn'],
@@ -22,8 +21,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'syarat',
                 'ketentuan:ntext',
 
-                ['class' => 'kartik\grid\ActionColumn',
-                    'template' => '{view}{update}{delete}',],
+           /*     ['class' => 'kartik\grid\ActionColumn',
+                    'template' => '{view}{update}{delete}',],*/
             ];
             ?>
         </div>

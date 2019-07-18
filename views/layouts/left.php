@@ -72,17 +72,26 @@ use yii\helpers\Html;
             'url'   => ['/pengaduan-admin/']
         ],
 
+     /*admin*/
         [
             'label' => 'Syarat & Ketentuan',
             'icon'  => 'exclamation-triangle',
             'url'   => ['/sarat-ketentuan/']
         ],
 
+
        /*user*/
         [
             'label' => 'Pengaduan',
             'icon'  => 'bell',
             'url'   => ['/pengaduan/']
+        ],
+
+        /*user*/
+        [
+            'label' => 'Syarat & Ketentuan',
+            'icon'  => 'exclamation-triangle',
+            'url'   => ['/sarat/']
         ],
 
         /*User*/

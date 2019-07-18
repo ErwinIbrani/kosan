@@ -224,8 +224,8 @@ class KosanController extends Controller
             $model->tgl_berakhir_kos  = date("Y-m-d", strtotime(''.$model->tgl_masuk_kos.' +1 month'));
             $model->bayar             = $request->post('UserKosan')['bayar'];
             $cek_bayar                = Kosan::findOne($model->kosan_id);
-            $model->nunggak           = ((float)$model->bayar - (float)$cek_bayar->harga_perbulan);
-            $model->total             = (float)$cek_bayar->harga_perbulan;
+            (float)$model->nunggak    = (float)$cek_bayar->harga_perbulan - (float)$model->bayar;
+            (float)$model->total      = (float)$cek_bayar->harga_perbulan;
             $ada                      = $this->cek($model->user_id);
 
             if((float)$model->total <= (float)$model->nunggak){

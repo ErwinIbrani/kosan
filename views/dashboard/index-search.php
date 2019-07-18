@@ -13,6 +13,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="box box-primary">
  <div class="box-header with-border">
+     <?php if($kosanStatus['nunggak'] > 0 ): ?>
+     <div class="callout callout-info">
+         <h4>Perhatian !</h4>
+         Pada Saat Transaksi Pertama Anda Membayar Dengan Uang DP, Anda Harus Segera Melunasi yang Belum Terbayar
+     </div>
+     <?php endif; ?>
+
    <div class="box-title">
 
    <?php
@@ -133,7 +140,7 @@ $this->params['breadcrumbs'][] = $this->title;
              'value' => function($model) {
                if($model->status_bayar === 'Belum Dibayar'){
                  return
-                  Html::a(Html::tag('i', '', ['class' => 'fa fa-upload' ]). ' '.'Upload Bukti Kuitansi', ['/user-kosan/bayar', 'id' => $model->id], ['class' => 'btn btn-info btn-xs', 'title' => 'Upload']);
+                  Html::a(Html::tag('i', '', ['class' => 'fa fa-upload' ]). ' '.'Upload Bukti Kuitansi', ['/user-kosan/bayar', 'id' => $model->id], ['class' => 'btn btn-info btn-xs', 'title' => 'Upload Bukti']);
               }
               else{
                  return 'Dibayar';

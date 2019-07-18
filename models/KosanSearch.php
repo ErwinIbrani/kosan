@@ -41,7 +41,7 @@ class KosanSearch extends Kosan
      */
     public function search($params)
     {
-        $query = Kosan::find();
+        $query = Kosan::find()->where(['id' => 1]);
 
         // add conditions that should always apply here
 
