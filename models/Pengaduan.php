@@ -56,7 +56,7 @@ class Pengaduan extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'kosan_id', 'jenis_pengaduan', 'keterangan_pengadu'], 'required'],
+            [['user_id', 'jenis_pengaduan', 'keterangan_pengadu'], 'required'],
             [['user_id', 'kosan_id'], 'integer'],
             [['keterangan_pengadu', 'foto', 'status', 'keterangan_teknisi'], 'string'],
             [['tanggal_laporan'], 'safe'],

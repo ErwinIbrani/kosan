@@ -27,7 +27,7 @@ use yii\helpers\Url;
        <div class="row">
         <div class="col-md-12">
     
-        <?= $form->field($model, 'kosan_id')->widget(Select2::className(), [
+    <!--    <?/*= $form->field($model, 'kosan_id')->widget(Select2::className(), [
              'data' => \yii\helpers\ArrayHelper::map($model->getNamakosan(), 'id', 'value'),
              'attribute' => 'kosan_id',
              'theme' => 'default',
@@ -39,17 +39,16 @@ use yii\helpers\Url;
             'tags' => false,
             'allowClear' => true,
             ],'class' => 'form-control',
-        ]); ?>    
+        ]); */?>    -->
     
 
         <?= $form->field($model, 'jenis_pengaduan')->dropDownList(['Listrik'        => 'Listrik',
                                                                             'Bocor'          => 'Bocor',
                                                                             'Air'            => 'Air',
-                                                                            'Anjing Galak'   => 'Anjing Galak',
                                                                             'Banjir'         => 'Banjir'],
-                                                                           ['prompt'         => '.:Pilih:.']); ?>
+                                                                           ['prompt'         => '.:Pilih:.'])->label('Jenis Keluhan'); ?>
 
-        <?= $form->field($model, 'keterangan_pengadu')->textarea(['rows' => 6]) ?>
+        <?= $form->field($model, 'keterangan_pengadu')->textarea(['rows' => 6])->label('Keterangan') ?>
 
         <?= $form->field($model, 'virtual')->widget(FileInput::classname(), [
                                  'options' => ['accept'=>'image/*'],

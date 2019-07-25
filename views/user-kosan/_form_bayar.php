@@ -33,12 +33,12 @@ use kartik\file\FileInput;
 
            <?php  if($model->nunggak != 0): ?>
             <div class="form-group">
-               <?= $form->field($model, 'nunggak')->textInput(['readonly' => true])->label('DP') ?>
+                <?= $form->field($model, 'bayar')->textInput(['readonly' => true])->label('DP') ?>
             </div>
-            <div class="form-group">
-               <?= $form->field($model, 'bayar')->textInput(['readonly' => true])->label('Sisa Pembayaran') ?>
-            </div>
-            <div class="form-group">
+               <div class="form-group">
+                   <?= $form->field($model, 'nunggak')->textInput(['readonly' => true])->label('Sisa Pembayaran') ?>
+               </div>
+               <div class="form-group">
                 <?= $form->field($model, 'total')->textInput(['readonly' => true])->label('Total') ?>
             </div>
             <?php endif;?>
@@ -49,7 +49,7 @@ use kartik\file\FileInput;
 
     <div class="box-footer">
     <div class="form-group">
-        <?= Html::submitButton('Simpan', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Bayar', ['class' => 'btn btn-success']) ?>
     </div>
     </div> 
 

@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Kosan;
 use Yii;
 use app\models\Pengaduan;
 use app\models\PengaduanSearch;
@@ -79,7 +80,8 @@ class PengaduanController extends Controller
         if ($model->load(Yii::$app->request->post())){
             $request                   = Yii::$app->request;
             $model->user_id            = Yii::$app->user->identity->id;
-            $model->kosan_id           = $request->post('Pengaduan')['kosan_id'];
+            $kosan                     = Kosan::findOne(1);
+            $model->kosan_id           = $kosan->id;
             $model->jenis_pengaduan    = $request->post('Pengaduan')['jenis_pengaduan'];
             $model->keterangan_pengadu = $request->post('Pengaduan')['keterangan_pengadu'];
             $folder                    = Yii::getAlias('@webroot/').Yii::getAlias('@pengaduan/');
