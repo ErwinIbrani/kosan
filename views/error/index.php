@@ -1,7 +1,7 @@
 <?php use yii\helpers\Html; ?>
 <div class="login-box">
   <div class="login-logo">
-    <b>ERROR</b>
+    <b>Hanya Pengelola yang Bisa Mengakses</b>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">

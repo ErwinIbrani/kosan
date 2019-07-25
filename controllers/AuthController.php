@@ -36,7 +36,8 @@ class AuthController extends \yii\web\Controller
             if (Yii::$app->request->isAjax) {
                 return true;
             }else{
-                if(!empty($model->isAdmin($model->username))){
+                if(!empty($model->isAdmin($model->username)))
+                {
                   return $this->redirect(['/dashboard-admin/']);
                 }
                 if(!empty($model->isKost($model->username)))
@@ -46,6 +47,12 @@ class AuthController extends \yii\web\Controller
                 if(!empty($model->notKost($model->username)))
                 {
                     return $this->redirect(['/landing-page/']);
+                }
+                if(!empty($model->isPemilik($model->username))){
+                    return $this->redirect(['/dashboard-admin/']);
+                }
+                if(!empty($model->isPengelola($model->username))){
+                    return $this->redirect(['/pengaduan-admin/']);
                 }
             }
         } 

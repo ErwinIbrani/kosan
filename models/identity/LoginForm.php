@@ -92,19 +92,52 @@ class LoginForm extends Model
         return $data;
     }
 
+    public function isPemilik($username)
+    {
+
+        $data =  UserModel::find()
+            ->innerJoinWith('assignments', true)
+            ->where("auth_assignment.item_name='Pemilik Kosan Haji Ajat'")
+            ->andWhere(['user.username' => $username])
+            ->andWhere(['user.status_kost' => 0])
+            ->one();
+
+        return $data;
+    }
+
+    public function isPengelola($username)
+    {
+
+        $data =  UserModel::find()
+            ->innerJoinWith('assignments', true)
+            ->where("auth_assignment.item_name='Bagian Pemeliharaan'")
+            ->andWhere(['user.username' => $username])
+            ->andWhere(['user.status_kost' => 0])
+            ->one();
+
+        return $data;
+    }
+
+
+
     public function isKost($username)
     {
-        return UserModel::find()
-               ->where(['username' => $username])
-               ->andWhere(['status_kost' => 1])
-               ->one();
+        return
+        UserModel::find()
+            ->innerJoinWith('assignments', true)
+            ->where("auth_assignment.item_name='User'")
+            ->andWhere(['user.username' => $username])
+            ->andWhere(['user.status_kost' => 1])
+            ->one();
     }
 
     public function notKost($username)
     {
         return UserModel::find()
-            ->where(['username' => $username])
-            ->andWhere(['status_kost' => 0])
+            ->innerJoinWith('assignments', true)
+            ->where("auth_assignment.item_name='User'")
+            ->andWhere(['user.username' => $username])
+            ->andWhere(['user.status_kost' => 0])
             ->one();
     }
 
