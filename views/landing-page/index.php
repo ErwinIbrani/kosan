@@ -11,10 +11,12 @@ use app\components\QueryHelper;
           <div class="box">
             <div class="box-header with-border">
                 <div class="collapse navbar-collapse" id="collapse-menu">
-                   <div class="col-md-6">
-                       <div class="label label-info">Kosan Mamah</div>
+                   <div class="col-md-4">
+                       <div style="color:#4454FF; font-family: 'Trocchi',serif; font-size: 62px; font-weight: 800; line-height: 72px; margin: 0 0 20px; text-align: center; text-transform: uppercase;">
+                           Papi Kost
+                       </div>
                    </div>
-                     <div class="col-md-6">
+                     <div class="col-md-8">
                         <ul class="nav navbar-nav navbar-right">
                             <?php
                             if(\Yii::$app->user->isGuest){ ?>
@@ -119,3 +121,10 @@ use app\components\QueryHelper;
           </div>
         </div>
       </div>
+
+<div style="text-align: center">
+    <b>Version</b> 1
+    <strong>Copyright © 2019 <a href="javascript:void(0)">Supriatna</a>.</strong> All rights
+    reserved.
+</div>
+

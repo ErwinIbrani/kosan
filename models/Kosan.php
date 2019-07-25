@@ -59,7 +59,7 @@ class Kosan extends \yii\db\ActiveRecord
             'jumlah_kamar' => 'Jumlah Kamar',
             'harga_perbulan' => 'Harga Perbulan',
             'alamat_kosan' => 'Alamat Kosan',
-            'pasilitas' => 'Pasilitas',
+            'pasilitas' => 'Fasilitas',
             'jenis_kosan' => 'Jenis Kosan',
             'status' => 'Status',
             'gambar_kosan' => 'Gambar Kosan',

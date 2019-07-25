@@ -16,7 +16,6 @@ class SignupForm extends Model
     public $tanggal_lahir;
     public $tempat_lahir;
     public $no_telepon;
-    public $email;
     public $password;
     public $alamat;
     public $poto_ktp;
@@ -54,11 +53,6 @@ class SignupForm extends Model
             ['no_telepon','required'],
             ['no_telepon', 'integer'],
             ['no_telepon','unique', 'targetClass' => '\app\models\identity\User', 'message' => 'Nomer HP Sudah Terdaptar'],
-
-            ['email', 'trim'],
-            ['email', 'required'],
-            ['email', 'unique', 'targetClass' => '\app\models\identity\User', 'message' => 'Email Sudah Terdaptar'],
-            ['email', 'string', 'max' => 255],
 
             ['alamat', 'trim'],
             ['alamat', 'required'],

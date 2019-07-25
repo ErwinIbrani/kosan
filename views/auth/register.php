@@ -46,10 +46,6 @@ use yii\jui\DatePicker;
       <div class="form-group has-feedback">
         <?= $form->field($model, 'no_telepon') ?>
       </div>
-     
-     <div class="form-group has-feedback">
-        <?= $form->field($model, 'email') ?>
-     </div>
 
       <div class="form-group has-feedback">
         <?= $form->field($model, 'password')->passwordInput() ?>

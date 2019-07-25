@@ -33,18 +33,14 @@ use kartik\file\FileInput;
 
            <?php  if($model->nunggak != 0): ?>
             <div class="form-group">
-               <?= $form->field($model, 'nunggak')->textInput(['readonly' => true]) ?>
+               <?= $form->field($model, 'nunggak')->textInput(['readonly' => true])->label('DP') ?>
             </div>
             <div class="form-group">
-               <?= $form->field($model, 'bayar')->textInput()->label('Sudah Dibayar') ?>
+               <?= $form->field($model, 'bayar')->textInput(['readonly' => true])->label('Sisa Pembayaran') ?>
             </div>
             <div class="form-group">
-                <?= $form->field($model, 'total')->textInput(['readonly' => true])->label('Total Harus Dibayar') ?>
+                <?= $form->field($model, 'total')->textInput(['readonly' => true])->label('Total') ?>
             </div>
-           <?php else: ?>
-               <div class="form-group">
-                   <?= $form->field($model, 'bayar')->textInput()->label('Bayar') ?>
-               </div>
             <?php endif;?>
 
        </div>

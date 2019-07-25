@@ -13,7 +13,7 @@ use app\widgets\Alert;
 
   <div class="login-box-body">
     <?= Alert::widget() ?>
-    <p class="login-box-msg">Please enter your email and password</p>
+    <p class="login-box-msg">Masukan Username dan Password Anda</p>
     <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
       <div id="required">
         <div class="form-group has-feedback">

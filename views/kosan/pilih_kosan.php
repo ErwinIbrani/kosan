@@ -7,6 +7,21 @@ use yii\jui\DatePicker;
 /* @var $this yii\web\View */
 /* @var $model app\models\Kosan */
 /* @var $form yii\widgets\ActiveForm */
+
+$script = <<< JS
+    $(document).ready(function () {
+    $("#tes").hide();
+    $("#changed").change(function (){
+          if($(this).val() === 'Cash') {
+            $("#tes").hide();
+         } 
+         else if($(this).val() === 'DP') {
+            $("#tes").show();
+         }   
+    });
+});
+JS;
+$this->registerJs($script);
 ?>
 
 <div class="kosan-form">
@@ -28,9 +43,14 @@ use yii\jui\DatePicker;
           <?= $form->field($kosanModel, 'nama_kosan')->textInput(['maxlength' => true, 'readonly' => true]) ?>
          </div>
 
-        <div class="form-group">
-         <?= $form->field($kosanModel, 'harga_perbulan')->textInput(['maxlength' => true, 'readonly' => true]) ?>
-       </div>
+
+         <div class="form-group">
+                <div class="form-group field-kosan-harga_perbulan required has-success">
+                    <label class="control-label" for="kosan-harga_perbulan">Harga Perbulan</label>
+                    <input type="text" id="kosan-harga_perbulan" class="form-control" name="Kosan[harga_perbulan]" value="Rp.<?= number_format($kosanModel->harga_perbulan) ?>" readonly="" aria-required="true" aria-invalid="false">
+                    <div class="help-block"></div>
+                </div>
+            </div>
 
        <div class="form-group">
         <?= $form->field($kosanModel, 'alamat_kosan')->textarea(['rows' => 6, 'readonly' => true]) ?>
@@ -45,11 +65,13 @@ use yii\jui\DatePicker;
        </div>
 
        <div class="form-group">
-          <?= $form->field($model, 'jenis_pembayaran')->dropDownList([ 'Cash' => 'Cash', 'DP' => 'DP'], ['prompt' => '.:Pilih Pembayaran:.']) ?>
+          <?= $form->field($model, 'jenis_pembayaran')->dropDownList([ 'Cash' => 'Cash', 'DP' => 'DP'], ['prompt' => '.:Pilih Pembayaran:.', 'id' => 'changed']) ?>
        </div>
 
       <div class="form-group">
+          <div id="tes">
           <?= $form->field($model, 'bayar')->textInput(['maxlength' => true]) ?>
+          </div>
        </div>
                                
        <div class="form-group"> 

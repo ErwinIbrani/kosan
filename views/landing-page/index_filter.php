@@ -10,14 +10,19 @@ use app\components\QueryHelper;
           <div class="box">
             <div class="box-header with-border">
                 <div class="collapse navbar-collapse" id="collapse-menu">
-                <div class="col-md-6">
-                    <div class="label label-info">Kosan Mamah</div>
-                </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
+                        <div style="color:#4454FF; font-family: 'Trocchi',serif; font-size: 62px; font-weight: 800; line-height: 72px; margin: 0 0 20px; text-align: center; text-transform: uppercase;">
+                            Papi Kost
+                        </div>
+                    </div>
+                    <div class="col-md-8">
                         <ul class="nav navbar-nav navbar-right">
+                         <?php if(!Yii::$app->user->isGuest): ?>
                             <li>
                                 <?php echo Html::a(Html::tag('i', '', ['class' => 'fa fa-user']) .' '.Yii::$app->user->identity->username, ['/landing-page/index'], ['class' => 'text-blue', 'title' => Yii::$app->user->identity->username]); ?>
                             </li>
+                         <?php endif; ?>
+
                             <li>
                                 <?= Html::a(Html::tag('i', '', ['class' => 'fa fa-filter']) . ' Cari Ulang', ['landing-page/index'], ['class' => 'text-blue', 'title' => 'Cari Ulang']) ?>
                             </li>
@@ -36,7 +41,7 @@ use app\components\QueryHelper;
                                 <li>
                                 <?php
                                 $model = QueryHelper::getAdmin(Yii::$app->user->identity->username);
-                                if ($model->item_name  === 'Admin')
+                                if ($model['item_name']  === 'Admin')
                                 {
                                     echo Html::a(Html::tag('i', '', ['class' => 'fa fa-bars']) . ' Kembali Ke Menu', ['/dashboard-admin/'], ['class' => 'text-blue', 'title' => 'Ke Menu Utama']);
                                 }else{
@@ -85,6 +90,11 @@ use app\components\QueryHelper;
           </div>
         </div>
       </div>
+   <div style="text-align: center">
+    <b>Version</b> 1
+    <strong>Copyright © 2019 <a href="javascript:void(0)">Supriatna</a>.</strong> All rights
+    reserved.
+   </div>
 
 
 

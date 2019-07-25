@@ -222,14 +222,14 @@ class KosanController extends Controller
             $model->kosan_id          = $request->post('UserKosan')['kosan_id'];
             $model->tgl_masuk_kos     = $request->post('UserKosan')['tgl_masuk_kos'];
             $model->tgl_berakhir_kos  = date("Y-m-d", strtotime(''.$model->tgl_masuk_kos.' +1 month'));
-            $model->bayar             = $request->post('UserKosan')['bayar'];
             $cek_bayar                = Kosan::findOne($model->kosan_id);
+
+            (float)$model->bayar      = (empty($request->post('UserKosan')['bayar'])) ? $cek_bayar->harga_perbulan : $request->post('UserKosan')['bayar'];
             (float)$model->nunggak    = (float)$cek_bayar->harga_perbulan - (float)$model->bayar;
             (float)$model->total      = (float)$cek_bayar->harga_perbulan;
             $ada                      = $this->cek($model->user_id);
-
             if((float)$model->total <= (float)$model->nunggak){
-                Yii::$app->session->setFlash('error', 'Maf!! Masukan Jumalah Yang Benar');
+                Yii::$app->session->setFlash('error', 'Maaf!! Masukan Jumlah Yang Benar');
                 return $this->redirect(['/dashboard/index/']);
             }
 

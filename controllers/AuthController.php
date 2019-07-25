@@ -81,7 +81,6 @@ class AuthController extends \yii\web\Controller
               $modelUser->tanggal_lahir = $request->post('SignupForm')['tanggal_lahir'];
               $modelUser->tempat_lahir  = $request->post('SignupForm')['tempat_lahir'];
               $modelUser->no_telepon    = $request->post('SignupForm')['no_telepon'];
-              $modelUser->email         = $request->post('SignupForm')['email'];
               $modelUser->alamat        = $request->post('SignupForm')['alamat'];
               $modelUser->setPassword($request->post('SignupForm')['password']);
               $modelUser->generateAuthKey();
@@ -103,7 +102,7 @@ class AuthController extends \yii\web\Controller
                   $modelRole->save(false);
                   //$model->sendVerification($modelUser->id);
                   $transaction->commit();
-                  Yii::$app->session->setFlash('success', 'Silahkkan Masuk Untuk Memulai');
+                  Yii::$app->session->setFlash('success', 'Registrasi Berhasil Silahakan Login !');
                   return $this->redirect(['login']);
               }
               else{

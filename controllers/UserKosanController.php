@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Kosan;
 use Yii;
 use app\models\User;
 use app\models\UserKosan;
@@ -134,7 +135,7 @@ class UserKosanController extends Controller
 
     public function actionBayar($id)
     {
-        $this->view->title = 'Upload Bukti PembayaranController Kosan';
+        $this->view->title = 'Upload Bukti Pembayaran Kosan';
         $transaction = Yii::$app->db->beginTransaction();
         $model    = $this->findModel($id);
 
@@ -152,11 +153,12 @@ class UserKosanController extends Controller
                       $filename                  = sha1(date('YmdHis').time());
                       $mfile                     = Yii::$app->mfile->upload($file, $folder, $filename);
                       if ($mfile) {
+                        $kosan = Kosan::findOne($model->kosan_id);
                         $model->bukti_pembayaran = $mfile;
                         $model->status_bayar     = 'Dibayar';
-                        $model->bayar            = (float)$request->post('UserKosan')['bayar'];
+                        $model->bayar            =  (float)$kosan->harga_perbulan;
+                        $model->total            =  (float)$kosan->harga_perbulan;
                         $model->nunggak          = 0;
-                        $model->total            = $model->bayar;
                       }
                   }
               }
