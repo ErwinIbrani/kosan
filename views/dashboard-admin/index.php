@@ -8,6 +8,8 @@ $this->params['breadcrumbs'][] = $this->title;
      <?= $this->render('_part/_userkost', ['kosan' => $userKostModel, 'model' => $kosanModel]) ?>
     </div>
 
+
+
     <div class="col-lg-3 col-xs-6">
         <?= $this->render('_part/_kamarkosong', ['model' => $kosanModel]) ?>
     </div>

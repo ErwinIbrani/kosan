@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Kosan;
 use Yii;
 use app\models\User;
 use yii\web\Controller;
@@ -34,9 +35,14 @@ class KeluarKosanController extends Controller
 
     public function actionKeluarKosan()
     {
+
            $model  = User::findOne(Yii::$app->user->identity->id);
            $model->delete();
-           Yii::$app->session->setFlash('success', 'Anda Telah Keluar Dari Kosan'); 
+           $kosan   = Kosan::findOne(1);
+           Yii::$app->db->createCommand()
+                ->update('kosan', ['jumlah_kamar' => $kosan->jumlah_kamar + 1], ['id' => $kosan->id])
+                ->execute();
+            Yii::$app->session->setFlash('success', 'Anda Telah Keluar Dari Kosan');
            return $this->redirect(['/landing-page/index']);
     }
     
