@@ -16,7 +16,7 @@
                 <th style="text-align: center">Tanggal Awal Kost</th>
                 <th style="text-align: center">Tanggal Habis Kost</th>
                 <th style="text-align: center">Periode</th>
-                <th style="text-align: center">Status</th>
+                <th style="text-align: center">Status Pembayaran</th>
             </tr>
             </thead>
             <tbody>
