@@ -150,7 +150,7 @@ class KosanController extends Controller
              if (!is_null($file)) 
                 {
                    if(!empty($model->gambar_kosan)){
-                    unlink(Yii::getAlias('@webroot/').Yii::getAlias('@potokosan/'.$model->gambar_kosan));
+                    //unlink(Yii::getAlias('@webroot/').Yii::getAlias('@potokosan/'.$model->gambar_kosan));
                     $filename      = sha1(date('YmdHis').time());
                     $mfile         = Yii::$app->mfile->upload($file, $folder, $filename);
                     if ($mfile) {

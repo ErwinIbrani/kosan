@@ -41,7 +41,7 @@ FancyAsset::register($this);
             'tanggal_lahir',
             'tempat_lahir',
             'no_telepon',
-            'email:email',
+            // 'email:email',
             //'status',
             'alamat:ntext',
             [
