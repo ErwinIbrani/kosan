@@ -200,5 +200,45 @@ class UserKosanSearch extends UserKosan
     }
 
 
+    public function laporan($params)
+    {
+        $query = UserKosan::find()
+            ->joinWith('kosan', true)
+            ->joinWith('user', true)
+            ->where(['kosan.id' => 1]);
+        // add conditions that should always apply here
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'sort' => false,
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider;
+        }
+
+        // grid filtering conditions
+        $query->andFilterWhere([
+            'id' => $this->id,
+            'user_id' => $this->user_id,
+            'kosan_id' => $this->kosan_id,
+            'tgl_masuk_kos' => $this->tgl_masuk_kos,
+            'tgl_berakhir_kos' => $this->tgl_berakhir_kos,
+            'periode_kosan' => $this->periode_kosan,
+        ]);
+
+        $query->andFilterWhere(['like', 'status', $this->status])
+            ->andFilterWhere(['=', 'status_bayar', $this->status_bayar])
+            ->andFilterWhere(['like', 'kosan.nama_kosan', $this->nama_kosan])
+            ->andFilterWhere(['like', 'user.nama_lengkap', $this->nama_user])
+            ->andFilterWhere(['=', 'status_konfirmasi', $this->status_konfirmasi]);
+
+        return $dataProvider;
+    }
+
+
 
 }

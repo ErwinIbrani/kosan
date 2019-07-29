@@ -42,7 +42,7 @@ use yii\helpers\Html;
         ['label' => 'Dashboard', 'icon'=>'dashboard', 'url' =>  ['/dashboard-admin/index/']],
 
         /*admin*/
-           /*  [
+             [
                 'label' => 'User Management',
                 'icon' => 'users',
                 //'url' => 'javascript:void(0)',
@@ -53,8 +53,13 @@ use yii\helpers\Html;
                     ['label' => 'Permission', 'icon' => 'compass', 'url' => ['/rbac/permission/']],
                     ['label' => 'Access', 'icon' => 'retweet', 'url' => ['/rbac/route/']],
                 ],
-              ],*/
-
+              ],
+        /*pemilik*/
+        [
+            'label' => 'Laporan Kosan',
+            'icon'  => 'fa fa-home',
+            'url'   => ['/laporan-pemilik/']
+        ],
          /*admin*/
         [
             'label' => 'Kosan Management',
