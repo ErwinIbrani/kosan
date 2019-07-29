@@ -2,9 +2,11 @@
 
 namespace app\controllers;
 
+use app\models\KosanSearch;
 use app\models\Pengaduan;
 use app\models\UserKosan;
 use app\models\UserKosanSearch;
+use app\models\UserSearch;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use app\models\Kosan;
@@ -34,8 +36,8 @@ class LaporanPemilikController extends Controller
    public function actionIndex()
    {
 
-       $searchModel = new UserKosanSearch();
-       $dataProvider = $searchModel->laporan(\Yii::$app->request->queryParams);
+       $searchModel = new UserSearch();
+       $dataProvider = $searchModel->searchUser(\Yii::$app->request->queryParams);
 
        return $this->render('index', [
            'searchModel' => $searchModel,

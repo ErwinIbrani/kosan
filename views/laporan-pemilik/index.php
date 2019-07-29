@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                       'attribute' => 'nama_lengkap',
                       'format'    => 'raw',
                       'value'    => function($model, $key, $index, $column){
-                        return $model->user->nama_lengkap;
+                        return $model->nama_lengkap;
                     }
                  ],
             ];
