@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 25/07/2019 23:42:36
+ Date: 01/08/2019 06:01:26
 */
 
 SET NAMES utf8mb4;
@@ -35,7 +35,6 @@ CREATE TABLE `auth_assignment`  (
 -- ----------------------------
 INSERT INTO `auth_assignment` VALUES ('Admin', '10', 1557925448);
 INSERT INTO `auth_assignment` VALUES ('Bagian Pemeliharaan', '36', 1564072745);
-INSERT INTO `auth_assignment` VALUES ('Pemilik Kosan Haji Ajat', '34', 1564071300);
 INSERT INTO `auth_assignment` VALUES ('Pemilik Kosan Haji Ajat', '35', 1564072515);
 INSERT INTO `auth_assignment` VALUES ('User', '11', 1557978922);
 INSERT INTO `auth_assignment` VALUES ('User', '13', 1560955732);
@@ -51,6 +50,9 @@ INSERT INTO `auth_assignment` VALUES ('User', '30', NULL);
 INSERT INTO `auth_assignment` VALUES ('User', '31', NULL);
 INSERT INTO `auth_assignment` VALUES ('User', '32', NULL);
 INSERT INTO `auth_assignment` VALUES ('User', '33', NULL);
+INSERT INTO `auth_assignment` VALUES ('User', '34', 1564611930);
+INSERT INTO `auth_assignment` VALUES ('User', '37', NULL);
+INSERT INTO `auth_assignment` VALUES ('User', '38', NULL);
 INSERT INTO `auth_assignment` VALUES ('User', '8', 1557977638);
 INSERT INTO `auth_assignment` VALUES ('User', '9', 1557975053);
 
@@ -97,6 +99,8 @@ INSERT INTO `auth_item` VALUES ('/kosan/update', 2, NULL, NULL, NULL, 1557235486
 INSERT INTO `auth_item` VALUES ('/kosan/view', 2, NULL, NULL, NULL, 1557235486, 1557235486);
 INSERT INTO `auth_item` VALUES ('/landing-page/*', 2, NULL, NULL, NULL, 1557152498, 1557152498);
 INSERT INTO `auth_item` VALUES ('/landing-page/index', 2, NULL, NULL, NULL, 1557152498, 1557152498);
+INSERT INTO `auth_item` VALUES ('/laporan-pemilik/*', 2, NULL, NULL, NULL, 1564410663, 1564410663);
+INSERT INTO `auth_item` VALUES ('/laporan-pemilik/index', 2, NULL, NULL, NULL, 1564410663, 1564410663);
 INSERT INTO `auth_item` VALUES ('/pembayaran/*', 2, NULL, NULL, NULL, 1561556585, 1561556585);
 INSERT INTO `auth_item` VALUES ('/pembayaran/index', 2, NULL, NULL, NULL, 1561556582, 1561556582);
 INSERT INTO `auth_item` VALUES ('/pengaduan-admin/*', 2, NULL, NULL, NULL, 1557972565, 1557972565);
@@ -223,10 +227,13 @@ INSERT INTO `auth_item_child` VALUES ('User', '/dashboard/*');
 INSERT INTO `auth_item_child` VALUES ('User', '/dashboard/index');
 INSERT INTO `auth_item_child` VALUES ('User', '/dashboard/search');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/gridview/*');
+INSERT INTO `auth_item_child` VALUES ('Pemilik Kosan Haji Ajat', '/gridview/*');
 INSERT INTO `auth_item_child` VALUES ('User', '/gridview/*');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/gridview/export/*');
+INSERT INTO `auth_item_child` VALUES ('Pemilik Kosan Haji Ajat', '/gridview/export/*');
 INSERT INTO `auth_item_child` VALUES ('User', '/gridview/export/*');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/gridview/export/download');
+INSERT INTO `auth_item_child` VALUES ('Pemilik Kosan Haji Ajat', '/gridview/export/download');
 INSERT INTO `auth_item_child` VALUES ('User', '/gridview/export/download');
 INSERT INTO `auth_item_child` VALUES ('User', '/keluar-kosan/*');
 INSERT INTO `auth_item_child` VALUES ('User', '/keluar-kosan/keluar-kosan');
@@ -237,6 +244,8 @@ INSERT INTO `auth_item_child` VALUES ('Admin', '/kosan/index');
 INSERT INTO `auth_item_child` VALUES ('User', '/kosan/pilih');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/kosan/update');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/kosan/view');
+INSERT INTO `auth_item_child` VALUES ('Pemilik Kosan Haji Ajat', '/laporan-pemilik/*');
+INSERT INTO `auth_item_child` VALUES ('Pemilik Kosan Haji Ajat', '/laporan-pemilik/index');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/pembayaran/*');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/pembayaran/index');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/pengaduan-admin/*');
@@ -370,6 +379,24 @@ CREATE TABLE `cron_job`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Table structure for gambar_kosan
+-- ----------------------------
+DROP TABLE IF EXISTS `gambar_kosan`;
+CREATE TABLE `gambar_kosan`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `kosan_id` int(11) NULL DEFAULT NULL,
+  `gambar` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of gambar_kosan
+-- ----------------------------
+INSERT INTO `gambar_kosan` VALUES (10, 1, '80e5335777ff8ce90335eca04e8e4428483852f4.jpg');
+INSERT INTO `gambar_kosan` VALUES (11, 1, '084fa642a3e00705501b60685dd29e7855556a1f.jpg');
+INSERT INTO `gambar_kosan` VALUES (12, 1, '679d7704e7c6045eac7e0e2cd8ee5f28e477b745.jpg');
+
+-- ----------------------------
 -- Table structure for komplain
 -- ----------------------------
 DROP TABLE IF EXISTS `komplain`;
@@ -400,16 +427,16 @@ CREATE TABLE `kosan`  (
   `pasilitas` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `jenis_kosan` enum('Pria','Wanita','Pria dan Wanita') CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `status` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT 'Tersedia',
-  `gambar_kosan` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of kosan
 -- ----------------------------
-INSERT INTO `kosan` VALUES (1, 'Kosan Bapa Ajat', 3, 100000.00, 'Nanjung', 'AC', 'Pria dan Wanita', 'Tersedia', '88071900e8fc740c4ac55d27344ec0c07afa994a.jpg');
-INSERT INTO `kosan` VALUES (5, 'Kosan Ibu Ilih', 23, 200000.00, 'Jl. Raya', 'AC, Tempat Makan', 'Pria', 'Tersedia', '8078a2517e35a31a113005a97eac4d6df14d9f0f.jpg');
-INSERT INTO `kosan` VALUES (6, 'Kosan Hanya', 90, 120000.00, 'Situ', 'Kopi', 'Wanita', 'Tersedia', '8a0bab87d0c137b49b01dcc56067b68b06e344e6.jpg');
+INSERT INTO `kosan` VALUES (1, 'Kosan Bapa Ajat', 3, 100000.00, 'Nanjung', 'AC', 'Pria dan Wanita', 'Tersedia');
+INSERT INTO `kosan` VALUES (5, 'Kosan Ibu Ilih', 23, 200000.00, 'Jl. Raya', 'AC, Tempat Makan', 'Pria', 'Tersedia');
+INSERT INTO `kosan` VALUES (6, 'Kosan Hanya', 90, 120000.00, 'Situ', 'Kopi', 'Wanita', 'Tersedia');
+INSERT INTO `kosan` VALUES (18, 'Erwinsas', 12, 120000.00, 'Nkajsk', 'k;lcjdsjc', 'Wanita', 'Tersedia');
 
 -- ----------------------------
 -- Table structure for migration
@@ -444,6 +471,8 @@ CREATE TABLE `pengaduan`  (
   `status` enum('Diperbaiki','Belum Diperbaiki') CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'Belum Diperbaiki',
   `keterangan_teknisi` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
   `tanggal_laporan` datetime(0) NULL DEFAULT NULL,
+  `foto_pelapor` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
+  `keterangan_pelapor` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `user_pengadu`(`user_id`) USING BTREE,
   INDEX `kosan_pengadu`(`kosan_id`) USING BTREE,
@@ -454,7 +483,18 @@ CREATE TABLE `pengaduan`  (
 -- ----------------------------
 -- Records of pengaduan
 -- ----------------------------
-INSERT INTO `pengaduan` VALUES (1, 34, 1, 'Listrik', 'Listrik Mati', 'afbc01a2b67dd3c574e66aae8a6a2a956d6d1560.jpg', 'Belum Diperbaiki', NULL, '2019-07-25 23:06:47');
+INSERT INTO `pengaduan` VALUES (1, 34, 1, 'Listrik', 'Listrik Mati', 'afbc01a2b67dd3c574e66aae8a6a2a956d6d1560.jpg', 'Diperbaiki', 'Sudah Diperbaiki', '2019-07-25 23:06:47', 'c592897330ac9c9e8750f21a15104f3a2a8acb83.jpg', 'Benar Sudah Diperbaiki');
+
+-- ----------------------------
+-- Table structure for pengelola_kosan
+-- ----------------------------
+DROP TABLE IF EXISTS `pengelola_kosan`;
+CREATE TABLE `pengelola_kosan`  (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NULL DEFAULT NULL,
+  `kosan_id` int(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for sarat_ketentuan
@@ -492,16 +532,16 @@ CREATE TABLE `user`  (
   `tanggal_daftar` datetime(0) NOT NULL,
   `status_kost` smallint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 39 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES (10, 'admin kosan', 'admin_kosan', 'Laki-laki', '2019-05-15', 'Bandung', '085645366455', 'Q_FYQ2-jQSXIzPbFvmZl_-dP5hPFbP96', '$2y$13$kQQM0GnbOVN6HYDzjnydyum0Evtje9y6htS0bZFSjpP4biVreVspK', 10, 'Jl. Dipatiukur', 'bf1c3179deab701e87821a40a1e74c4bb0c2ee45.png', '2019-05-15 20:02:57', 0);
-INSERT INTO `user` VALUES (28, 'Erwin Wiguna', 'wiguna', 'Laki-laki', '2019-07-18', 'Jakarta', '0876535444644', 'FJtCytCsVR2JCqxMW9ARLZ0deEyvXFZJ', '$2y$13$U9iu1KzSA5lz5zuLajHYIeHxNKZ1a6H/48F9tloJ8sSfbT/SIXRvW', 10, 'Jl. Raya', 'fa13b38f4d08aa6934718ea19e9388bfd0c3081d.jpg', '2019-07-18 21:24:28', 1);
 INSERT INTO `user` VALUES (34, 'Iwa Kustiwa', 'iwakustiwa', 'Laki-laki', '2019-07-25', 'Jakarta', '08765455344', 'dgx8cN46oHLyKkUVBO2RH6mErDErbygS', '$2y$13$dl84C5FpFODLXoZfEnzai.twcR7yJ/4cBgNr12vNTdcuKC56QdF5O', 10, 'bandung', '04623d499b5f0e00821b6e3b6883d380a8452e22.jpg', '2019-07-25 22:57:16', 1);
 INSERT INTO `user` VALUES (35, 'haji adjat', 'hajiajat', 'Laki-laki', '2019-07-25', 'Jakarta', '08765455344', 'KZjaku_Yh2vAhzNBgKSZ0zjckEGO8Ma1', '$2y$13$71bINumjHav8ZMtKyIwRGu7POngN47Uplq4GL.FyKZgR4erUdngjO', 10, 'Bandung', 'a58cb71c1cd4239674bc586d28f7496e488be581.png', '2019-07-25 23:17:09', 0);
 INSERT INTO `user` VALUES (36, 'pemelihara', 'pemelihara', 'Laki-laki', '2019-07-25', 'Jakarta', '08765455344', 'vs4LPOfQ00H8X4eJXTWtX71hs8Ny1Sok', '$2y$13$XenA5NEPEn2C/Alp6spXjec0J9DwimxjS0mUlbLXg0m2hwDxUr0Hu', 10, 'bandung', 'a18bd17b43c6291df6d1331a1d2b59c8b5b19a20.jpg', '2019-07-25 23:38:10', 0);
+INSERT INTO `user` VALUES (38, 'Erwin Situmorangs', 'serwin', 'Perempuan', '2019-07-28', 'Jakarta Raya', '098765433222', 'mD08R2ik4Sekg1nFHO3Fsz8jmvi_9jFk', '$2y$13$uQHez8YshkAnaLFCpRB7QOw1A6QXJn0Lv862rAR8R7JkYMDCdLY82', 10, 'Jl. raya', 'c4875e23e64e40687720731ffea25a7ec340f515.jpg', '2019-07-28 17:17:54', 1);
 
 -- ----------------------------
 -- Table structure for user_kosan
@@ -528,13 +568,12 @@ CREATE TABLE `user_kosan`  (
   INDEX `kosan`(`kosan_id`) USING BTREE,
   CONSTRAINT `kosan` FOREIGN KEY (`kosan_id`) REFERENCES `kosan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 43 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 44 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user_kosan
 -- ----------------------------
-INSERT INTO `user_kosan` VALUES (26, 28, 1, '2019-07-18', '2019-08-18', 'Tetap', 'Belum Dikonfirmasi', 'Dibayar', 1, '9a479fd48e6099e6ec46a616a765e99b057cfa53.jpg', 'DP', 'Dieksekusi', 100000.00, 0.00, 100000.00);
-INSERT INTO `user_kosan` VALUES (27, 28, 1, '2019-08-18', '2019-09-18', 'Tetap', 'Belum Dikonfirmasi', 'Dibayar', 2, 'c6b0be695a6cf5400a4bbc9f4391c1147cbdf50f.jpg', 'Cash', 'Belum Dieksekusi', 100000.00, 0.00, 100000.00);
 INSERT INTO `user_kosan` VALUES (42, 34, 1, '2019-07-24', '2019-08-24', 'Tetap', 'Belum Dikonfirmasi', 'Belum Dibayar', 1, NULL, 'DP', 'Dieksekusi', 20000.00, 80000.00, 100000.00);
+INSERT INTO `user_kosan` VALUES (43, 38, 1, '2019-07-28', '2019-08-28', 'Tetap', 'Belum Dikonfirmasi', 'Belum Dibayar', 1, NULL, 'Cash', 'Dieksekusi', 100000.00, 0.00, 100000.00);
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -60,7 +60,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
           ['class' => 'kartik\grid\ActionColumn',
-           'template' => '{view}{delete}',],
+           'template' => '{view}{delete}{update}',
+              'buttons' => [
+                  'update'   => function ($url, $model) {
+                            $url = \yii\helpers\Url::to(['pengaduan/konfirmasi', 'id' => $model->id]);
+                            return Html::a('<span class="glyphicon glyphicon-ok"></span>', $url, ['title' => 'Konfirmasi Perbaikan']);
+                        },
+                  ]
+          ],
       ];
      ?> 
   </div>

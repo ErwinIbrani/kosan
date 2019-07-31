@@ -58,8 +58,8 @@ $this->params['breadcrumbs'][] = $this->title;
                  'format'    => 'raw',
                  'value'    => function($model) {
                    return 
-                    '<a data-fancybox="gallery" href='.$model->linkpreview.'>
-                    '.Html::img($model->linkpreview, 
+                    '<a data-fancybox="gallery" href='.$model->linkpreviewpengadu.'>
+                    '.Html::img($model->linkpreviewpengadu,
                     ['alt' => 'example1', 
                      'class'=>'img-thumbnail img-responsive',
                      'style' => 'border: 1px solid #ddd;
@@ -86,7 +86,32 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label'      => 'Tanggal Laporan',
                 'attribute'  => 'tanggal_laporan',
                 'format'     => 'date'
-             ], 
+             ],
+
+            [
+                'attribute' => 'foto',
+                'label'     => 'Foto Konfirmasi Perbaikan',
+                'format'    => 'raw',
+                'value'    => function($model) {
+                    return
+                        '<a data-fancybox="gallery" href='.$model->linkpreviewhasil.'>
+                    '.Html::img($model->linkpreviewhasil,
+                            ['alt' => 'example1',
+                                'class'=>'img-thumbnail img-responsive',
+                                'style' => 'border: 1px solid #ddd;
+                     border-radius: 4px;
+                     padding: 5px;
+                     width: 100px;'
+                            ]).'
+                    </a>';
+                },
+            ],
+
+            [
+                'label'      => 'Keterangan Konfirmasi',
+                'attribute'  => 'keterangan_pelapor',
+                'format'     => 'ntext'
+            ],
        
         ],
         ]) ?>

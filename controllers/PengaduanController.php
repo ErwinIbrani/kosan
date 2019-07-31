@@ -148,6 +148,40 @@ class PengaduanController extends Controller
         return $this->redirect(['index']);
     }
 
+
+    public function actionKonfirmasi($id)
+    {
+        $model = $this->findModel($id);
+        if ($model->load(Yii::$app->request->post())) {
+            $request  = Yii::$app->request;
+            $model->keterangan_pelapor = $request->post('Pengaduan')['keterangan_pelapor'];
+            $folder   = Yii::getAlias('@webroot') . Yii::getAlias('@pengaduan/');
+            $file     = UploadedFile::getInstance($model, 'virtual2');
+            if (!is_null($file)) {
+                $filename = sha1(date('YmdHis') . time());
+                $mfile    = Yii::$app->mfile->upload($file, $folder, $filename);
+                if ($mfile) {
+                    $model->foto_pelapor = $mfile;
+                }
+            } else {
+                Yii::$app->session->setFlash('success', 'Mohon Untuk Upload Gambar');
+                return $this->redirect(['create']);
+            }
+
+            if ($model->save(false)) {
+                Yii::$app->session->setFlash('success', 'Berhasil Dikonfirmasi');
+                return $this->redirect(['index']);
+            } else {
+                Yii::$app->session->setFlash('error', 'Ada yang error');
+                return $this->redirect(['index']);
+            }
+        }
+        return $this->render('konfirmasi', [
+            'model' => $model,
+        ]);
+
+    }
+
     /**
      * Finds the Pengaduan model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

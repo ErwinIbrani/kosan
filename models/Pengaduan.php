@@ -28,6 +28,7 @@ class Pengaduan extends \yii\db\ActiveRecord
 {
 
     public $virtual;
+    public $virtual2;
     /**
      * {@inheritdoc}
      */
@@ -58,12 +59,13 @@ class Pengaduan extends \yii\db\ActiveRecord
         return [
             [['user_id', 'jenis_pengaduan', 'keterangan_pengadu'], 'required'],
             [['user_id', 'kosan_id'], 'integer'],
-            [['keterangan_pengadu', 'foto', 'status', 'keterangan_teknisi'], 'string'],
+            [['keterangan_pengadu', 'foto', 'status', 'keterangan_teknisi', 'foto_pelapor','keterangan_pelapor'], 'string'],
             [['tanggal_laporan'], 'safe'],
             [['jenis_pengaduan'], 'string', 'max' => 255],
             [['kosan_id'], 'exist', 'skipOnError' => true, 'targetClass' => Kosan::className(), 'targetAttribute' => ['kosan_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['virtual'], 'file', 'skipOnEmpty' => false, 'on' => 'create', 'extensions' => ['jpg', 'gif', 'png', 'bmp']],
+            [['virtual2'], 'file', 'skipOnEmpty' => false, 'on' => 'update', 'extensions' => ['jpg', 'gif', 'png', 'bmp']],
         ];
     }
 
@@ -78,8 +80,10 @@ class Pengaduan extends \yii\db\ActiveRecord
             'kosan_id' => 'Kosan ID',
             'jenis_pengaduan' => 'Jenis Pengaduan',
             'keterangan_pengadu' => 'Keterangan Pengadu',
-            'foto' => 'Foto',
+            'foto' => 'Foto Bukti',
             'status' => 'Status',
+            'foto_pelapor' => 'Bukti Keterangan Pelapor',
+            'keterangan_pelapor' => 'Keterangan Pelapor',
             'keterangan_teknisi' => 'Keterangan Teknisi',
             'tanggal_laporan' => 'Tanggal Laporan'
         ];
@@ -102,9 +106,22 @@ class Pengaduan extends \yii\db\ActiveRecord
     }
 
 
-      public function getLinkpreview()
+    public function getLinkpreviewPengadu()
     {
+        $code = Yii::$app->mfile->getCode($this->foto,Yii::getAlias('@webroot').Yii::getAlias('@pengaduan/'));
+        if(!is_null($this->foto) AND !empty($this->foto))
+            return Url::to(['/site/image', 'code' => $code]);
+        else
+            return null;
+    }
 
+    public function getLinkpreviewHasil()
+    {
+        $code = Yii::$app->mfile->getCode($this->foto_pelapor,Yii::getAlias('@webroot').Yii::getAlias('@pengaduan/'));
+        if(!is_null($this->foto_pelapor) AND !empty($this->foto_pelapor))
+            return Url::to(['/site/image', 'code' => $code]);
+        else
+            return null;
     }
 
 
