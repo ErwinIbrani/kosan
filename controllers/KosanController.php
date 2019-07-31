@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\GambarKosan;
 use Yii;
 use app\models\Kosan;
 use app\models\KosanSearch;
@@ -20,7 +21,7 @@ class KosanController extends Controller
 {
 
 
-   public function behaviors()
+    public function behaviors()
     {
         return [
             'access' => [
@@ -71,43 +72,43 @@ class KosanController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-   
+
     public function actionCreate()
     {
-     
-      $model = new Kosan();
-        if ($model->load(Yii::$app->request->post())){
-            $request               = Yii::$app->request;
-            $model->nama_kosan     = $request->post('Kosan')['nama_kosan'];
-            $model->jumlah_kamar   = $request->post('Kosan')['jumlah_kamar'];
-            $model->harga_perbulan = $request->post('Kosan')['harga_perbulan'];
-            $model->alamat_kosan   = $request->post('Kosan')['alamat_kosan'];
-            $model->pasilitas      = $request->post('Kosan')['pasilitas'];
-            $model->jenis_kosan    = $request->post('Kosan')['jenis_kosan'];
-            $folder                = Yii::getAlias('@webroot/').Yii::getAlias('@potokosan/');
-            $file                  = UploadedFile::getInstance($model, 'gambar_poto');
 
-             if (!is_null($file)) 
-             {
-                $filename = sha1(date('YmdHis').time());
-                $mfile    = Yii::$app->mfile->upload($file, $folder, $filename);
-               if ($mfile) {
-                  $model->gambar_kosan = $mfile;
-                 }
-             }else{
-               Yii::$app->session->setFlash('success', 'Mohon Untuk Upload Gambar'); 
-               return $this->redirect(['create']); 
-             }
-           
-            if($model->save(false)){
-                Yii::$app->session->setFlash('success', 'Berhasil Disimpan'); 
-                return $this->redirect(['index']); 
-           }
-           else{
-             Yii::$app->session->setFlash('error', 'Ada yang error'); 
-             return $this->redirect(['index']); 
-           }
-       }
+        $model = new Kosan();
+        if ($model->load(Yii::$app->request->post())) {
+            $request = Yii::$app->request;
+            $model->nama_kosan = $request->post('Kosan')['nama_kosan'];
+            $model->jumlah_kamar = $request->post('Kosan')['jumlah_kamar'];
+            $model->harga_perbulan = $request->post('Kosan')['harga_perbulan'];
+            $model->alamat_kosan = $request->post('Kosan')['alamat_kosan'];
+            $model->pasilitas = $request->post('Kosan')['pasilitas'];
+            $model->jenis_kosan = $request->post('Kosan')['jenis_kosan'];
+
+            if ($model->save(false)) {
+                $folder = Yii::getAlias('@webroot') . Yii::getAlias('@potokosan/');
+                $model->gambar_poto = UploadedFile::getInstances($model, 'gambar_poto');
+                if (!is_null($model->gambar_poto)) {
+                    foreach ($model->gambar_poto as $key => $value) {
+                        $gamabarModel = new GambarKosan();
+                        $value->saveAs($folder . $value->baseName . '.' . $value->extension);
+                        $gamabarModel->gambar .= $value->baseName . '.' . $value->extension;
+                        $gamabarModel->kosan_id = $model->id;
+                        $gamabarModel->save(false);
+                    }
+                } else {
+                    Yii::$app->session->setFlash('success', 'Mohon Untuk Upload Gambar');
+                    return $this->redirect(['create']);
+                }
+
+                Yii::$app->session->setFlash('success', 'Berhasil Disimpan');
+                return $this->redirect(['index']);
+            } else {
+                Yii::$app->session->setFlash('error', 'Ada yang error');
+                return $this->redirect(['index']);
+            }
+        }
 
         return $this->render('create', [
             'model' => $model,
@@ -121,62 +122,46 @@ class KosanController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-     public function actionUpdate($id)
+    public function actionUpdate($id)
     {
-      $model    = $this->findModel($id);
-      $old_file = $model->gambar_kosan;
+        $model = $this->findModel($id);
+        if ($model->load(Yii::$app->request->post())) {
 
-      if ($model->load(Yii::$app->request->post()))
-      {
-        
-         $request               = Yii::$app->request;
-         $model->nama_kosan     = $request->post('Kosan')['nama_kosan'];
-         $model->jumlah_kamar   = $request->post('Kosan')['jumlah_kamar'];
-         $model->harga_perbulan = $request->post('Kosan')['harga_perbulan'];
-         $model->alamat_kosan   = $request->post('Kosan')['alamat_kosan'];
-         $model->pasilitas      = $request->post('Kosan')['pasilitas'];
-         $model->jenis_kosan    = $request->post('Kosan')['jenis_kosan'];
-
-          if (file_exists($model->linkpreview))
-          {
-             $model->gambar_kosan = $old_file;
-          }
-
-          if (!file_exists($model->linkpreview))
-           {
-         
-             $folder = Yii::getAlias('@webroot/').Yii::getAlias('@potokosan/');
-             $file   = UploadedFile::getInstance($model, 'gambar_poto');
-             if (!is_null($file)) 
-                {
-                   if(!empty($model->gambar_kosan)){
-                    //unlink(Yii::getAlias('@webroot/').Yii::getAlias('@potokosan/'.$model->gambar_kosan));
-                    $filename      = sha1(date('YmdHis').time());
-                    $mfile         = Yii::$app->mfile->upload($file, $folder, $filename);
-                    if ($mfile) {
-                      $model->gambar_kosan = $mfile;
-                    }  
-                }else{
-                    $filename      = sha1(date('YmdHis').time());
-                    $mfile         = Yii::$app->mfile->upload($file, $folder, $filename);
-                    if ($mfile) {
-                      $model->gambar_kosan = $mfile;
+            $request = Yii::$app->request;
+            $model->nama_kosan = $request->post('Kosan')['nama_kosan'];
+            $model->jumlah_kamar = $request->post('Kosan')['jumlah_kamar'];
+            $model->harga_perbulan = $request->post('Kosan')['harga_perbulan'];
+            $model->alamat_kosan = $request->post('Kosan')['alamat_kosan'];
+            $model->pasilitas = $request->post('Kosan')['pasilitas'];
+            $model->jenis_kosan = $request->post('Kosan')['jenis_kosan'];
+            if ($model->save()) {
+                $folder             = Yii::getAlias('@webroot') . Yii::getAlias('@potokosan/');
+                $model->gambar_poto = UploadedFile::getInstances($model, 'gambar_poto');
+                $gamabarModels      = GambarKosan::find()->where(['kosan_id' => $id])->count();
+                if (!is_null($model->gambar_poto)) {
+                    foreach ($model->gambar_poto as $key => $value) {
+                        foreach ($gamabarModels as $gamabarModel) {
+                            $value->saveAs($folder . $value->baseName . '.' . $value->extension);
+                            $gamabarModel->gambar .= $value->baseName . '.' . $value->extension;
+                            $gamabarModel->kosan_id = $model->id;
+                            $gamabarModel->save(false);
+                        }
                     }
-                }
-              }
-          }
+                } else {
+                    Yii::$app->session->setFlash('success', 'Mohon Untuk Upload Gambar');
+                    return $this->redirect(['create']);
+            }
 
-          if($model->save()){
-              Yii::$app->session->setFlash('success', 'Kosan Berhasil Diupdate'); 
-              return $this->redirect(['index']);
-           }else{
-              Yii::$app->session->setFlash('error', 'Updated Failed'); 
-              return $this->redirect(['index']);
-           } 
-         }  
-            
+            Yii::$app->session->setFlash('success', 'Kosan Berhasil Diupdate');
+            return $this->redirect(['index']);
+        } else {
+            Yii::$app->session->setFlash('error', 'Updated Failed');
+            return $this->redirect(['index']);
+        }
+    }
+
         return $this->render('update', [
-                'model' => $model,
+            'model' => $model,
         ]);
     }
 
@@ -190,7 +175,7 @@ class KosanController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-        Yii::$app->session->setFlash('success', 'Berhasil Dihapus');  
+        Yii::$app->session->setFlash('success', 'Berhasil Dihapus');
         return $this->redirect(['index']);
     }
 
@@ -211,11 +196,11 @@ class KosanController extends Controller
     }
 
 
-   public function actionPilih($id)
-   {
-       $this->view->title = 'Pilih Kosan';
-       $kosanModel = $this->findModel($id);
-       $model = new UserKosan();
+    public function actionPilih($id)
+    {
+        $this->view->title = 'Pilih Kosan';
+        $kosanModel = $this->findModel($id);
+        $model = new UserKosan();
         if ($model->load(Yii::$app->request->post())){
             $request                  = Yii::$app->request;
             $model->user_id           = Yii::$app->user->identity->id;
@@ -234,8 +219,8 @@ class KosanController extends Controller
             }
 
             else if(!empty($ada)){
-              Yii::$app->session->setFlash('error', 'Maff !! Anda Sudah Memilih Kosan');
-              return $this->redirect(['/dashboard/index/']); 
+                Yii::$app->session->setFlash('error', 'Maff !! Anda Sudah Memilih Kosan');
+                return $this->redirect(['/dashboard/index/']);
             }
 
             else{
@@ -252,16 +237,16 @@ class KosanController extends Controller
                 }
             }
         }
-        return $this->render('pilih_kosan', ['kosanModel' => $kosanModel, 'model' => $model]);  
-   }
+        return $this->render('pilih_kosan', ['kosanModel' => $kosanModel, 'model' => $model]);
+    }
 
- 
 
-   private function cek($user_id)
-   {
-      return UserKosan::find()
-                 ->where(['user_id' => $user_id])
-                 ->one();
-   }
+
+    private function cek($user_id)
+    {
+        return UserKosan::find()
+            ->where(['user_id' => $user_id])
+            ->one();
+    }
 
 }

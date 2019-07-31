@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\GambarKosan;
 use app\models\User;
 use yii\web\Controller;
 use app\models\Kosan;
@@ -19,7 +20,7 @@ class LandingPageController extends Controller
   {
   	 $this->view->title = 'Semua Kategori Kosan';
   	 $searchModel = new KosanSearch();
-     $query       = Kosan::find();
+     $query       = GambarKosan::find()->innerJoinWith('kosan');
      $countQuery  = clone $query;
      $pages       = new Pagination(['totalCount' => $countQuery->count()]);
      $models      = $query->offset($pages->offset)->limit($pages->limit)->all();
@@ -35,8 +36,8 @@ class LandingPageController extends Controller
 	     $request              = Yii::$app->request;
 	     $model->alamat_kosan  = $request->post('KosanSearch')['alamat_kosan'];
 	     if(!empty($model->alamat_kosan)){
-		     $query       = Kosan::find()
-		                    ->where(['like', 'alamat_kosan', '%' .$model->alamat_kosan. '%', false]);
+		     $query       = GambarKosan::find()->innerJoinWith('kosan')
+		                    ->where(['like', 'kosan.alamat_kosan', '%' .$model->alamat_kosan. '%', false]);
 	         $countQuery  = clone $query;
 	         $pages       = new Pagination(['totalCount' => $countQuery->count()]);
 	         $models      = $query->offset($pages->offset)->limit($pages->limit)->all();

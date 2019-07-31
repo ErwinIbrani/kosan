@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="kosan-create">
 
     <?= $this->render('_form', [
-        'model' => $model,
+        'model' => $model
     ]) ?>
 
 </div>

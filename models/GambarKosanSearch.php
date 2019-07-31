@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Kosan;
+use app\models\GambarKosan;
 
 /**
- * KosanSearch represents the model behind the search form of `app\models\Kosan`.
+ * GambarKosanSearch represents the model behind the search form of `app\models\GambarKosan`.
  */
-class KosanSearch extends Kosan
+class GambarKosanSearch extends GambarKosan
 {
     /**
      * {@inheritdoc}
@@ -17,9 +17,8 @@ class KosanSearch extends Kosan
     public function rules()
     {
         return [
-            [['id', 'jumlah_kamar'], 'integer'],
-            [['nama_kosan', 'alamat_kosan', 'pasilitas', 'jenis_kosan', 'status'], 'safe'],
-            [['harga_perbulan'], 'number'],
+            [['id', 'kosan_id'], 'integer'],
+            [['gambar'], 'safe'],
         ];
     }
 
@@ -41,7 +40,7 @@ class KosanSearch extends Kosan
      */
     public function search($params)
     {
-        $query = Kosan::find()->where(['id' => 1]);
+        $query = GambarKosan::find();
 
         // add conditions that should always apply here
 
@@ -60,15 +59,10 @@ class KosanSearch extends Kosan
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'jumlah_kamar' => $this->jumlah_kamar,
-            'harga_perbulan' => $this->harga_perbulan,
+            'kosan_id' => $this->kosan_id,
         ]);
 
-        $query->andFilterWhere(['like', 'nama_kosan', $this->nama_kosan])
-            ->andFilterWhere(['like', 'alamat_kosan', $this->alamat_kosan])
-            ->andFilterWhere(['like', 'pasilitas', $this->pasilitas])
-            ->andFilterWhere(['like', 'jenis_kosan', $this->jenis_kosan])
-            ->andFilterWhere(['like', 'status', $this->status]);
+        $query->andFilterWhere(['like', 'gambar', $this->gambar]);
 
         return $dataProvider;
     }

@@ -16,7 +16,6 @@ FancyAsset::register($this);
 <div class="box box-primary">
  <div class="box-header with-border">
    <div class="box-title">
-   <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
    <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -29,7 +28,7 @@ FancyAsset::register($this);
 <div class="box-body">
   <table class="table table-bordered">
     <tbody>
-     
+
      <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -40,28 +39,32 @@ FancyAsset::register($this);
             'alamat_kosan:ntext',
             'pasilitas:ntext',
             'jenis_kosan',
-            'status',
-            [
-                'attribute' => 'gambar_kosan',
-                'label'     => 'Gambar Kosan',
-                'format'    => 'raw',
-                'value'    => function($model) {
-                return 
-                  '<a data-fancybox="gallery" href='.$model->linkpreview.'>
-                  '.Html::img($model->linkpreview, 
-                  ['alt' => 'example1', 
-                   'class'=>'img-thumbnail img-responsive',
-                   'style' => 'border: 1px solid #ddd;
-                    border-radius: 4px;
-                    padding: 5px;
-                    width: 100px;'
-                  ]).'
-                  </a>'; 
-                },
-            ],
+            'status'
         ],
     ]) ?>
     </tbody>
   </table>
+
+    <!-- USERS LIST -->
+        <div class="box box-danger">
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+                <ul class="users-list clearfix">
+                    <?php
+                    $modelGambar =\app\models\GambarKosan::find()->where(['kosan_id' => $model->id])->all();
+                    foreach ($modelGambar as $value): ?>
+                    <li>
+                        <?=
+                          Html::img(\yii\helpers\Url::to('@web/uploads/potokosan/' . $value->gambar, true),['width'=>100, 'class' => 'img-thumbnail']);
+                        ?>
+                    </li>
+                    <?php endforeach; ?>
+                </ul>
+                <!-- /.users-list -->
+            </div>
+            <!-- /.box-body -->
+            <!-- /.box-footer -->
+        </div>
+        <!--/.box -->
+    </div>
   </div>
-</div>

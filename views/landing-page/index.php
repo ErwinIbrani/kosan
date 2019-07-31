@@ -83,7 +83,9 @@ use app\components\QueryHelper;
                           <!--get DataFromDB-->
                           <?php foreach ($models as $key => $value) { ?>
                               <div class="item-class">
-                                  <?= Html::img($value->linkpreview, ['alt' => $value->id, 'style' => 'width:320px']); ?>
+                                  <?=  Html::img(\yii\helpers\Url::to('@web/uploads/potokosan/' . $value->gambar, true),
+                                      ['style'=> 'width:320px', 'class' => 'img-thumbnail']);
+                                  ?>
                               </div>
                           <?php } ?>
                           <?php OwlCarouselWidget::end(); ?>
@@ -96,7 +98,7 @@ use app\components\QueryHelper;
               <div class="col-sm-4 col-xs-6">
                   <div class="box box-success box-solid">
                   <div class="box-header with-border">
-                      <h3 class="box-title"><?= $value->nama_kosan; ?></h3>
+                      <h3 class="box-title"><?= $value->kosan->nama_kosan; ?></h3>
                       <div class="box-tools pull-right">
                           <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                       </div>
@@ -104,12 +106,12 @@ use app\components\QueryHelper;
                   </div>
                   <!-- /.box-header -->
                   <div class="box-body">
-                      <span class="info-box-text">Nama Kosan   : <?= $value->nama_kosan ?></span>
-                      <span class="info-box-text">Alamat Kosan : <?= $value->alamat_kosan ?></span>
-                      <span class="info-box-number">Rp. <?= number_format($value->harga_perbulan) ?>/Bulan</span>
+                      <span class="info-box-text">Nama Kosan   : <?= $value->kosan->nama_kosan ?></span>
+                      <span class="info-box-text">Alamat Kosan : <?= $value->kosan->alamat_kosan ?></span>
+                      <span class="info-box-number">Rp. <?= number_format($value->kosan->harga_perbulan) ?>/Bulan</span>
                       <div class="pull-right">
                           <?= Html::a('Detail',
-                              ['/landing-page/detail', 'id' => $value->id],
+                              ['/landing-page/detail', 'id' => $value->kosan->id],
                               ['class' => 'btn btn-primary btn-sm btn-flat']
                           ) ?>
                       </div>

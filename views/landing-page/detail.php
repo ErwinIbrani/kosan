@@ -10,7 +10,7 @@ FancyAsset::register($this);
 <div class="col-md-12">
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Kosan <?= $model->nama_kosan ?></h3>
+              <h1 class="box-title">Kosan <?= $model->nama_kosan ?></h1>
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
@@ -19,13 +19,40 @@ FancyAsset::register($this);
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <div class="row">
 
-                <div class="col-md-4">
-                  <?= Html::img($model->linkpreview, ['class'=>'img-thumbnail', 'style' => 'height:100%;width:100%']); ?>
+              <div class="row">
+                  <?php
+                  \kv4nt\owlcarousel\OwlCarouselWidget::begin([
+                      'container' => 'div',
+                      'containerOptions' => [
+                          'id' => 'container-id',
+                          'class' => 'container-class'
+                      ],
+                      'pluginOptions'    => [
+                          'autoplay'          => true,
+                          'autoplayTimeout'   => 3000,
+                          'items'             => 3,
+                          'loop'              => true,
+                          'itemsDesktop'      => [1199, 3],
+                          'itemsDesktopSmall' => [979, 3]
+                      ]
+                  ]);
+              $gambars = \app\models\GambarKosan::find()->where(['kosan_id' => $model->id])->all();
+              foreach ($gambars as $gambar => $value): ?>
+                <div class="col-md-12">
+                  <?=  Html::img(\yii\helpers\Url::to('@web/uploads/potokosan/' . $value->gambar, true),
+                      ['style' => 'height:100%;width:100%', 'class' => 'img-thumbnail']);
+                  ?>
                 </div>
+               <?php endforeach; ?>
+               <?php \kv4nt\owlcarousel\OwlCarouselWidget::end(); ?>
                 <!-- /.col -->
-                <div class="col-md-6">
+              </div>
+              <br>
+                <hr>
+                <div class="row">
+                <div class="col-md-12">
+                  <h3>
                    <div class="direct-chat-text">
                      Nama Kosan : <?= $model->nama_kosan ?>
                     </div><br/>
@@ -53,7 +80,7 @@ FancyAsset::register($this);
                     <div class="direct-chat-text">
                      Jenis Kosan : <?= $model->jenis_kosan ?>
                     </div><br/>
-
+                  </h3>
                     <!--<div class="direct-chat-text">
                      Status Kosan : <?/*= $model->status */?>
                     </div><br/>-->
@@ -72,24 +99,15 @@ FancyAsset::register($this);
                                     ['/kosan/pilih/', 'id' => $model->id],
                                     ['class' => 'btn btn-info btn-sm btn-flat']
                               ) ?>
-                      <?php } 
-                    ?>  
+                      <?php }
+                    ?>
+                  <?= Html::a('Kembali',
+                      ['/landing-page/index'],
+                      ['class' => 'btn btn-primary btn-sm btn-flat']
+                  ) ?>
                   </div>
-                      
+
                 </div>
-
-                <div class="col-md-2">
-                  <div class="pull-right">
-
-                   <?= Html::a('Kembali',
-                                    ['/landing-page/index'],
-                                    ['class' => 'btn btn-primary btn-sm btn-flat']
-                                ) ?>
-
-
-                   </div>             
-                </div>
-
                 <!-- /.col -->
               </div>
               <!-- /.row -->

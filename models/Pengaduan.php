@@ -104,12 +104,7 @@ class Pengaduan extends \yii\db\ActiveRecord
 
       public function getLinkpreview()
     {
-        $code = Yii::$app->mfile->getCode($this->foto,Yii::getAlias('@webroot/').Yii::getAlias('@pengaduan/'));
 
-        if(!is_null($this->foto) AND !empty($this->foto))
-            return Url::to(['/site/image', 'code' => $code]);
-        else
-            return Yii::getAlias('@web').'/uploads/default.png';
     }
 
 

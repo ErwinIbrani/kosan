@@ -1,10 +1,8 @@
 <?php
-
 namespace app\models;
-
+use liyunfang\file\UploadBehavior;
 use yii\helpers\Url;
 use Yii;
-
 /**
  * This is the model class for table "kosan".
  *
@@ -31,7 +29,6 @@ class Kosan extends \yii\db\ActiveRecord
     {
         return 'kosan';
     }
-
     /**
      * {@inheritdoc}
      */
@@ -44,10 +41,9 @@ class Kosan extends \yii\db\ActiveRecord
             [['alamat_kosan', 'pasilitas', 'jenis_kosan', 'gambar_kosan'], 'string'],
             [['nama_kosan'], 'string', 'max' => 200],
             [['status'], 'string', 'max' => 100],
-            [['gambar_poto'], 'file', 'skipOnEmpty' => false, 'on' => 'create', 'extensions' => ['jpg', 'gif', 'png', 'bmp']],
+            ['gambar_poto', 'file','maxFiles' => 5, 'extensions' => 'doc, docx, pdf', 'on' => ['insert', 'update']],
         ];
     }
-
     /**
      * {@inheritdoc}
      */
@@ -66,7 +62,6 @@ class Kosan extends \yii\db\ActiveRecord
             'gambar_poto' => 'Upload Gambar Kosan'
         ];
     }
-
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -74,7 +69,6 @@ class Kosan extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Komplain::className(), ['kosan_id' => 'id']);
     }
-
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -83,13 +77,10 @@ class Kosan extends \yii\db\ActiveRecord
         return $this->hasMany(UserKosan::className(), ['kosan_id' => 'id']);
     }
 
-     public function getLinkpreview()
+    public function getGambars()
     {
-        $code = Yii::$app->mfile->getCode($this->gambar_kosan,Yii::getAlias('@webroot/').Yii::getAlias('@potokosan/'));
-
-        if(!is_null($this->gambar_kosan) AND !empty($this->gambar_kosan))
-            return Url::to(['/site/image', 'code' => $code]);
-        else
-            return Yii::getAlias('@web').'/uploads/default.png';
+        return $this->hasMany(GambarKosan::className(), ['kosan_id' => 'id']);
     }
+
+
 }
