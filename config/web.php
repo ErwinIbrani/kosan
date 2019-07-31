@@ -154,6 +154,7 @@ $config = [
            'dashboard/index',
            'kosan/pilih',
            'user-kosan/bayar',
+           'pengelola-kosan/*',
           
         
        ]

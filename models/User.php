@@ -109,4 +109,9 @@ class User extends \yii\db\ActiveRecord
     {
         return $this->hasMany(AuthAssignment::className(), ['user_id' => 'id']);
     }
+
+    public function getPengelolas()
+    {
+        return $this->hasMany(PengelolaKosan::className(), ['user_id' => 'id']);
+    }
 }

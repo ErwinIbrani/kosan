@@ -14,7 +14,7 @@ use yii\helpers\Url;
 <div class="kosan-form">
   <div class="box box-primary">
     <div class="box-header with-border">
-        <h3 class="box-title"><?= Html::encode('Form Pengaduan Keluahan'); ?></h3>
+        <h3 class="box-title"><?= Html::encode('Form Keluhan'); ?></h3>
      </div>
 
        <?php

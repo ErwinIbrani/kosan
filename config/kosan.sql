@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 01/08/2019 06:01:26
+ Date: 01/08/2019 06:44:28
 */
 
 SET NAMES utf8mb4;
@@ -490,11 +490,16 @@ INSERT INTO `pengaduan` VALUES (1, 34, 1, 'Listrik', 'Listrik Mati', 'afbc01a2b6
 -- ----------------------------
 DROP TABLE IF EXISTS `pengelola_kosan`;
 CREATE TABLE `pengelola_kosan`  (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NULL DEFAULT NULL,
   `kosan_id` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of pengelola_kosan
+-- ----------------------------
+INSERT INTO `pengelola_kosan` VALUES (1, 36, 1);
 
 -- ----------------------------
 -- Table structure for sarat_ketentuan

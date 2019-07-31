@@ -70,4 +70,3 @@ use kartik\file\FileInput;
 
     </div>
 </div>
-</div>

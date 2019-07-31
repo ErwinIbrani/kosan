@@ -82,5 +82,10 @@ class Kosan extends \yii\db\ActiveRecord
         return $this->hasMany(GambarKosan::className(), ['kosan_id' => 'id']);
     }
 
+    public function getPengelolas()
+    {
+        return $this->hasMany(PengelolaKosan::className(), ['kosan_id' => 'id']);
+    }
+
 
 }
