@@ -28,6 +28,7 @@ class PengelolaKosan extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'kosan_id'], 'integer'],
+            [['user_id', 'kosan_id'], 'unique', 'targetAttribute' => ['user_id', 'kosan_id']]
         ];
     }
 

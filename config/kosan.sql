@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 01/08/2019 09:02:47
+ Date: 01/08/2019 09:14:43
 */
 
 SET NAMES utf8mb4;
@@ -35,6 +35,8 @@ CREATE TABLE `auth_assignment`  (
 -- ----------------------------
 INSERT INTO `auth_assignment` VALUES ('Admin', '10', 1557925448);
 INSERT INTO `auth_assignment` VALUES ('Bagian Pemeliharaan', '36', 1564072745);
+INSERT INTO `auth_assignment` VALUES ('Bagian Pemeliharaan', '39', 1564625202);
+INSERT INTO `auth_assignment` VALUES ('Bagian Pemeliharaan', '40', 1564625651);
 INSERT INTO `auth_assignment` VALUES ('Pemilik Kosan Haji Ajat', '35', 1564072515);
 INSERT INTO `auth_assignment` VALUES ('User', '11', 1557978922);
 INSERT INTO `auth_assignment` VALUES ('User', '13', 1560955732);
@@ -580,12 +582,14 @@ CREATE TABLE `pengelola_kosan`  (
   `user_id` int(11) NULL DEFAULT NULL,
   `kosan_id` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of pengelola_kosan
 -- ----------------------------
 INSERT INTO `pengelola_kosan` VALUES (1, 36, 1);
+INSERT INTO `pengelola_kosan` VALUES (2, 39, 5);
+INSERT INTO `pengelola_kosan` VALUES (3, 40, 6);
 
 -- ----------------------------
 -- Table structure for sarat_ketentuan
@@ -623,7 +627,7 @@ CREATE TABLE `user`  (
   `tanggal_daftar` datetime(0) NOT NULL,
   `status_kost` smallint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 39 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 41 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
@@ -633,6 +637,8 @@ INSERT INTO `user` VALUES (34, 'Iwa Kustiwa', 'iwakustiwa', 'Laki-laki', '2019-0
 INSERT INTO `user` VALUES (35, 'haji adjat', 'hajiajat', 'Laki-laki', '2019-07-25', 'Jakarta', '08765455344', 'KZjaku_Yh2vAhzNBgKSZ0zjckEGO8Ma1', '$2y$13$71bINumjHav8ZMtKyIwRGu7POngN47Uplq4GL.FyKZgR4erUdngjO', 10, 'Bandung', 'a58cb71c1cd4239674bc586d28f7496e488be581.png', '2019-07-25 23:17:09', 0);
 INSERT INTO `user` VALUES (36, 'pemelihara', 'pemelihara', 'Laki-laki', '2019-07-25', 'Jakarta', '08765455344', 'vs4LPOfQ00H8X4eJXTWtX71hs8Ny1Sok', '$2y$13$XenA5NEPEn2C/Alp6spXjec0J9DwimxjS0mUlbLXg0m2hwDxUr0Hu', 10, 'bandung', 'a18bd17b43c6291df6d1331a1d2b59c8b5b19a20.jpg', '2019-07-25 23:38:10', 0);
 INSERT INTO `user` VALUES (38, 'Erwin Situmorangs', 'serwin', 'Perempuan', '2019-07-28', 'Jakarta Raya', '098765433222', 'mD08R2ik4Sekg1nFHO3Fsz8jmvi_9jFk', '$2y$13$uQHez8YshkAnaLFCpRB7QOw1A6QXJn0Lv862rAR8R7JkYMDCdLY82', 10, 'Jl. raya', 'c4875e23e64e40687720731ffea25a7ec340f515.jpg', '2019-07-28 17:17:54', 1);
+INSERT INTO `user` VALUES (39, 'diah', 'diah', 'Laki-laki', '2019-08-01', 'Jakarta', '098765555777', 'mIbVSMLGJpepN9tTaa-tB1Ag-9yxZ9XY', '$2y$13$AyrNJW7ilOcBow5hvBoUtuY2XyZU8humDUK3jfOETKpd8TB2XPtwC', 10, 'Jl. Raya', '287f9167c90427221b91edaf534479b5cd6253ae.jpg', '2019-08-01 09:06:17', 0);
+INSERT INTO `user` VALUES (40, 'dede', 'wiranto', 'Laki-laki', '2019-08-09', 'Jakarta', '09876544333', 'm5qjnYyiTQ5CnFB2BjOpR3Ry7ClUssfv', '$2y$13$KFhd0nMC1NeGwteTdwkSr.XwHA0o.TMVMeLjuXPX2ewUNku3EABc2', 10, 'Jlksas', '2faa90ea823f10ede3210b182ce0a7ba09d6af71.jpg', '2019-08-01 09:13:05', 0);
 
 -- ----------------------------
 -- Table structure for user_kosan

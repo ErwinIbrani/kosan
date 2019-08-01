@@ -51,7 +51,7 @@ use yii\helpers\Html;
                     'icon' => 'users',
                     //'url' => 'javascript:void(0)',
                     'items' => [
-                        ['label' => 'List User', 'icon' => 'user', 'url' => ['/user/']],
+                       /* ['label' => 'List User', 'icon' => 'user', 'url' => ['/user/']],*/
                         ['label' => 'Assignment', 'icon' => 'balance-scale', 'url' => ['/rbac/assignment/']],
                         ['label' => 'Role', 'icon' => 'blind', 'url' => ['/rbac/role/']],
                         ['label' => 'Permission', 'icon' => 'compass', 'url' => ['/rbac/permission/']],
