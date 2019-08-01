@@ -16,7 +16,7 @@ use yii\filters\AccessControl;
 /**
  * UserKosanController implements the CRUD actions for UserKosan model.
  */
-class UserKosanController extends Controller
+class UserKosanSuperadminController extends Controller
 {
 
 
@@ -198,15 +198,12 @@ class UserKosanController extends Controller
         ]);
     }
 
-    public  function  actionUser($kosan_id)
+    public  function  actionUser()
     {
-        $modelPemilik = PengelolaKosan::find()->where(['user_id' => \Yii::$app->user->identity->id])->one();
         $query = UserKosan::find()
             ->select(['user.nama_lengkap', 'user.username', 'kosan.nama_kosan', 'user_kosan.user_id'])
             ->joinWith('kosan', true)
             ->joinWith('user', true)
-            ->where(['user_kosan.kosan_id' => $kosan_id])
-            ->andWhere(['user_kosan.kosan_id' => $modelPemilik->kosan_id])
             ->groupBy(['user_kosan.user_id'])
             ->all();
 
@@ -217,13 +214,11 @@ class UserKosanController extends Controller
 
     public function actionDate($today)
     {
-        $modelPemilik = PengelolaKosan::find()->where(['user_id' => \Yii::$app->user->identity->id])->one();
         $query = UserKosan::find()
             ->select(['user.nama_lengkap', 'user.username', 'kosan.nama_kosan', 'user_kosan.user_id'])
             ->joinWith('kosan', true)
             ->joinWith('user', true)
             ->where(['user_kosan.tgl_berakhir_kos' => $today])
-            ->andWhere(['user_kosan.kosan_id' => $modelPemilik->kosan_id])
             ->groupBy(['user_kosan.user_id'])
             ->all();
 

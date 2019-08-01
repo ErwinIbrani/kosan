@@ -85,10 +85,53 @@ class PengaduanSearch extends Pengaduan
 
      public function searchAll($params)
     {
-       
+        $modelPemilik = PengelolaKosan::find()->where(['user_id' => \Yii::$app->user->identity->id])->one();
         $query = Pengaduan::find()
                 ->innerJoinWith('kosan', true)
-                ->innerJoinWith('user', true);
+                ->innerJoinWith('user', true)
+                ->where(['pengaduan.kosan_id' => $modelPemilik->kosan_id]);
+
+
+        // add conditions that should always apply here
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider;
+        }
+
+        // grid filtering conditions
+        $query->andFilterWhere([
+            'id' => $this->id,
+            'user_id' => $this->user_id,
+            'kosan_id' => $this->kosan_id,
+            'tanggal_laporan' => $this->tanggal_laporan
+        ]);
+
+        $query->andFilterWhere(['like', 'jenis_pengaduan', $this->jenis_pengaduan])
+            ->andFilterWhere(['like',  'keterangan_pengadu', $this->keterangan_pengadu])
+            ->andFilterWhere(['like', 'foto', $this->foto])
+            ->andFilterWhere(['like', 'status', $this->status])
+            ->andFilterWhere(['like', 'kosan.nama_kosan', $this->nama_kosan])
+            ->andFilterWhere(['like', 'user.nama_lengkap', $this->nama_pengadu])
+            ->andFilterWhere(['like', 'keterangan_teknisi', $this->keterangan_teknisi]);
+
+        return $dataProvider;
+    }
+
+    public function searchAlls($params)
+    {
+
+        $query = Pengaduan::find()
+            ->innerJoinWith('kosan', true)
+            ->innerJoinWith('user', true);
+
 
         // add conditions that should always apply here
 
@@ -124,6 +167,48 @@ class PengaduanSearch extends Pengaduan
     }
 
     public function searchNot($params)
+    {
+        $modelPemilik = PengelolaKosan::find()->where(['user_id' => \Yii::$app->user->identity->id])->one();
+        $query = Pengaduan::find()
+            ->innerJoinWith('kosan', true)
+            ->innerJoinWith('user', true)
+            ->andWhere(['pengaduan.status' => 'Belum Diperbaiki'])
+            ->where(['pengaduan.kosan_id' => $modelPemilik->kosan_id]);
+
+        // add conditions that should always apply here
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider;
+        }
+
+        // grid filtering conditions
+        $query->andFilterWhere([
+            'id' => $this->id,
+            'user_id' => $this->user_id,
+            'kosan_id' => $this->kosan_id,
+            'tanggal_laporan' => $this->tanggal_laporan
+        ]);
+
+        $query->andFilterWhere(['like', 'jenis_pengaduan', $this->jenis_pengaduan])
+            ->andFilterWhere(['like',  'keterangan_pengadu', $this->keterangan_pengadu])
+            ->andFilterWhere(['like', 'foto', $this->foto])
+            ->andFilterWhere(['like', 'status', $this->status])
+            ->andFilterWhere(['like', 'kosan.nama_kosan', $this->nama_kosan])
+            ->andFilterWhere(['like', 'user.nama_lengkap', $this->nama_pengadu])
+            ->andFilterWhere(['like', 'keterangan_teknisi', $this->keterangan_teknisi]);
+
+        return $dataProvider;
+    }
+
+    public function searchNots($params)
     {
 
         $query = Pengaduan::find()

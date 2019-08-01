@@ -49,7 +49,7 @@ class AuthController extends \yii\web\Controller
                     return $this->redirect(['/landing-page/']);
                 }
                 if(!empty($model->isPemilik($model->username))){
-                    return $this->redirect(['/dashboard-admin/']);
+                    return $this->redirect(['/dashboard-pemilik/']);
                 }
                 if(!empty($model->isPengelola($model->username))){
                     return $this->redirect(['/pengaduan-admin/']);
