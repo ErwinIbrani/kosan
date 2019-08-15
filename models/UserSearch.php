@@ -19,7 +19,7 @@ class UserSearch extends User
     {
         return [
             [['id', 'status'], 'integer'],
-            [['nama_lengkap', 'username', 'jenis_kelamin', 'tanggal_lahir', 'tempat_lahir', 'no_telepon', 'auth_key', 'password_hash', 'email', 'alamat', 'poto_ktp', 'tanggal_daftar', 'status_kost'], 'safe'],
+            [['nama_lengkap', 'username', 'jenis_kelamin', 'tanggal_lahir', 'tempat_lahir', 'no_telepon', 'auth_key', 'password_hash', 'email', 'alamat', 'poto_ktp', 'tanggal_daftar', 'status_kost', 'status_pengelola'], 'safe'],
         ];
     }
 
@@ -85,6 +85,50 @@ class UserSearch extends User
     public function searchUser($params)
     {
         $query = User::find()->where(['status_kost' => 1])->orderBy([
+            'id' => SORT_DESC
+        ]);
+
+        // add conditions that should always apply here
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider;
+        }
+
+        // grid filtering conditions
+        $query->andFilterWhere([
+            'id' => $this->id,
+            'tanggal_lahir' => $this->tanggal_lahir,
+            'status' => $this->status,
+            'tanggal_daftar' => $this->tanggal_daftar,
+        ]);
+
+        $query->andFilterWhere(['like', 'nama_lengkap', $this->nama_lengkap])
+            ->andFilterWhere(['like', 'username', $this->username])
+            ->andFilterWhere(['like', 'jenis_kelamin', $this->jenis_kelamin])
+            ->andFilterWhere(['like', 'tempat_lahir', $this->tempat_lahir])
+            ->andFilterWhere(['like', 'no_telepon', $this->no_telepon])
+            ->andFilterWhere(['like', 'auth_key', $this->auth_key])
+            ->andFilterWhere(['like', 'password_hash', $this->password_hash])
+            ->andFilterWhere(['like', 'email', $this->email])
+            ->andFilterWhere(['like', 'alamat', $this->alamat])
+            ->andFilterWhere(['like', 'status_kost', $this->status_kost])
+            ->andFilterWhere(['like', 'poto_ktp', $this->poto_ktp]);
+
+        return $dataProvider;
+    }
+
+
+    public function searchUserPengelola($params)
+    {
+        $query = User::find()->where(['status_pengelola' => 1])->orderBy([
             'id' => SORT_DESC
         ]);
 

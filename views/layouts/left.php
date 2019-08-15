@@ -46,21 +46,23 @@ use yii\helpers\Html;
        ['label' => 'Dashboard', 'icon'=>'dashboard', 'url' =>  ['/dashboard-pemilik/index/']],
 
         /*admin*/
-                 [
+              /*   [
                     'label' => 'User Management',
                     'icon' => 'users',
-                    //'url' => 'javascript:void(0)',
+                    'url' => 'javascript:void(0)',
                     'items' => [
-                       /* ['label' => 'List User', 'icon' => 'user', 'url' => ['/user/']],*/
+                        ['label' => 'List User', 'icon' => 'user', 'url' => ['/user/']],
                         ['label' => 'Assignment', 'icon' => 'balance-scale', 'url' => ['/rbac/assignment/']],
                         ['label' => 'Role', 'icon' => 'blind', 'url' => ['/rbac/role/']],
                         ['label' => 'Permission', 'icon' => 'compass', 'url' => ['/rbac/permission/']],
                         ['label' => 'Access', 'icon' => 'retweet', 'url' => ['/rbac/route/']],
                     ],
-                  ],
+                  ],*/
         /*pemilik*/
 
-       ['label' => 'Pengelola', 'icon'=>'user', 'url' =>  ['/pengelola-kosan/index/']],
+       ['label' => 'User Pengelola', 'icon'=>'users', 'url' =>  ['/user-pengelola/index/']],
+
+       ['label' => 'Management Pengelola', 'icon'=>'user', 'url' =>  ['/pengelola-kosan/index/']],
 
         [
             'label' => 'Laporan Kosan',

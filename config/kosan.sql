@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 01/08/2019 09:14:43
+ Date: 15/08/2019 22:10:05
 */
 
 SET NAMES utf8mb4;
@@ -33,11 +33,12 @@ CREATE TABLE `auth_assignment`  (
 -- ----------------------------
 -- Records of auth_assignment
 -- ----------------------------
-INSERT INTO `auth_assignment` VALUES ('Admin', '10', 1557925448);
 INSERT INTO `auth_assignment` VALUES ('Bagian Pemeliharaan', '36', 1564072745);
-INSERT INTO `auth_assignment` VALUES ('Bagian Pemeliharaan', '39', 1564625202);
+INSERT INTO `auth_assignment` VALUES ('Bagian Pemeliharaan', '39', 1565876649);
 INSERT INTO `auth_assignment` VALUES ('Bagian Pemeliharaan', '40', 1564625651);
+INSERT INTO `auth_assignment` VALUES ('Bagian Pemeliharaan', '41', NULL);
 INSERT INTO `auth_assignment` VALUES ('Pemilik Kosan Haji Ajat', '35', 1564072515);
+INSERT INTO `auth_assignment` VALUES ('Teknisi', '10', 1565878224);
 INSERT INTO `auth_assignment` VALUES ('User', '11', 1557978922);
 INSERT INTO `auth_assignment` VALUES ('User', '13', 1560955732);
 INSERT INTO `auth_assignment` VALUES ('User', '14', 1560957346);
@@ -224,6 +225,9 @@ INSERT INTO `auth_item` VALUES ('/user-kosan/keluar-kosan', 2, NULL, NULL, NULL,
 INSERT INTO `auth_item` VALUES ('/user-kosan/update', 2, NULL, NULL, NULL, 1557975187, 1557975187);
 INSERT INTO `auth_item` VALUES ('/user-kosan/user', 2, NULL, NULL, NULL, 1561556905, 1561556905);
 INSERT INTO `auth_item` VALUES ('/user-kosan/view', 2, NULL, NULL, NULL, 1557975187, 1557975187);
+INSERT INTO `auth_item` VALUES ('/user-pengelola/*', 2, NULL, NULL, NULL, 1565880267, 1565880267);
+INSERT INTO `auth_item` VALUES ('/user-pengelola/create', 2, NULL, NULL, NULL, 1565880267, 1565880267);
+INSERT INTO `auth_item` VALUES ('/user-pengelola/index', 2, NULL, NULL, NULL, 1565880267, 1565880267);
 INSERT INTO `auth_item` VALUES ('/user/*', 2, NULL, NULL, NULL, 1557235832, 1557235832);
 INSERT INTO `auth_item` VALUES ('/user/create', 2, NULL, NULL, NULL, 1557235832, 1557235832);
 INSERT INTO `auth_item` VALUES ('/user/delete', 2, NULL, NULL, NULL, 1557235832, 1557235832);
@@ -233,6 +237,7 @@ INSERT INTO `auth_item` VALUES ('/user/view', 2, NULL, NULL, NULL, 1557235832, 1
 INSERT INTO `auth_item` VALUES ('Admin', 1, 'Role Admin Tingkat Atas', NULL, NULL, 1557152527, 1557152527);
 INSERT INTO `auth_item` VALUES ('Bagian Pemeliharaan', 1, NULL, NULL, NULL, 1564071160, 1564071160);
 INSERT INTO `auth_item` VALUES ('Pemilik Kosan Haji Ajat', 1, NULL, NULL, NULL, 1564071250, 1564071250);
+INSERT INTO `auth_item` VALUES ('Teknisi', 1, 'Teknisi Kosan', NULL, NULL, 1565878062, 1565878062);
 INSERT INTO `auth_item` VALUES ('User', 1, 'User yang nyewa kosan', NULL, NULL, 1557975023, 1557975023);
 
 -- ----------------------------
@@ -279,14 +284,14 @@ INSERT INTO `auth_item_child` VALUES ('Pemilik Kosan Haji Ajat', '/gridview/expo
 INSERT INTO `auth_item_child` VALUES ('User', '/gridview/export/download');
 INSERT INTO `auth_item_child` VALUES ('User', '/keluar-kosan/*');
 INSERT INTO `auth_item_child` VALUES ('User', '/keluar-kosan/keluar-kosan');
-INSERT INTO `auth_item_child` VALUES ('Admin', '/kosan/*');
-INSERT INTO `auth_item_child` VALUES ('Admin', '/kosan/create');
-INSERT INTO `auth_item_child` VALUES ('Admin', '/kosan/delete');
-INSERT INTO `auth_item_child` VALUES ('Admin', '/kosan/index');
-INSERT INTO `auth_item_child` VALUES ('Admin', '/kosan/pilih');
+INSERT INTO `auth_item_child` VALUES ('Pemilik Kosan Haji Ajat', '/kosan/*');
+INSERT INTO `auth_item_child` VALUES ('Pemilik Kosan Haji Ajat', '/kosan/create');
+INSERT INTO `auth_item_child` VALUES ('Pemilik Kosan Haji Ajat', '/kosan/delete');
+INSERT INTO `auth_item_child` VALUES ('Pemilik Kosan Haji Ajat', '/kosan/index');
+INSERT INTO `auth_item_child` VALUES ('Pemilik Kosan Haji Ajat', '/kosan/pilih');
 INSERT INTO `auth_item_child` VALUES ('User', '/kosan/pilih');
-INSERT INTO `auth_item_child` VALUES ('Admin', '/kosan/update');
-INSERT INTO `auth_item_child` VALUES ('Admin', '/kosan/view');
+INSERT INTO `auth_item_child` VALUES ('Pemilik Kosan Haji Ajat', '/kosan/update');
+INSERT INTO `auth_item_child` VALUES ('Pemilik Kosan Haji Ajat', '/kosan/view');
 INSERT INTO `auth_item_child` VALUES ('Pemilik Kosan Haji Ajat', '/laporan-pemilik/*');
 INSERT INTO `auth_item_child` VALUES ('Pemilik Kosan Haji Ajat', '/laporan-pemilik/index');
 INSERT INTO `auth_item_child` VALUES ('Pemilik Kosan Haji Ajat', '/laporan-pengelola/*');
@@ -299,11 +304,17 @@ INSERT INTO `auth_item_child` VALUES ('Pemilik Kosan Haji Ajat', '/pembayaran-su
 INSERT INTO `auth_item_child` VALUES ('Bagian Pemeliharaan', '/pembayaran/*');
 INSERT INTO `auth_item_child` VALUES ('Bagian Pemeliharaan', '/pembayaran/index');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/pengaduan-admin-superadmin/*');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/pengaduan-admin-superadmin/*');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/pengaduan-admin-superadmin/belum');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/pengaduan-admin-superadmin/belum');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/pengaduan-admin-superadmin/delete');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/pengaduan-admin-superadmin/delete');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/pengaduan-admin-superadmin/index');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/pengaduan-admin-superadmin/index');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/pengaduan-admin-superadmin/update');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/pengaduan-admin-superadmin/update');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/pengaduan-admin-superadmin/view');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/pengaduan-admin-superadmin/view');
 INSERT INTO `auth_item_child` VALUES ('Bagian Pemeliharaan', '/pengaduan-admin/*');
 INSERT INTO `auth_item_child` VALUES ('Bagian Pemeliharaan', '/pengaduan-admin/belum');
 INSERT INTO `auth_item_child` VALUES ('Bagian Pemeliharaan', '/pengaduan-admin/delete');
@@ -316,65 +327,118 @@ INSERT INTO `auth_item_child` VALUES ('User', '/pengaduan/delete');
 INSERT INTO `auth_item_child` VALUES ('User', '/pengaduan/index');
 INSERT INTO `auth_item_child` VALUES ('User', '/pengaduan/update');
 INSERT INTO `auth_item_child` VALUES ('User', '/pengaduan/view');
-INSERT INTO `auth_item_child` VALUES ('Admin', '/pengelola-kosan/*');
-INSERT INTO `auth_item_child` VALUES ('Admin', '/pengelola-kosan/create');
-INSERT INTO `auth_item_child` VALUES ('Admin', '/pengelola-kosan/delete');
-INSERT INTO `auth_item_child` VALUES ('Admin', '/pengelola-kosan/index');
-INSERT INTO `auth_item_child` VALUES ('Admin', '/pengelola-kosan/update');
-INSERT INTO `auth_item_child` VALUES ('Admin', '/pengelola-kosan/view');
+INSERT INTO `auth_item_child` VALUES ('Pemilik Kosan Haji Ajat', '/pengelola-kosan/*');
+INSERT INTO `auth_item_child` VALUES ('Pemilik Kosan Haji Ajat', '/pengelola-kosan/create');
+INSERT INTO `auth_item_child` VALUES ('Pemilik Kosan Haji Ajat', '/pengelola-kosan/delete');
+INSERT INTO `auth_item_child` VALUES ('Pemilik Kosan Haji Ajat', '/pengelola-kosan/index');
+INSERT INTO `auth_item_child` VALUES ('Pemilik Kosan Haji Ajat', '/pengelola-kosan/update');
+INSERT INTO `auth_item_child` VALUES ('Pemilik Kosan Haji Ajat', '/pengelola-kosan/view');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/*');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/*');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/assignment/*');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/assignment/*');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/assignment/assign');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/assignment/assign');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/assignment/index');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/assignment/index');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/assignment/revoke');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/assignment/revoke');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/assignment/view');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/assignment/view');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/default/*');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/default/*');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/default/index');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/default/index');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/menu/*');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/menu/*');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/menu/create');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/menu/create');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/menu/delete');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/menu/delete');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/menu/index');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/menu/index');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/menu/update');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/menu/update');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/menu/view');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/menu/view');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/permission/*');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/permission/*');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/permission/assign');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/permission/assign');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/permission/create');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/permission/create');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/permission/delete');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/permission/delete');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/permission/index');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/permission/index');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/permission/remove');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/permission/remove');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/permission/update');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/permission/update');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/permission/view');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/permission/view');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/role/*');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/role/*');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/role/assign');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/role/assign');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/role/create');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/role/create');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/role/delete');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/role/delete');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/role/index');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/role/index');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/role/remove');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/role/remove');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/role/update');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/role/update');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/role/view');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/role/view');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/route/*');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/route/*');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/route/assign');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/route/assign');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/route/create');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/route/create');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/route/index');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/route/index');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/route/refresh');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/route/refresh');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/route/remove');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/route/remove');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/rule/*');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/rule/*');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/rule/create');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/rule/create');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/rule/delete');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/rule/delete');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/rule/index');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/rule/index');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/rule/update');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/rule/update');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/rule/view');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/rule/view');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/user/*');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/user/*');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/user/activate');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/user/activate');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/user/change-password');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/user/change-password');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/user/delete');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/user/delete');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/user/index');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/user/index');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/user/login');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/user/login');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/user/logout');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/user/logout');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/user/request-password-reset');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/user/request-password-reset');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/user/reset-password');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/user/reset-password');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/user/signup');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/user/signup');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/rbac/user/view');
+INSERT INTO `auth_item_child` VALUES ('Teknisi', '/rbac/user/view');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/sarat-ketentuan/*');
 INSERT INTO `auth_item_child` VALUES ('Bagian Pemeliharaan', '/sarat-ketentuan/*');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/sarat-ketentuan/create');
@@ -429,6 +493,9 @@ INSERT INTO `auth_item_child` VALUES ('Admin', '/user-kosan/user');
 INSERT INTO `auth_item_child` VALUES ('Bagian Pemeliharaan', '/user-kosan/user');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/user-kosan/view');
 INSERT INTO `auth_item_child` VALUES ('Bagian Pemeliharaan', '/user-kosan/view');
+INSERT INTO `auth_item_child` VALUES ('Pemilik Kosan Haji Ajat', '/user-pengelola/*');
+INSERT INTO `auth_item_child` VALUES ('Pemilik Kosan Haji Ajat', '/user-pengelola/create');
+INSERT INTO `auth_item_child` VALUES ('Pemilik Kosan Haji Ajat', '/user-pengelola/index');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/user/*');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/user/create');
 INSERT INTO `auth_item_child` VALUES ('Admin', '/user/delete');
@@ -475,7 +542,7 @@ CREATE TABLE `gambar_kosan`  (
   `kosan_id` int(11) NULL DEFAULT NULL,
   `gambar` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of gambar_kosan
@@ -483,6 +550,7 @@ CREATE TABLE `gambar_kosan`  (
 INSERT INTO `gambar_kosan` VALUES (10, 1, '80e5335777ff8ce90335eca04e8e4428483852f4.jpg');
 INSERT INTO `gambar_kosan` VALUES (11, 1, '084fa642a3e00705501b60685dd29e7855556a1f.jpg');
 INSERT INTO `gambar_kosan` VALUES (12, 1, '679d7704e7c6045eac7e0e2cd8ee5f28e477b745.jpg');
+INSERT INTO `gambar_kosan` VALUES (13, 19, 'Jigsaw_2017_poster.jpg');
 
 -- ----------------------------
 -- Table structure for komplain
@@ -516,7 +584,7 @@ CREATE TABLE `kosan`  (
   `jenis_kosan` enum('Pria','Wanita','Pria dan Wanita') CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `status` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT 'Tersedia',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of kosan
@@ -525,6 +593,7 @@ INSERT INTO `kosan` VALUES (1, 'Kosan Bapa Ajat', 3, 100000.00, 'Nanjung', 'AC',
 INSERT INTO `kosan` VALUES (5, 'Kosan Ibu Ilih', 23, 200000.00, 'Jl. Raya', 'AC, Tempat Makan', 'Pria', 'Tersedia');
 INSERT INTO `kosan` VALUES (6, 'Kosan Hanya', 90, 120000.00, 'Situ', 'Kopi', 'Wanita', 'Tersedia');
 INSERT INTO `kosan` VALUES (18, 'Erwinsas', 12, 120000.00, 'Nkajsk', 'k;lcjdsjc', 'Wanita', 'Tersedia');
+INSERT INTO `kosan` VALUES (19, 'Kosan Kidul', 3, 100000.00, 'Jl. Raya Aja', 'AC, Kasur, Toilet Didalam, Listrik Dibayar Pemilik Kosan', 'Pria dan Wanita', 'Tersedia');
 
 -- ----------------------------
 -- Table structure for migration
@@ -582,7 +651,7 @@ CREATE TABLE `pengelola_kosan`  (
   `user_id` int(11) NULL DEFAULT NULL,
   `kosan_id` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of pengelola_kosan
@@ -590,6 +659,7 @@ CREATE TABLE `pengelola_kosan`  (
 INSERT INTO `pengelola_kosan` VALUES (1, 36, 1);
 INSERT INTO `pengelola_kosan` VALUES (2, 39, 5);
 INSERT INTO `pengelola_kosan` VALUES (3, 40, 6);
+INSERT INTO `pengelola_kosan` VALUES (4, 41, 19);
 
 -- ----------------------------
 -- Table structure for sarat_ketentuan
@@ -626,19 +696,21 @@ CREATE TABLE `user`  (
   `poto_ktp` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
   `tanggal_daftar` datetime(0) NOT NULL,
   `status_kost` smallint(1) NOT NULL DEFAULT 0,
+  `status_pengelola` smallint(1) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 41 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 42 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (10, 'admin kosan', 'admin_kosan', 'Laki-laki', '2019-05-15', 'Bandung', '085645366455', 'Q_FYQ2-jQSXIzPbFvmZl_-dP5hPFbP96', '$2y$13$kQQM0GnbOVN6HYDzjnydyum0Evtje9y6htS0bZFSjpP4biVreVspK', 10, 'Jl. Dipatiukur', 'bf1c3179deab701e87821a40a1e74c4bb0c2ee45.png', '2019-05-15 20:02:57', 0);
-INSERT INTO `user` VALUES (34, 'Iwa Kustiwa', 'iwakustiwa', 'Laki-laki', '2019-07-25', 'Jakarta', '08765455344', 'dgx8cN46oHLyKkUVBO2RH6mErDErbygS', '$2y$13$dl84C5FpFODLXoZfEnzai.twcR7yJ/4cBgNr12vNTdcuKC56QdF5O', 10, 'bandung', '04623d499b5f0e00821b6e3b6883d380a8452e22.jpg', '2019-07-25 22:57:16', 1);
-INSERT INTO `user` VALUES (35, 'haji adjat', 'hajiajat', 'Laki-laki', '2019-07-25', 'Jakarta', '08765455344', 'KZjaku_Yh2vAhzNBgKSZ0zjckEGO8Ma1', '$2y$13$71bINumjHav8ZMtKyIwRGu7POngN47Uplq4GL.FyKZgR4erUdngjO', 10, 'Bandung', 'a58cb71c1cd4239674bc586d28f7496e488be581.png', '2019-07-25 23:17:09', 0);
-INSERT INTO `user` VALUES (36, 'pemelihara', 'pemelihara', 'Laki-laki', '2019-07-25', 'Jakarta', '08765455344', 'vs4LPOfQ00H8X4eJXTWtX71hs8Ny1Sok', '$2y$13$XenA5NEPEn2C/Alp6spXjec0J9DwimxjS0mUlbLXg0m2hwDxUr0Hu', 10, 'bandung', 'a18bd17b43c6291df6d1331a1d2b59c8b5b19a20.jpg', '2019-07-25 23:38:10', 0);
-INSERT INTO `user` VALUES (38, 'Erwin Situmorangs', 'serwin', 'Perempuan', '2019-07-28', 'Jakarta Raya', '098765433222', 'mD08R2ik4Sekg1nFHO3Fsz8jmvi_9jFk', '$2y$13$uQHez8YshkAnaLFCpRB7QOw1A6QXJn0Lv862rAR8R7JkYMDCdLY82', 10, 'Jl. raya', 'c4875e23e64e40687720731ffea25a7ec340f515.jpg', '2019-07-28 17:17:54', 1);
-INSERT INTO `user` VALUES (39, 'diah', 'diah', 'Laki-laki', '2019-08-01', 'Jakarta', '098765555777', 'mIbVSMLGJpepN9tTaa-tB1Ag-9yxZ9XY', '$2y$13$AyrNJW7ilOcBow5hvBoUtuY2XyZU8humDUK3jfOETKpd8TB2XPtwC', 10, 'Jl. Raya', '287f9167c90427221b91edaf534479b5cd6253ae.jpg', '2019-08-01 09:06:17', 0);
-INSERT INTO `user` VALUES (40, 'dede', 'wiranto', 'Laki-laki', '2019-08-09', 'Jakarta', '09876544333', 'm5qjnYyiTQ5CnFB2BjOpR3Ry7ClUssfv', '$2y$13$KFhd0nMC1NeGwteTdwkSr.XwHA0o.TMVMeLjuXPX2ewUNku3EABc2', 10, 'Jlksas', '2faa90ea823f10ede3210b182ce0a7ba09d6af71.jpg', '2019-08-01 09:13:05', 0);
+INSERT INTO `user` VALUES (10, 'Teknisi Kosan', 'teknisi', 'Laki-laki', '2019-05-15', 'Bandung', '085645366455', 'Q_FYQ2-jQSXIzPbFvmZl_-dP5hPFbP96', '$2y$13$kQQM0GnbOVN6HYDzjnydyum0Evtje9y6htS0bZFSjpP4biVreVspK', 10, 'Jl. Dipatiukur', 'bf1c3179deab701e87821a40a1e74c4bb0c2ee45.png', '2019-05-15 20:02:57', 0, NULL);
+INSERT INTO `user` VALUES (34, 'User Kosan', 'iwakustiwa', 'Laki-laki', '2019-07-25', 'Jakarta', '08765455344', 'dgx8cN46oHLyKkUVBO2RH6mErDErbygS', '$2y$13$dl84C5FpFODLXoZfEnzai.twcR7yJ/4cBgNr12vNTdcuKC56QdF5O', 10, 'bandung', '04623d499b5f0e00821b6e3b6883d380a8452e22.jpg', '2019-07-25 22:57:16', 1, NULL);
+INSERT INTO `user` VALUES (35, 'haji adjat', 'hajiajat', 'Laki-laki', '2019-07-25', 'Jakarta', '08765455344', 'KZjaku_Yh2vAhzNBgKSZ0zjckEGO8Ma1', '$2y$13$71bINumjHav8ZMtKyIwRGu7POngN47Uplq4GL.FyKZgR4erUdngjO', 10, 'Bandung', 'a58cb71c1cd4239674bc586d28f7496e488be581.png', '2019-07-25 23:17:09', 0, NULL);
+INSERT INTO `user` VALUES (36, 'Pengelola  Diapiukur', 'pengelola', 'Laki-laki', '2019-07-25', 'Jakarta', '08765455344', 'vs4LPOfQ00H8X4eJXTWtX71hs8Ny1Sok', '$2y$13$XenA5NEPEn2C/Alp6spXjec0J9DwimxjS0mUlbLXg0m2hwDxUr0Hu', 10, 'bandung', 'a18bd17b43c6291df6d1331a1d2b59c8b5b19a20.jpg', '2019-07-25 23:38:10', 0, 1);
+INSERT INTO `user` VALUES (38, 'User Kosan', 'serwin', 'Perempuan', '2019-07-28', 'Jakarta Raya', '098765433222', 'mD08R2ik4Sekg1nFHO3Fsz8jmvi_9jFk', '$2y$13$uQHez8YshkAnaLFCpRB7QOw1A6QXJn0Lv862rAR8R7JkYMDCdLY82', 10, 'Jl. raya', 'c4875e23e64e40687720731ffea25a7ec340f515.jpg', '2019-07-28 17:17:54', 1, NULL);
+INSERT INTO `user` VALUES (39, 'Pengelola Kubang Sari', 'diah', 'Laki-laki', '2019-08-01', 'Jakarta', '098765555777', 'mIbVSMLGJpepN9tTaa-tB1Ag-9yxZ9XY', '$2y$13$AyrNJW7ilOcBow5hvBoUtuY2XyZU8humDUK3jfOETKpd8TB2XPtwC', 10, 'Jl. Raya', '287f9167c90427221b91edaf534479b5cd6253ae.jpg', '2019-08-01 09:06:17', 0, 1);
+INSERT INTO `user` VALUES (40, 'Pengelola Jatinangor', 'wiranto', 'Laki-laki', '2019-08-09', 'Jakarta', '09876544333', 'm5qjnYyiTQ5CnFB2BjOpR3Ry7ClUssfv', '$2y$13$KFhd0nMC1NeGwteTdwkSr.XwHA0o.TMVMeLjuXPX2ewUNku3EABc2', 10, 'Jlksas', '2faa90ea823f10ede3210b182ce0a7ba09d6af71.jpg', '2019-08-01 09:13:05', 0, 1);
+INSERT INTO `user` VALUES (41, 'junaedi', 'juned', 'Laki-laki', '2019-08-15', 'Bandung', '0838210000', 'Cd4H5HPXhcCJ-jZyIk0kZ3JiO5_uSOYm', '$2y$13$UG0Jql9emFS9EC1C9e3Elus/DoxMk90qirB5bhBLSscpmSYU.SM2i', 10, 'bandung', 'ba7d71c02eedf995e738d6f25fa26c4863558762.jpg', '2019-08-15 22:02:40', 0, 1);
 
 -- ----------------------------
 -- Table structure for user_kosan

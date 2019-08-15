@@ -38,22 +38,26 @@ class AuthController extends \yii\web\Controller
             }else{
                 if(!empty($model->isAdmin($model->username)))
                 {
-                  return $this->redirect(['/dashboard-admin/']);
+                  return $this->redirect(['/dashboard-admin/']); //kost
                 }
                 if(!empty($model->isKost($model->username)))
                 {
-                  return $this->redirect(['/dashboard/']);
+                  return $this->redirect(['/dashboard/']); //kost
                 }
-                if(!empty($model->notKost($model->username)))
+                if(!empty($model->notKost($model->username))) //tidak kost
                 {
                     return $this->redirect(['/landing-page/']);
                 }
-                if(!empty($model->isPemilik($model->username))){
+                if(!empty($model->isPemilik($model->username))){ //pemilik
                     return $this->redirect(['/dashboard-pemilik/']);
                 }
-                if(!empty($model->isPengelola($model->username))){
-                    return $this->redirect(['/pengaduan-admin/']);
+                if(!empty($model->isPengelola($model->username))){ //Pengelola
+                    return $this->redirect(['/dashboard-admin/index/']);
                 }
+                if(!empty($model->isTeknisi($model->username))){ //Teknisi
+                    return $this->redirect(['/pengaduan-admin-superadmin/']);
+                }
+
             }
         } 
         else {
